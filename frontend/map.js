@@ -1,3 +1,11 @@
+// add tooltip to body
+var tooltip = d3.select("body")
+.append("div")
+.style("position", "absolute")
+.style("z-index", "10")
+.style("visibility", "hidden")
+.text("a simple tooltip");
+
 // append svg to body
 var svg = d3.select("body").append("svg")
 
@@ -20,11 +28,11 @@ d3.json(url, function(err, geojson) {
 
   // get attack attack json now uses fake data
   var attack_json = [{latitude : 43, longitude : -75, country_txt : "USA", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
-  01, attacktypeN : 01, attacktypeN_txt : "bombing", targtypeN : 01,
+  01, attacktypeN : 01, attacktypeN_txt : "bombing1", targtypeN : 01,
   tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 50, longitude : -90, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
-  01, attacktypeN : 01, attacktypeN_txt : "bombing", targtypeN : 01,
+  01, attacktypeN : 01, attacktypeN_txt : "bombing2", targtypeN : 01,
   tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 60, longitude : -110, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
-  01, attacktypeN : 01, attacktypeN_txt : "bombing", targtypeN : 01,
+  01, attacktypeN : 01, attacktypeN_txt : "bombing3", targtypeN : 01,
   tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}];
 
   //  loop through geojson per country
@@ -56,11 +64,8 @@ d3.json(url, function(err, geojson) {
   }
 
   console.log(new_geojson)
-  // // append cleaned geojson to svg
-  // svg.append("path")
-  // .attr("class", "boundary")
-  // .attr("d", path(new_geojson));
 
+  // draw the map
   svg.selectAll("path")
   .data(new_geojson.features)
   .enter()
@@ -69,12 +74,24 @@ d3.json(url, function(err, geojson) {
   .style("fill", function(d){return d.properties.color});
 
 
-  //  add points for attack locations
-  svg.selectAll("circles.points")
+  //  add points for attack locations and styles for tooltip on hover
+  attacks = svg.selectAll("circles.points")
   .data(attack_json)
   .enter()
   .append("circle")
-  .attr("r",2)
-  .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";});
+  .attr("r",4)
+  .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
+  .on("mouseover", function(d) {
+    tooltip.text(d.attacktypeN_txt);
+    return tooltip.style("visibility", "visible");
+  })
+  .on("mousemove", function() {
+    return tooltip.style("top",
+    (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+  })
+  .on("mouseout", function() {
+    return tooltip.style("visibility", "hidden");
+  });
+
 
 })

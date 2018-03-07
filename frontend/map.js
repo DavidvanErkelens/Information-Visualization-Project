@@ -11,17 +11,19 @@ var path = d3.geoPath()
 
 // open geojson
 var url = "http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
+countries = svg.append("g");
+
 d3.json(url, function(err, geojson) {
 
   // clean geojson
   var new_geojson = {type: "FeatureCollection", features : []}
 
   // get attack attack json now uses fake data
-  var attack_json = [{country_txt : "Afghanistan", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
+  var attack_json = [{latitude : 43, longitude : -75, country_txt : "USA", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
   01, attacktypeN : 01, attacktypeN_txt : "bombing", targtypeN : 01,
-  tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {country_txt : "Afghanistan", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
+  tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 50, longitude : -90, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
   01, attacktypeN : 01, attacktypeN_txt : "bombing", targtypeN : 01,
-  tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {country_txt : "Angola", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
+  tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 60, longitude : -110, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
   01, attacktypeN : 01, attacktypeN_txt : "bombing", targtypeN : 01,
   tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}];
 
@@ -39,13 +41,40 @@ d3.json(url, function(err, geojson) {
         return obj.country_txt == geojson.features[i].properties.name;
       });
 
+      // get relative number of attacks for country
+      rel_num_attack = Math.floor((country_features.properties.attack.length / attack_json.length) * 10)
+
+      // colours for map
+      colors = ['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"];
+
+      // add color to country based on relative number of attack
+      country_features.properties.color = colors[rel_num_attack];
+
       // add country to new geojson
       new_geojson.features.push(geojson.features[i])
     }
   }
 
-  console.log(new_geojson);
-  // append cleaned geojson to svg
-  svg.append("path")
-  .attr("d", path(new_geojson))
+  console.log(new_geojson)
+  // // append cleaned geojson to svg
+  // svg.append("path")
+  // .attr("class", "boundary")
+  // .attr("d", path(new_geojson));
+
+  svg.selectAll("path")
+  .data(new_geojson.features)
+  .enter()
+  .append("path")
+  .attr("d", path)
+  .style("fill", function(d){return d.properties.color});
+
+
+  //  add points for attack locations
+  svg.selectAll("circles.points")
+  .data(attack_json)
+  .enter()
+  .append("circle")
+  .attr("r",2)
+  .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";});
+
 })

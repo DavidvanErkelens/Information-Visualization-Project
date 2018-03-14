@@ -7,6 +7,19 @@ var tooltip = d3.select("body")
 .text("a simple tooltip")
 .attr("class", "tool-tip")
 
+
+// get attack attack json now uses fake data
+var attack_json = [{latitude : 43, longitude : -75, country_txt : "USA", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
+01, attacktypeN : 01, attacktypeN_txt : "bombing1", targtypeN : 01,
+tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 50, longitude : -90, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
+01, attacktypeN : 01, attacktypeN_txt : "bombing2", targtypeN : 01,
+tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 60, longitude : -110, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
+01, attacktypeN : 01, attacktypeN_txt : "bombing3", targtypeN : 01,
+tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01},
+{"id":37554,"country_txt":"India","region_txt":"South Asia","latitude":"34.08365800","longitude":"74.79736800","db_eventid":"198903170002","year":1989,"month":3,"day":17},
+{"id":31620,"country_txt":"Dominican Republic","region_txt":"Central America & Caribbean","latitude":"18.45679200","longitude":"-69.95116400","db_eventid":"198707280010","year":1987,"month":7,"day":28},{"id":15426,"country_txt":"Colombia","region_txt":"South America","latitude":"4.60248900","longitude":"-74.09303200","db_eventid":"198202180007","year":1982,"month":2,"day":18},{"id":48050,"country_txt":"United Kingdom","region_txt":"Western Europe","latitude":"54.18006000","longitude":"-6.33393000","db_eventid":"199109160004","year":1991,"month":9,"day":16},{"id":49706,"country_txt":"Mexico","region_txt":"North America","latitude":"25.86524700","longitude":"-100.39258900","db_eventid":"199201130006","year":1992,"month":1,"day":13},{"id":2037,"country_txt":"Mexico","region_txt":"North America","latitude":"20.67334300","longitude":"-103.34417700","db_eventid":"197311260001","year":1973,"month":11,"day":26},{"id":26070,"country_txt":"Sri Lanka","region_txt":"South Asia","latitude":"9.66123000","longitude":"80.02558000","db_eventid":"198509040012","year":1985,"month":9,"day":4},{"id":48969,"country_txt":"Liberia","region_txt":"Sub-Saharan Africa","latitude":"6.29074300","longitude":"-10.76052400","db_eventid":"199111120003","year":1991,"month":11,"day":12},{"id":33103,"country_txt":"Colombia","region_txt":"South America","latitude":"8.85768000","longitude":"-73.81579000","db_eventid":"198801180001","year":1988,"month":1,"day":18},{"id":42369,"country_txt":"Spain","region_txt":"Western Europe","latitude":"42.69539100","longitude":"-1.67606900","db_eventid":"199005090008","year":1990,"month":5,"day":9},{"id":24929,"country_txt":"Greece","region_txt":"Western Europe","latitude":"37.94243900","longitude":"23.71472400","db_eventid":"198505080025","year":1985,"month":5,"day":8}];
+
+
 // append svg to body
 var svg = d3.select("body").append("svg")
 .attr("class", "svg1")
@@ -14,6 +27,11 @@ var svg = d3.select("body").append("svg")
 // Projection for map overview
 var projection = d3.geoMercator()
 .translate([960, 500])
+
+// start drawing the map
+var drawmap = function(){
+
+}
 
 // create path based on projection
 var path = d3.geoPath()
@@ -28,16 +46,6 @@ d3.json(url, function(err, geojson) {
   // clean geojson
   var new_geojson = {type: "FeatureCollection", features : []}
 
-  // get attack attack json now uses fake data
-  var attack_json = [{latitude : 43, longitude : -75, country_txt : "USA", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
-  01, attacktypeN : 01, attacktypeN_txt : "bombing1", targtypeN : 01,
-  tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 50, longitude : -90, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
-  01, attacktypeN : 01, attacktypeN_txt : "bombing2", targtypeN : 01,
-  tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01}, {latitude : 60, longitude : -110, country_txt : "Canada", region_txt: 01, iyear : 2018, imonth : 01, "iday" :
-  01, attacktypeN : 01, attacktypeN_txt : "bombing3", targtypeN : 01,
-  tartypeN_txt : "president", gname : "isis", nkill : 01, nwound :01},
-  {"id":37554,"country_txt":"India","region_txt":"South Asia","latitude":"34.08365800","longitude":"74.79736800","db_eventid":"198903170002","year":1989,"month":3,"day":17},
-  {"id":31620,"country_txt":"Dominican Republic","region_txt":"Central America & Caribbean","latitude":"18.45679200","longitude":"-69.95116400","db_eventid":"198707280010","year":1987,"month":7,"day":28},{"id":15426,"country_txt":"Colombia","region_txt":"South America","latitude":"4.60248900","longitude":"-74.09303200","db_eventid":"198202180007","year":1982,"month":2,"day":18},{"id":48050,"country_txt":"United Kingdom","region_txt":"Western Europe","latitude":"54.18006000","longitude":"-6.33393000","db_eventid":"199109160004","year":1991,"month":9,"day":16},{"id":49706,"country_txt":"Mexico","region_txt":"North America","latitude":"25.86524700","longitude":"-100.39258900","db_eventid":"199201130006","year":1992,"month":1,"day":13},{"id":2037,"country_txt":"Mexico","region_txt":"North America","latitude":"20.67334300","longitude":"-103.34417700","db_eventid":"197311260001","year":1973,"month":11,"day":26},{"id":26070,"country_txt":"Sri Lanka","region_txt":"South Asia","latitude":"9.66123000","longitude":"80.02558000","db_eventid":"198509040012","year":1985,"month":9,"day":4},{"id":48969,"country_txt":"Liberia","region_txt":"Sub-Saharan Africa","latitude":"6.29074300","longitude":"-10.76052400","db_eventid":"199111120003","year":1991,"month":11,"day":12},{"id":33103,"country_txt":"Colombia","region_txt":"South America","latitude":"8.85768000","longitude":"-73.81579000","db_eventid":"198801180001","year":1988,"month":1,"day":18},{"id":42369,"country_txt":"Spain","region_txt":"Western Europe","latitude":"42.69539100","longitude":"-1.67606900","db_eventid":"199005090008","year":1990,"month":5,"day":9},{"id":24929,"country_txt":"Greece","region_txt":"Western Europe","latitude":"37.94243900","longitude":"23.71472400","db_eventid":"198505080025","year":1985,"month":5,"day":8}];
 
   //  loop through geojson per country
   for(var i = 0; i< geojson.features.length;i++){
@@ -100,3 +108,59 @@ d3.json(url, function(err, geojson) {
 
 
 })
+
+
+/* Slider */
+
+// Create SVG element
+var svg2 = d3.select("body").append("svg")
+.attr("class", "svg2");
+
+// Append HTML to display slider information
+svg2.append("foreignObject")
+.attr("x", "0")
+.attr("y", "0")
+.attr("width" , "100%")
+.attr("height", '30%')
+.append("xhtml:div")
+  .style("border", "solid black 1px")
+  .style("background-color", "rgba(192, 192, 192, 0.4)")
+  .style("display", "block")
+  .style("overflow", "hidden")
+  .style("height", "50px");
+
+
+// add the slider to to the SVG element
+slider = svg2.append("foreignObject")
+.attr("x", "0")
+.attr("y", "30")
+.attr("width" , "100%")
+.attr("height", '70%')
+.append("xhtml:div")
+  .attr("id", "slider-container")
+  .style("border", "solid black 1px")
+  .style("background-color", "rgba(192, 192, 192, 0.4)")
+  .style("display", "block")
+  .style("overflow", "hidden")
+  .style("height", "50px");
+
+// Create slider spanning the range from 0 to 45 to encapsulate all 45 years of
+// the dataset
+var slider = createD3RangeSlider(0, 45, "#slider-container", true);
+
+// Slide range to start with showing 2 years per interval
+slider.range(0, 2);
+
+// Slider listener
+slider.onChange(function(newRange){
+
+  // save the start and and of the sliderRange
+  var begin = newRange.begin
+  var end = newRange.end
+
+  // TODO call update function
+
+});
+
+// Access currently set range
+// var curRange = slider.range();

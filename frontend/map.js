@@ -9,6 +9,7 @@ var tooltip = d3.select("body")
 
 // append svg to body
 var svg = d3.select("body").append("svg")
+.attr("class", "svg1")
 
 // Projection for map overview
 var projection = d3.geoMercator()
@@ -77,7 +78,8 @@ d3.json(url, function(err, geojson) {
   .style("fill", function(d){return d.properties.color});
 
 
-  //  add points for attack locations and styles for tooltip on hover
+  //  add points for attack locations and tooltip hover for more information on
+  // actual attack
   attacks = svg.selectAll("circles.points")
   .data(attack_json)
   .enter()

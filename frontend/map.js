@@ -4,7 +4,8 @@ var tooltip = d3.select("body")
 .style("position", "absolute")
 .style("z-index", "10")
 .style("visibility", "hidden")
-.text("a simple tooltip");
+.text("a simple tooltip")
+.attr("class", "tool-tip")
 
 // append svg to body
 var svg = d3.select("body").append("svg")

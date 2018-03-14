@@ -12,3 +12,10 @@ svg{
   stroke: black;
   stroke-width: 0.2px;
 }
+
+/* Styling for tooltip */
+.tool-tip{
+  width: 200px;
+  height: 200px;
+  background-color: grey;
+}

@@ -17,13 +17,13 @@ class Mapper
      */
     public static function filterType($index)
     {
+        if (!is_numeric($index)) return $index;
         switch($index) {
             case 0:         return 'attacktype';
             case 1:         return 'targettype';
             case 2:         return 'weapontype';
             case 3:         return 'perpetrator';
-            case 'time':    return 'time';
-            default: return '-INV-';
+            default:        return $index;
         }
     }
 

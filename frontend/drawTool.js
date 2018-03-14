@@ -46,7 +46,7 @@ loadFilters(0);
 
 conn.onmessage = function(e) {
 	console.log('answer van socket')
-    console.log(e.data);
+    // console.log(e.data);
     drawmap(e.data);
 };
 

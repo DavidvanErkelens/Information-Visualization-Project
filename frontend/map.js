@@ -17,6 +17,7 @@ var projection = d3.geoMercator()
 
 
 // start drawing the map
+
 var drawmap = function(input){
 
   attack_json = input

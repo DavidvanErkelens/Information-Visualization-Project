@@ -5,7 +5,8 @@ require 'init.php';
 $db = new Database();
 $db = $db->connection();
 
-$array = $fields = array(); $i = 0;
+$array = $fields = array(); 
+$i = 0;
 
 $stmt = $db->prepare("INSERT INTO gtdb (eventid, iyear, imonth, iday, country_txt, region_txt, provstate, city, latitude, longitude, attacktype1, attacktype2, attacktype3, targtype1, targtype2, targtype3, gname, gname2, gname3, weaptype1, weaptype2, weaptype3, weaptype4, multiple, success, suicide, claimed, individual, nkil, nwound, nkillter, nwoundte, propvalue) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -28,6 +29,7 @@ if ($handle) {
 
         $lat = (strlen($array[$i]['latitude']) > 0 ? $array[$i]['latitude'] : '0.0');
         $long = (strlen($array[$i]['longitude']) > 0 ? $array[$i]['longitude'] : '0.0');
+
 
         $stmt->bindValue($param++, $array[$i]['eventid']);
         $stmt->bindValue($param++, $array[$i]['iyear']);
@@ -62,10 +64,19 @@ if ($handle) {
         $stmt->bindValue($param++, intval($array[$i]['nkillter']));
         $stmt->bindValue($param++, intval($array[$i]['nwoundte']));
         $stmt->bindValue($param++, intval($array[$i]['propvalue']));
+        
  
-        $stmt->execute();
+        if (intval($array[$i]['eventid']) <= 198002290002) continue;
 
+        // var_dump($array[$i]);
         $i++;
+    
+        try
+        {
+            $stmt->execute();
+        }
+        catch(Exception $e) { /*...*/}
+
 
         // if ($i > 10) break;
     }

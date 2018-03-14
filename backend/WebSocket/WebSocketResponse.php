@@ -34,6 +34,9 @@ class WebSocketResponse
         // Create new Query
         $query = new QueryBuilder('gtdb');
 
+        // Store limit if we encounter it
+        $limit = 100;
+
         // Loop over filters to add to the query
         foreach ($parsedData as $filter => $contents)
         {
@@ -90,10 +93,20 @@ class WebSocketResponse
                 $endStatement->addCondition(new QueryCondition('iyear', '<', $contents['end']));
                 $query->addStatement($endStatement);
             }
+
+            // Is it a limit filter
+            if ($filter == "number")
+            {
+                // Is it numeric?
+                if (!is_numeric($contents)) continue;
+
+                // Store limit
+                $limit = intval($contents);
+            }
         }
 
         // Set the limit to 1000 items for now
-        $query->setLimit(1000);
+        $query->setLimit($limit);
 
         // Create database connection
         $db = new Database();

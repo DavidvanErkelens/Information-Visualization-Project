@@ -5,30 +5,30 @@ require 'init.php';
 
 $json = file_get_contents(__DIR__.'/example.json');
 
-// /WebSocketResponse::getResponse($json);
+WebSocketResponse::getResponse($json);
 
 
 
-$x = new QueryBuilder('table');
-$stat = new QueryStatement();
-$stat->addCondition(new QueryCondition('x', '=', 1));
-$stat->addCondition(new QueryCondition('y', '>', 2));
+// $x = new QueryBuilder('table');
+// $stat = new QueryStatement();
+// $stat->addCondition(new QueryCondition('x', '=', 1));
+// $stat->addCondition(new QueryCondition('y', '>', 2));
 
 
-$stat2 = new QueryStatement();
-$stat2->addCondition(new QueryCondition('z', '<', '00-00-00'));
+// $stat2 = new QueryStatement();
+// $stat2->addCondition(new QueryCondition('z', '<', '00-00-00'));
 
-$stat3 = new QueryStatement();
-$stat3->addCondition(new QueryCondition('zomaar', '<', '123'));
-$stat3->addCondition(new QueryCondition('z', '<', '00-00-00'));
-$stat3->addCondition(new QueryCondition('x', '=', 1));
+// $stat3 = new QueryStatement();
+// $stat3->addCondition(new QueryCondition('zomaar', '<', '123'));
+// $stat3->addCondition(new QueryCondition('z', '<', '00-00-00'));
+// $stat3->addCondition(new QueryCondition('x', '=', 1));
 
-$x->addStatement($stat);
-$x->addStatement($stat2);
-$x->addStatement($stat3);
+// $x->addStatement($stat);
+// $x->addStatement($stat2);
+// $x->addStatement($stat3);
 
-echo $x->format();
-var_dump($x->variables());     
+// echo $x->format();
+// var_dump($x->variables());     
 
 // test file, will be removed later       
       

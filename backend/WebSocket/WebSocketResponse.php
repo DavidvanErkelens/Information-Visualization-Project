@@ -36,28 +36,32 @@ class WebSocketResponse
         $query->addColumn('id');
 
         // Loop over filters to add to the query
-        foreach ($parsedData as $column => $contents)
+        foreach ($parsedData as $filter => $contents)
         {
             // Skip invalid columns
-            if ($column == "-INV-") continue;
+            if ($filter == "-INV-") continue;
 
             // Save values that the column may have
             $contains = '(' . implode(',' ,array_keys(array_filter($contents, function($value, $key) {
                 return $value;
             }, ARRAY_FILTER_USE_BOTH))) . ')';
 
-            // Add condition to query
-            $query->addCondition(new QueryCondition($column, 'IN', $contains));
+            // Create new querystatement
+            $statement = new QueryStatement();
+
+            // Get the columns that it could be in and add it to the statement
+            foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryCondition($column, 'IN', $contains));
+
+            // Add statement to query
+            $query->addStatement($statement);
         }
 
+        // Set the limit to 10 items for now
+        $query->setLimit(10);
+
         
-        echo $query->format();
+        echo $query->format() . PHP_EOL;
         var_dump($query->variables());
-
-        // $query = new QueryBuilder('testtable');
-
-        // $db = new Database();
-        // return json_encode($db->query($query));
 
     }
 }

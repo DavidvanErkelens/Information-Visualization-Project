@@ -27,16 +27,27 @@ class Mapper
     }
 
     /**
+     *  Map a filter type to the array of columns it could be in
+     *  @param   string
+     *  @return  array
+     */
+    public static function filterToColumns($name)
+    {
+        switch($name) {
+            case 'attacktype':  return array('attack1', 'attack2', 'attack3');
+            default:            return array($name);
+        }
+    }
+
+    /**
      *  Map column name in the database to the result set the frontend expects
      *  @param  string
      *  @return string
      */
-    public function columnToResult($column)
+    public static function columnToResult($column)
     {
         // for now, they are the same
         return $column;
     }
 }
 
-
-// filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator', 'Stats'];

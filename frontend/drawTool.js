@@ -30,32 +30,18 @@ stringvalues = [attacktypes, targettypes, weaptypes, perpretrator, stats]
 filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator', 'Stats'];
 
 //this will hold all the states of the filters!
-var dictionary = {0:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true},
+dictionary = {0:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true},
 				  1:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:false, 12:true, 13:true, 14:false, 15:true, 16:true, 17: true, 18:true, 19: true, 20: true, 21: true, 22: true},
 				  2:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:false, 12:true, 13:true},
 				  3:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:false, 12:true, 13:true, 14: false},
-				  4:{1:true, 2:false, 3:true, 4:true, 5:false}}
+				  4:{1:true, 2:false, 3:true, 4:true, 5:false},
+					"time" : {"start" : 1970, "end" : 1976}}
 
 
 
 //initialize filtlers
 loadedFilters = false
 loadFilters(0);
-
-
-
-conn.onmessage = function(e) {
-	console.log('answer van socket')
-
-		output = JSON.parse(e.data);
-    drawmap(output);
-		console.log(output);
-};
-
-conn.onopen = function(e) {
-    console.log("Connection established!");
-    conn.send(JSON.stringify(dictionary));
-};
 
 //create menu with filter categories
 function showDropdown()
@@ -93,6 +79,9 @@ function selectFilter(id)
 	{
 		dictionary[currentfilter][id] = true;
 	}
+
+	updatedata();
+	console.log(dictionary[currentfilter]);
 }
 
 function createBottomMenu(){

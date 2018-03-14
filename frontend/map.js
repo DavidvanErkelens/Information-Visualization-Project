@@ -75,6 +75,7 @@ var drawmap = function(input){
     .enter()
     .append("path")
     .attr("d", path)
+    .attr("class", "boundary")
     .on("click", showgraph("usa"))
     .style("fill", function(d){return d.properties.color});
 

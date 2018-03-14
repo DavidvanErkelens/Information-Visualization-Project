@@ -2,6 +2,9 @@
 var svg = d3.select("svg")
 var click = false;
 
+var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
+
+
 //TODO:
 //multiple(series of attacks or single attack),success and suicide, claimed, individual (does the attacker belong to group or not) :boolean values 
 //nkil, nwound, nkillter (killed perps),nwoundte (woudned perps), propvalue (estimated costs) : int values? 
@@ -33,9 +36,24 @@ var dictionary = {0:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8
 				  3:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:false, 12:true, 13:true, 14: false},
 				  4:{1:true, 2:false, 3:true, 4:true, 5:false}}
 
+
+
 //initialize filtlers
 loadedFilters = false
 loadFilters(0);
+
+
+
+conn.onmessage = function(e) {
+	console.log('answer van socket')
+    console.log(e.data);
+    drawmap(e.data);
+};
+
+conn.onopen = function(e) {
+    console.log("Connection established!");	
+    conn.send(JSON.stringify(dictionary));
+};
 
 //create menu with filter categories
 function showDropdown()
@@ -104,7 +122,6 @@ function updateRange(id, value)
 {
 
 	ranges[id[0]][id[1]] = parseInt(value);
-
 	console.log(ranges);
 }
 

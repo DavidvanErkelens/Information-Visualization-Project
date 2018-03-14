@@ -28,11 +28,6 @@ var svg = d3.select("body").append("svg")
 var projection = d3.geoMercator()
 .translate([960, 500])
 
-// start drawing the map
-var drawmap = function(){
-
-}
-
 // create path based on projection
 var path = d3.geoPath()
 .projection(projection);

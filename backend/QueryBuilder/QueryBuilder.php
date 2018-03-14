@@ -91,7 +91,7 @@ class QueryBuilder
     public function format()
     {
         // @todo fix
-        return 'SELECT * FROM attacks ORDER BY RAND() LIMIT 10;';
+        // return 'SELECT * FROM attacks ORDER BY RAND() LIMIT 10;';
 
         // Format columns
         if (count($this->columns) > 0) $columns = implode(', ', $this->columns);

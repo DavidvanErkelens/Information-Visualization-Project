@@ -21,7 +21,7 @@ class WebSocketResponse
         $data = json_decode($request, true);
 
         // do we have valid data?
-        if (is_null($data)) throw Exception("Invalid JSON");
+        if (is_null($data)) return json_encode(array());
 
         // Map keys from IDs to column names
         $parsedKeys = array_map(function($key) {
@@ -33,9 +33,6 @@ class WebSocketResponse
 
         // Create new Query
         $query = new QueryBuilder('gtdb');
-        // $query->addColumn('id');
-        // $query->addColumn('eventid');
-        // $query->addColumn('gname');
 
         // Loop over filters to add to the query
         foreach ($parsedData as $filter => $contents)

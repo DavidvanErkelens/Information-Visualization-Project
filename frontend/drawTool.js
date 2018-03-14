@@ -17,7 +17,7 @@ perpretrator = {1: 'Unknown', 2: 'Taliban', 3: 'Shining Path', 4: 'ISIL', 5: 'FM
 stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'}
 
 //intvalues
-ranges = {}
+ranges = {1: [0,5], 2: [10,15]}
 
 
 //here we match filters with correct category values
@@ -94,10 +94,20 @@ function createBottomMenu(){
 			.style("height", "20px")
 			.style("display", "block")
 	        //.html("<input type='range' min='1' max='100' value='50' class='slider2' id='myRange'>")
-	        .html("nKill: <input type=text' name='lastname' maxlength='3' size='1' value='min'> - <input type=text' name='lastname' maxlength='3' size='1' value='max'><br>nWound: <input type=text' name='lastname' maxlength='3' size='1' value='min'> - <input type=text' name='lastname' maxlength='3' size='1' value='max'>")
+	        .html("nKill: <input type=text' id=10 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[1][0]+"'> - <input type=text' id=11 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[1][1]+"'><br>nWound: <input type=text' id=20 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[2][0]+"'> - <input type=text' id=21 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[2][1]+"'>")
 }
 
 createBottomMenu();
+
+
+function updateRange(id, value)
+{
+
+	ranges[id[0]][id[1]] = parseInt(value);
+
+	console.log(ranges);
+}
+
 
 //create menu
 function loadFilters(filter)

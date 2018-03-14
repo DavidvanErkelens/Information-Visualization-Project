@@ -1,0 +1,19 @@
+list of columns that are needed for each event to make all visualisations
+
+
+latitude
+longitude
+country text
+region text
+iyear
+imonth
+iday
+attacktypeN
+attacktypeN_txt
+targtypeN
+tartypeN_txt
+gname
+nkill
+nwound
+
+# elements for visualisations on right side??

@@ -18,7 +18,6 @@ class WebSocketResponse
     public static function getResponse($request)
     {
         $query = new QueryBuilder('testtable');
-        $query->addCondition(new QueryCondition('test2', 'LIKE', '%bcd%'));
 
         $db = new Database();
         return json_encode($db->query($query));

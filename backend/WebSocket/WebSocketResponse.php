@@ -74,8 +74,8 @@ class WebSocketResponse
             $query->addStatement($statement);
         }
 
-        // Set the limit to 10 items for now
-        $query->setLimit(10);
+        // Set the limit to 500 items for now
+        $query->setLimit(500);
 
         // Create database connection
         $db = new Database();

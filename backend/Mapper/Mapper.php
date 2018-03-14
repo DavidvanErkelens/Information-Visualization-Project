@@ -22,7 +22,7 @@ class Mapper
             case 1:         return 'targettype';
             case 2:         return 'weapontype';
             case 3:         return 'perpetrator';
-            case 'time'     return 'time';
+            case 'time':    return 'time';
             default: return '-INV-';
         }
     }

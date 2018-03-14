@@ -33,14 +33,4 @@ class QueryInCondition extends QueryCondition
         // Format PDO string
         return "{$this->column} {$this->operator} ({$q})";
     }
-
-    /**
-     *  Get value
-     *  @return array
-     */
-    public function value()
-    {
-        // expose member
-        return $this->value;
-    }
 }

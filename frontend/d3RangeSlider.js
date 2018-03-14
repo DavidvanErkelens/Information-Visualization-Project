@@ -170,7 +170,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         .on("end", function () {
             if (resumePlaying) {
                 startPlaying();
-            }
+              }
         })
         .on("drag", function () {
             var dx = d3.event.dx;

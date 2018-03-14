@@ -31,92 +31,95 @@ var projection = d3.geoMercator()
 // start drawing the map
 var drawmap = function(){
 
+  // remove the old drawmap
+  d3.selectAll("path").remove();
+
+  // create path based on projection
+  var path = d3.geoPath()
+  .projection(projection);
+
+  // open geojson
+  var url = "http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
+  countries = svg.append("g");
+
+  d3.json(url, function(err, geojson) {
+
+    // clean geojson
+    var new_geojson = {type: "FeatureCollection", features : []}
+
+
+    //  loop through geojson per country
+    for(var i = 0; i< geojson.features.length;i++){
+
+      // remove Antarctica
+      if (geojson.features[i].properties.name != "Antarctica"){
+
+        //  get the country features
+        country_features = geojson.features[i]
+
+        // select attacks for current country and add them to the geojson
+        country_features.properties.attack = attack_json.filter(function( obj ) {
+          return obj.country_txt == geojson.features[i].properties.name;
+        });
+
+        // get relative number of attacks for country
+        rel_num_attack = Math.floor((country_features.properties.attack.length / attack_json.length) * 10)
+
+        // colours for map
+        colors = ['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"];
+
+        // add color to country based on relative number of attack
+        country_features.properties.color = colors[rel_num_attack];
+
+        // add country to new geojson
+        new_geojson.features.push(geojson.features[i])
+      }
+    }
+
+    console.log(new_geojson)
+
+    // draw the map
+    svg.selectAll("path")
+    .data(new_geojson.features)
+    .enter()
+    .append("path")
+    .attr("d", path)
+    .style("fill", function(d){return d.properties.color});
+
+
+    //  add points for attack locations and tooltip hover for more information on
+    // actual attack
+    attacks = svg.selectAll("circles.points")
+    .data(attack_json)
+    .enter()
+    .append("circle")
+    .attr("r",4)
+    .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
+    .on("mouseover", function(d) {
+      tooltip.text(d.attacktypeN_txt);
+      return tooltip.style("visibility", "visible");
+    })
+    .on("mousemove", function() {
+      return tooltip.style("top",
+      (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+    })
+    .on("mouseout", function() {
+      return tooltip.style("visibility", "hidden");
+    });
+
+
+  })
 }
 
-// create path based on projection
-var path = d3.geoPath()
-.projection(projection);
-
-// open geojson
-var url = "http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
-countries = svg.append("g");
-
-d3.json(url, function(err, geojson) {
-
-  // clean geojson
-  var new_geojson = {type: "FeatureCollection", features : []}
-
-
-  //  loop through geojson per country
-  for(var i = 0; i< geojson.features.length;i++){
-
-    // remove Antarctica
-    if (geojson.features[i].properties.name != "Antarctica"){
-
-      //  get the country features
-      country_features = geojson.features[i]
-
-      // select attacks for current country and add them to the geojson
-      country_features.properties.attack = attack_json.filter(function( obj ) {
-        return obj.country_txt == geojson.features[i].properties.name;
-      });
-
-      // get relative number of attacks for country
-      rel_num_attack = Math.floor((country_features.properties.attack.length / attack_json.length) * 10)
-
-      // colours for map
-      colors = ['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"];
-
-      // add color to country based on relative number of attack
-      country_features.properties.color = colors[rel_num_attack];
-
-      // add country to new geojson
-      new_geojson.features.push(geojson.features[i])
-    }
-  }
-
-  console.log(new_geojson)
-
-  // draw the map
-  svg.selectAll("path")
-  .data(new_geojson.features)
-  .enter()
-  .append("path")
-  .attr("d", path)
-  .style("fill", function(d){return d.properties.color});
-
-
-  //  add points for attack locations and tooltip hover for more information on
-  // actual attack
-  attacks = svg.selectAll("circles.points")
-  .data(attack_json)
-  .enter()
-  .append("circle")
-  .attr("r",4)
-  .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
-  .on("mouseover", function(d) {
-    tooltip.text(d.attacktypeN_txt);
-    return tooltip.style("visibility", "visible");
-  })
-  .on("mousemove", function() {
-    return tooltip.style("top",
-    (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
-  })
-  .on("mouseout", function() {
-    return tooltip.style("visibility", "hidden");
-  });
-
-
-})
+drawmap()
 
 
 /* Slider */
-
 // Create SVG element
 var svg2 = d3.select("body").append("svg")
 .attr("class", "svg2");
 
-// Append HTML to display slider information
+// // Append HTML to display slider information
 svg2.append("foreignObject")
 .attr("x", "0")
 .attr("y", "0")
@@ -131,7 +134,7 @@ svg2.append("foreignObject")
 
 
 // add the slider to to the SVG element
-slider = svg2.append("foreignObject")
+slider_element = svg2.append("foreignObject")
 .attr("x", "0")
 .attr("y", "30")
 .attr("width" , "100%")
@@ -159,6 +162,8 @@ slider.onChange(function(newRange){
   var end = newRange.end
 
   // TODO call update function
+
+  // Draw the new drawmap when the slider is released
 
 });
 

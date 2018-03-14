@@ -30,9 +30,10 @@ var projection = d3.geoMercator()
 
 
 // start drawing the map
-var drawmap = function(attack_json){
 
-  
+var drawmap = function(input){
+
+  attack_json = input
 
   // remove the old drawmap
   d3.selectAll("path").remove();
@@ -50,7 +51,6 @@ var drawmap = function(attack_json){
     // clean geojson
     var new_geojson = {type: "FeatureCollection", features : []}
 
-
     //  loop through geojson per country
     for(var i = 0; i< geojson.features.length;i++){
 
@@ -59,6 +59,7 @@ var drawmap = function(attack_json){
 
         //  get the country features
         country_features = geojson.features[i]
+
 
         // select attacks for current country and add them to the geojson
         country_features.properties.attack = attack_json.filter(function( obj ) {
@@ -113,8 +114,6 @@ var drawmap = function(attack_json){
 
   })
 }
-
-drawmap()
 
 
 /* Slider */

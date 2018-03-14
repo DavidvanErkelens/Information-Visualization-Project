@@ -6,8 +6,8 @@ var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
 
 
 //TODO:
-//multiple(series of attacks or single attack),success and suicide, claimed, individual (does the attacker belong to group or not) :boolean values 
-//nkil, nwound, nkillter (killed perps),nwoundte (woudned perps), propvalue (estimated costs) : int values? 
+//multiple(series of attacks or single attack),success and suicide, claimed, individual (does the attacker belong to group or not) :boolean values
+//nkil, nwound, nkillter (killed perps),nwoundte (woudned perps), propvalue (estimated costs) : int values?
 
 
 //here we match the ints to strings
@@ -46,12 +46,19 @@ loadFilters(0);
 
 conn.onmessage = function(e) {
 	console.log('answer van socket')
+<<<<<<< HEAD
     // console.log(e.data);
     drawmap(e.data);
+=======
+
+		output = JSON.parse(e.data);
+    drawmap(output);
+		console.log(output);
+>>>>>>> e82b1ce4ab43a34c16c829e14896a8d0ab9a779f
 };
 
 conn.onopen = function(e) {
-    console.log("Connection established!");	
+    console.log("Connection established!");
     conn.send(JSON.stringify(dictionary));
 };
 
@@ -69,7 +76,7 @@ function showDropdown()
         .style("background-color", "rgba(300, 33, 192, 1)")
 
         .html("<a onclick='loadFilters(0)'>"+filters[0]+"</a> <a onclick='loadFilters(1)'>"+filters[1]+"</a> <a onclick='loadFilters(2)'>"+filters[2]+"</a> <a onclick='loadFilters(3)'>"+filters[3]+"</a> <a onclick='loadFilters(4)'>"+filters[4])
-	} else 
+	} else
 	{
 		click = false;
 		dropdown.remove();
@@ -85,9 +92,9 @@ function selectFilter(id)
 	if(dictionary[currentfilter][id] == true)
 	{
 		dictionary[currentfilter][id] = false;
-		//dictionary[currentfilter] = 
-	} 
-	else 
+		//dictionary[currentfilter] =
+	}
+	else
 	{
 		dictionary[currentfilter][id] = true;
 	}
@@ -100,14 +107,14 @@ function createBottomMenu(){
         .attr("width", 200)
         .attr("height", 150)
    		.append("xhtml:div")
-   		
+
         .style("border", "solid black 1px")
         .style("background-color", "rgba(192, 192, 192, 0.4)")
         .style("display", "block")
         .style("height", "150px")
 
-     
-    
+
+
     		FO3.append("foreignObject")
 			.style("height", "20px")
 			.style("display", "block")
@@ -163,7 +170,7 @@ function loadFilters(filter)
 
 
 	var arrayLength = Object.keys(dictionary[filter]).length
-	
+
 	//this is a placeholder for the filters
 	//TODO: ADD SCROLLBAR INTO THIS PLACEHOLDER
 	FO2 = svg.append("foreignObject")
@@ -186,7 +193,7 @@ function loadFilters(filter)
 
 
 	//loop over the filters and create checkboxes
-	for (var i = 1; i < arrayLength+1; i++) 
+	for (var i = 1; i < arrayLength+1; i++)
 	{
 		//get strings from the int types
 		stringdict = stringvalues[filter]
@@ -199,8 +206,8 @@ function loadFilters(filter)
 			.style("display", "block")
 	        .html("<input type=checkbox onclick=selectFilter(this.id) id="+i+" checked>"+stringdict[i])
 
-		} 
-		else 
+		}
+		else
 		{
 				FO2.append("foreignObject")
 			.style("height", "20px")
@@ -218,6 +225,3 @@ function loadFilters(filter)
 	}
 
 }
-
-
-

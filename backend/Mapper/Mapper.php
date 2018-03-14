@@ -25,6 +25,17 @@ class Mapper
             default: return '-INV-';
         }
     }
+
+    /**
+     *  Map column name in the database to the result set the frontend expects
+     *  @param  string
+     *  @return string
+     */
+    public function columnToResult($column)
+    {
+        // for now, they are the same
+        return $column;
+    }
 }
 
 

@@ -75,8 +75,7 @@ class Mapper
      */
     public static function columnToResult($column)
     {
-        // for now
-        //          case they are       return the same
+        // This is not yet necessary, return the same value.
         return $column;
     }
 }

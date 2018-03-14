@@ -15,7 +15,7 @@ conn.onopen = function(e) {
     console.log("Connection established!");
 
     // TODO remove this
-    delete dictionary["time"]
+    // delete dictionary["time"]
 
     conn.send(JSON.stringify(dictionary));
 };

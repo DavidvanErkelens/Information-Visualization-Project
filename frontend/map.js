@@ -17,7 +17,6 @@ var projection = d3.geoMercator()
 
 
 // start drawing the map
-
 var drawmap = function(input){
 
   attack_json = input
@@ -68,12 +67,15 @@ var drawmap = function(input){
       }
     }
 
+    console.log(new_geojson);
+
     // draw the map
-    svg.selectAll("path")
+    countries = svg.selectAll("path")
     .data(new_geojson.features)
     .enter()
     .append("path")
     .attr("d", path)
+    .on("click", showgraph("usa"))
     .style("fill", function(d){return d.properties.color});
 
     //  add points for attack locations and tooltip hover for more information on
@@ -112,21 +114,21 @@ svg2.append("foreignObject")
 .attr("x", "0")
 .attr("y", "0")
 .attr("width" , "100%")
-.attr("height", '30%')
+.attr("height", '50%')
 .append("xhtml:div")
   .style("border", "solid black 1px")
   .style("background-color", "rgba(192, 192, 192, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
-  .style("height", "50px");
+  .style("height", "220px");
 
 
 // add the slider to to the SVG element
 slider_element = svg2.append("foreignObject")
 .attr("x", "0")
-.attr("y", "30")
+.attr("y", "220")
 .attr("width" , "100%")
-.attr("height", '70%')
+.attr("height", '50%')
 .append("xhtml:div")
   .attr("id", "slider-container")
   .style("border", "solid black 1px")

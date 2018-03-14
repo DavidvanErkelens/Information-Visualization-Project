@@ -1,6 +1,3 @@
-/* Source: https://rasmusfonseca.github.io/d3RangeSlider/
-Ported from version 3 to version 4 of d3js*/
-
 /*jslint browser: true */
 /*jslint this */
 
@@ -161,13 +158,13 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
     }
 
     // configure drag behavior for handles and slider
-    var dragResizeE = d3.drag()
-        .on("start", function () {
+    var dragResizeE = d3.behavior.drag()
+        .on("dragstart", function () {
             d3.event.sourceEvent.stopPropagation();
             resumePlaying = playing;
             playing = false;
         })
-        .on("end", function () {
+        .on("dragend", function () {
             if (resumePlaying) {
                 startPlaying();
             }
@@ -184,14 +181,14 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             updateRangeFromUI();
         });
 
-    var dragResizeW = d3.drag()
-        .on("start", function () {
+    var dragResizeW = d3.behavior.drag()
+        .on("dragstart", function () {
             this.startX = d3.mouse(this)[0];
             d3.event.sourceEvent.stopPropagation();
             resumePlaying = playing;
             playing = false;
         })
-        .on("end", function () {
+        .on("dragend", function () {
             if (resumePlaying) {
                 startPlaying();
             }
@@ -217,13 +214,13 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             updateRangeFromUI();
         });
 
-    var dragMove = d3.drag()
-        .on("drag", function () {
+    var dragMove = d3.behavior.drag()
+        .on("dragstart", function () {
             d3.event.sourceEvent.stopPropagation();
             resumePlaying = playing;
             playing = false;
         })
-        .on("end", function () {
+        .on("dragend", function () {
             if (resumePlaying) {
                 startPlaying();
             }

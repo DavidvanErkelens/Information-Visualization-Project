@@ -16,6 +16,9 @@ perpretrator = {1: 'Unknown', 2: 'Taliban', 3: 'Shining Path', 4: 'ISIL', 5: 'FM
 //not one column but 5 columns that are true or false
 stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'}
 
+//intvalues
+ranges = {1: [0,5], 2: [10,15]}
+
 
 //here we match filters with correct category values
 stringvalues = [attacktypes, targettypes, weaptypes, perpretrator, stats]
@@ -29,10 +32,6 @@ var dictionary = {0:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8
 				  2:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:false, 12:true, 13:true},
 				  3:{1:true, 2:false, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:false, 12:true, 13:true, 14: false},
 				  4:{1:true, 2:false, 3:true, 4:true, 5:false}}
-
-
-//var topheight = 35;
-
 
 //initialize filtlers
 loadedFilters = false
@@ -75,6 +74,40 @@ function selectFilter(id)
 		dictionary[currentfilter][id] = true;
 	}
 }
+
+function createBottomMenu(){
+	FO3 = svg.append("foreignObject")
+   		.attr("x", 10)
+   		.attr("y", 325)
+        .attr("width", 200)
+        .attr("height", 150)
+   		.append("xhtml:div")
+   		
+        .style("border", "solid black 1px")
+        .style("background-color", "rgba(192, 192, 192, 0.4)")
+        .style("display", "block")
+        .style("height", "150px")
+
+     
+    
+    		FO3.append("foreignObject")
+			.style("height", "20px")
+			.style("display", "block")
+	        //.html("<input type='range' min='1' max='100' value='50' class='slider2' id='myRange'>")
+	        .html("nKill: <input type=text' id=10 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[1][0]+"'> - <input type=text' id=11 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[1][1]+"'><br>nWound: <input type=text' id=20 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[2][0]+"'> - <input type=text' id=21 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[2][1]+"'>")
+}
+
+createBottomMenu();
+
+
+function updateRange(id, value)
+{
+
+	ranges[id[0]][id[1]] = parseInt(value);
+
+	console.log(ranges);
+}
+
 
 //create menu
 function loadFilters(filter)

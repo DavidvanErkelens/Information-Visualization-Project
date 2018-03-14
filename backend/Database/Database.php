@@ -59,4 +59,14 @@ class Database
         // Fetch rows and return
         return $q->fetchAll();
     }
+
+    /**
+     *  Expose connection
+     *  @return PDO
+     */
+    public function connection()
+    {
+        // expose member
+        return $this->connection;
+    }
 }

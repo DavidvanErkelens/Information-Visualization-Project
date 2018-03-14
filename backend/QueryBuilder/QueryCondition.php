@@ -14,19 +14,19 @@ class QueryCondition
      *  The column for which this condition applies
      *  @var  string
      */
-    private $column;
+    protected $column;
 
     /**
      *  The operator for this condition
      *  @var  string
      */
-    private $operator;
+    protected $operator;
 
     /**
      *  The value to compare to
      *  @var  mixed
      */
-    private $value;
+    protected $value;
 
     /**
      *  Constructor
@@ -36,7 +36,7 @@ class QueryCondition
         // Store values
         $this->column = $column;
         $this->operator = $operator;
-        $this->value = $value;
+        $this->value = array($value);
     }
 
     /**
@@ -51,7 +51,7 @@ class QueryCondition
 
     /**
      *  Get value
-     *  @return mixed
+     *  @return array
      */
     public function value()
     {

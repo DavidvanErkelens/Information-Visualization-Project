@@ -23,10 +23,10 @@ class QueryBuilder
     private $columns = array();
 
     /**
-     *  The conditions for the query
-     *  @var QueryCondition[]
+     *  The statements for the query
+     *  @var QueryStatement[]
      */
-    private $conditions = array();
+    private $statements = array();
 
     /**
      *  The limit and offset for this query
@@ -55,13 +55,13 @@ class QueryBuilder
     }
 
     /**
-     *  Add a condition to the query
-     *  @param  QueryCondition
+     *  Add a statement to the query
+     *  @param  QueryStatement
      */
-    public function addCondition(QueryCondition $condition)
+    public function addStatement(QueryStatement $statement)
     {
         // add to list
-        $this->conditions[] = $condition;
+        $this->statements[] = $statement;
     }
 
     /**
@@ -90,9 +90,6 @@ class QueryBuilder
      */
     public function format()
     {
-        // @todo fix
-        return 'SELECT * FROM attacks ORDER BY RAND() LIMIT 10;';
-
         // Format columns
         if (count($this->columns) > 0) $columns = implode(', ', $this->columns);
         else $columns = '*';
@@ -100,15 +97,15 @@ class QueryBuilder
         // Format query
         $query = "SELECT {$columns} FROM {$this->table}";
 
-        // Store formatted conditions
-        $conditions = array();
+        // Store formatted statements
+        $statements = array();
 
-        // Do we have conditions?
-        foreach ($this->conditions as $condition) $conditions[] = $condition->format();
+        // Do we have statements?
+        foreach ($this->statements as $statement) $statements[] = $statement->format();
 
-        // Add conditions to query
-        if (count($conditions) > 0) $query .= " WHERE ";
-        $query .= implode(' AND ', $conditions);
+        // Add statements to query
+        if (count($statements) > 0) $query .= " WHERE ";
+        $query .= implode(' AND ', $statements);
 
         // Should we limit and offset?
         if ($this->limit >= 0) $query .= " LIMIT {$this->limit}";
@@ -127,8 +124,8 @@ class QueryBuilder
         // Store variables
         $vars = array();
 
-        // Loop over conditions
-        foreach ($this->conditions as $condition) $vars[] = $condition->value();
+        // Loop over statements
+        foreach ($this->statements as $statement) $vars = array_merge($vars, $statement->variables());
 
         // Return result
         return $vars;

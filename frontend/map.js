@@ -89,7 +89,7 @@ var drawmap = function(input){
     .attr("id", "attack-circle")
     .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
     .on("mouseover", function(d) {
-      tooltip.text(d.attacktypeN_txt);
+      tooltip.text(d.attacktype1);
       return tooltip.style("visibility", "visible");
     })
     .on("mousemove", function() {

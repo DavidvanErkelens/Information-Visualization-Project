@@ -8,34 +8,16 @@
 /**
  *  Class definition
  */
-class QueryCondition
+class QueryInCondition extends QueryCondition
 {
-    /**
-     *  The column for which this condition applies
-     *  @var  string
-     */
-    private $column;
-
-    /**
-     *  The operator for this condition
-     *  @var  string
-     */
-    private $operator;
-
-    /**
-     *  The value to compare to
-     *  @var  mixed
-     */
-    private $value;
-
     /**
      *  Constructor
      */
-    public function __construct($column, $operator, $value)
+    public function __construct($column, array $value = array())
     {
         // Store values
         $this->column = $column;
-        $this->operator = $operator;
+        $this->operator = 'IN';
         $this->value = $value;
     }
 
@@ -45,8 +27,11 @@ class QueryCondition
      */
     public function format()
     {
+        // Create ?-list
+        $q = implode(',', array_fill(0, count($this->value), '?'));
+
         // Format PDO string
-        return "{$this->column} {$this->operator} ?";
+        return "{$this->column} {$this->operator} ({$q})";
     }
 
     /**
@@ -56,6 +41,6 @@ class QueryCondition
     public function value()
     {
         // expose member
-        return array($this->value);
+        return $this->value;
     }
 }

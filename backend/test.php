@@ -5,7 +5,7 @@ require 'init.php';
 
 $json = file_get_contents(__DIR__.'/example.json');
 
-WebSocketResponse::getResponse($json);
+echo WebSocketResponse::getResponse($json);
 
 
 

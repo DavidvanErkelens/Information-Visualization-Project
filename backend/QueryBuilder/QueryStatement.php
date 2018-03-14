@@ -53,7 +53,7 @@ class QueryStatement
         $vars = array();
 
         // Merge variables from conditions
-        foreach ($this->conditions as $condition) $vars[] = $condition->value();
+        foreach ($this->conditions as $condition) $vars = array_merge($vars, $condition->value());
 
         // Return variables
         return $vars;

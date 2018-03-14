@@ -34,8 +34,37 @@ class Mapper
     public static function filterToColumns($name)
     {
         switch($name) {
-            case 'attacktype':  return array('attack1', 'attack2', 'attack3');
+            case 'attacktype':  return array('attacktype1', 'attacktype2', 'attacktype3');
+            case 'targettype':  return array('targtype1', 'targtype2', 'targtype3');
+            case 'weapontype':  return array('weaptype1', 'weaptype2', 'weaptype3', 'weaptype4');
+            case 'perpetrator': return array('gname', 'gname2', 'gname3');
             default:            return array($name);
+        }
+    }
+
+    /**
+     *  Map a perpretrator id to the group name
+     *  @param  int
+     *  @return string
+     */
+    public static function groupToName($id)
+    {
+        switch($id) {
+            case 1:     return 'Unknown';
+            case 2:     return 'Taliban';
+            case 3:     return 'Shining Path';
+            case 4:     return 'ISIL';
+            case 5:     return 'FMLN';
+            case 6:     return 'Al-Shabaab';
+            case 7:     return 'IRA';
+            case 8:     return 'FARC';
+            case 9:     return 'NPA';
+            case 10:    return 'PKK';
+            case 11:    return 'Boko Haram';
+            case 12:    return 'ETA';
+            case 13:    return 'CPI-Maoist';
+            case 14:    return 'LTTE';
+            default:    return 'Unknown';
         }
     }
 
@@ -46,7 +75,8 @@ class Mapper
      */
     public static function columnToResult($column)
     {
-        // for now, they are the same
+        // for now
+        //          case they are       return the same
         return $column;
     }
 }

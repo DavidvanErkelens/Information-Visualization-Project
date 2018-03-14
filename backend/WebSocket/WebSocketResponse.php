@@ -32,8 +32,10 @@ class WebSocketResponse
         $parsedData = array_combine($parsedKeys, array_values($data));
 
         // Create new Query
-        $query = new QueryBuilder('attacks');
-        $query->addColumn('id');
+        $query = new QueryBuilder('gtdb');
+        // $query->addColumn('id');
+        // $query->addColumn('eventid');
+        // $query->addColumn('gname');
 
         // Loop over filters to add to the query
         foreach ($parsedData as $filter => $contents)
@@ -41,16 +43,35 @@ class WebSocketResponse
             // Skip invalid columns
             if ($filter == "-INV-") continue;
 
-            // Save values that the column may have
-            $contains = '(' . implode(',' ,array_keys(array_filter($contents, function($value, $key) {
-                return $value;
-            }, ARRAY_FILTER_USE_BOTH))) . ')';
-
             // Create new querystatement
             $statement = new QueryStatement();
 
-            // Get the columns that it could be in and add it to the statement
-            foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryCondition($column, 'IN', $contains));
+            // Different query formatting depending on column type
+            if (in_array($filter, array('attacktype', 'targettype', 'weapontype')))
+            {
+                // Save values that the column may have
+                $contains = array_keys(array_filter($contents, function($value, $key) {
+                    return $value;
+                }, ARRAY_FILTER_USE_BOTH));
+
+                // Get the columns that it could be in and add it to the statement
+                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition($column, $contains));                
+            }
+
+            // Group?
+            if ($filter == 'perpetrator')
+            {
+                // Create list of group names
+                $contains = array_map(function($value) {
+                    return strtolower(Mapper::groupToName($value));
+                }, array_keys(array_filter($contents, function($value, $key) {
+                    return $value;
+                }, ARRAY_FILTER_USE_BOTH)));
+
+                // Add to statement
+                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
+            }
+
 
             // Add statement to query
             $query->addStatement($statement);
@@ -59,9 +80,13 @@ class WebSocketResponse
         // Set the limit to 10 items for now
         $query->setLimit(10);
 
-        
-        echo $query->format() . PHP_EOL;
-        var_dump($query->variables());
+        // Create database connection
+        $db = new Database();
 
+        // Pass query to DB
+        $result = $db->query($query);
+
+        // Pass return back
+        return json_encode($result);
     }
 }

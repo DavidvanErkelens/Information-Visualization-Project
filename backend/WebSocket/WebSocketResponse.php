@@ -80,10 +80,22 @@ class WebSocketResponse
         // Create database connection
         $db = new Database();
 
-        // Pass query to DB
-        $result = $db->query($query);
+        // Create results array
+        $results = array();
 
-        // Pass return back
-        return json_encode($result);
+        // Loop over results
+        foreach ($db->query($query) as $result) 
+        {
+            // Replace keys if necessary
+            $keys = array_map(function($key) {
+                return Mapper::columnToResult($key);
+            }, array_keys($result));
+            
+            // Add to results array
+            $results[] = array_combine($keys, array_values($result));
+        }
+
+        // Return encoded result
+        return json_encode($results);
     }
 }

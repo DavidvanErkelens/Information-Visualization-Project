@@ -34,6 +34,9 @@ class WebSocketResponse
         // Create new Query
         $query = new QueryBuilder('gtdb');
 
+        // Store limit if we encounter it
+        $limit = 100;
+
         // Loop over filters to add to the query
         foreach ($parsedData as $filter => $contents)
         {
@@ -52,7 +55,11 @@ class WebSocketResponse
                 }, ARRAY_FILTER_USE_BOTH));
 
                 // Get the columns that it could be in and add it to the statement
-                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition($column, $contains));                
+                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition($column, $contains));   
+
+
+                // Add statement to query
+                $query->addStatement($statement);             
             }
 
             // Group?
@@ -67,15 +74,39 @@ class WebSocketResponse
 
                 // Add to statement
                 foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
+
+
+                // Add statement to query
+                $query->addStatement($statement);
             }
 
+            // Time filter
+            if ($filter == 'time')
+            {
+                // Start date
+                $startStatement = new QueryStatement();
+                $startStatement->addCondition(new QueryCondition('iyear', '>=', $contents['start']));
+                $query->addStatement($startStatement);
 
-            // Add statement to query
-            $query->addStatement($statement);
+                // End date
+                $endStatement = new QueryStatement();
+                $endStatement->addCondition(new QueryCondition('iyear', '<', $contents['end']));
+                $query->addStatement($endStatement);
+            }
+
+            // Is it a limit filter
+            if ($filter == "number")
+            {
+                // Is it numeric?
+                if (!is_numeric($contents)) continue;
+
+                // Store limit
+                $limit = intval($contents);
+            }
         }
 
-        // Set the limit to 10 items for now
-        $query->setLimit(10);
+        // Set the limit to 1000 items for now
+        $query->setLimit($limit);
 
         // Create database connection
         $db = new Database();

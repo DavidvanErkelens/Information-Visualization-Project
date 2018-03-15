@@ -44,7 +44,7 @@ class WebSocketResponse
             if ($filter == "-INV-") continue;
 
             // We don't need a statement if the filter is empty
-            if (count($contents) == 0) continue;
+            if (is_array($contents) && count($contents) == 0) continue;
 
             // Create new querystatement
             $statement = new QueryStatement();

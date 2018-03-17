@@ -12,9 +12,11 @@ var svg = d3.select("body").append("svg")
 .attr("class", "svg1")
 
 svg.append("text")
-    .attr("x", "950")
+    .attr("x", "850")
     .attr("y", "40")
-    .text("This graph is nice");
+    .attr("font-size", "20px")
+    .text("Visualizing the terrorism landscape");
+
 
 
 

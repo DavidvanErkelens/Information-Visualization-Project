@@ -91,7 +91,7 @@ var drawmap = function(input){
           d3.select(this).style("fill", "rgb(255, 247, 236)");
         }
 
-        alert(d.properties.name)
+        console.log(d.properties.name)
 
 
 })     

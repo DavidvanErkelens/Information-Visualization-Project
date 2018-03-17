@@ -87,6 +87,7 @@ var drawmap = function(input){
     .append("circle")
     .attr("r",4)
     .attr("id", "attack-circle")
+    .attr("class", "attack-circle")
     .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
     .on("mouseover", function(d) {
 

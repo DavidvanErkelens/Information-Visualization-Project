@@ -78,6 +78,10 @@ a:hover{
   background-color: rgba(234, 242, 255, 0.4);
 }
 
+.attack-circle{
+  fill: rgba(255, 35, 68, 0.5);
+}
+
 
 /* slider stuf */
 .d3-slider {

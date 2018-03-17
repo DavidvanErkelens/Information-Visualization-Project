@@ -23,6 +23,9 @@ var projection = d3.geoMercator()
 .translate([960, 500])
 
 
+selected = []
+
+
 // start drawing the map
 var drawmap = function(input){
 
@@ -87,11 +90,17 @@ var drawmap = function(input){
     .on("click", function(d) {
       if(d3.select(this).style("fill") != 'rgba(252, 177, 80, 0.6)'){
           d3.select(this).style("fill", "rgba(252, 177, 80, 0.6)");
+          selected.push(d.properties.name)
+
         } else {
           d3.select(this).style("fill", "rgb(255, 247, 236)");
+
+          var index = selected.indexOf(d.properties.name);
+          selected.splice(index, 1);
+
         }
 
-        console.log(d.properties.name)
+        console.log(selected)
 
 
 })     

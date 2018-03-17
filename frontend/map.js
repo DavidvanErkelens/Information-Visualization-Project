@@ -11,6 +11,13 @@ var tooltip = d3.select("body")
 var svg = d3.select("body").append("svg")
 .attr("class", "svg1")
 
+svg.append("text")
+    .attr("x", "950")
+    .attr("y", "40")
+    .text("This graph is nice");
+
+
+
 // Projection for map overview
 var projection = d3.geoMercator()
 .translate([960, 500])
@@ -75,16 +82,18 @@ var drawmap = function(input){
     .enter()
     .append("path")
     .attr("d", path)
+
     .attr("class", "boundary")
-    .on("click", showgraph("usa"))
     .on("click", function(d) {
-      console.log(d3.select(this).style("fill"))
       if(d3.select(this).style("fill") != 'rgba(252, 177, 80, 0.6)'){
           d3.select(this).style("fill", "rgba(252, 177, 80, 0.6)");
         } else {
           d3.select(this).style("fill", "rgb(255, 247, 236)");
-
         }
+
+        alert(d.properties.name)
+
+
 })     
     .style("fill", function(d){return d.properties.color});
 
@@ -94,7 +103,7 @@ var drawmap = function(input){
     .data(attack_json)
     .enter()
     .append("circle")
-    .attr("r",4)
+    .attr("r",3)
     .attr("id", "attack-circle")
     .attr("class", "attack-circle")
     .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})

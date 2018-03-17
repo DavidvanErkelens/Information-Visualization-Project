@@ -77,6 +77,15 @@ var drawmap = function(input){
     .attr("d", path)
     .attr("class", "boundary")
     .on("click", showgraph("usa"))
+    .on("click", function(d) {
+      console.log(d3.select(this).style("fill"))
+      if(d3.select(this).style("fill") != 'rgba(252, 177, 80, 0.6)'){
+          d3.select(this).style("fill", "rgba(252, 177, 80, 0.6)");
+        } else {
+          d3.select(this).style("fill", "rgb(255, 247, 236)");
+
+        }
+})     
     .style("fill", function(d){return d.properties.color});
 
     //  add points for attack locations and tooltip hover for more information on
@@ -117,15 +126,16 @@ var svg2 = d3.select("body").append("svg")
 // // Append HTML to display slider information
 svg2.append("foreignObject")
 .attr("x", "0")
-.attr("y", "0")
+.attr("y", "30")
 .attr("width" , "100%")
 .attr("height", '50%')
 .append("xhtml:div")
   .style("border", "solid black 1px")
-  .style("background-color", "rgba(192, 192, 192, 0.4)")
+    .style("border-color", "rgba(234, 242, 255, 1)")
+  .style("background-color", "rgba(234, 242, 255, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
-  .style("height", "220px");
+  .style("height", "190px");
 
 
 // add the slider to to the SVG element
@@ -136,11 +146,12 @@ slider_element = svg2.append("foreignObject")
 .attr("height", '50%')
 .append("xhtml:div")
   .attr("id", "slider-container")
-  .style("border", "solid black 1px")
-  .style("background-color", "rgba(192, 192, 192, 0.4)")
+  .style("border", "solid 1px")
+  .style("border-color", "rgba(234, 242, 255, 1)")
+  .style("background-color", "rgba(234, 242, 255, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
-  .style("height", "50px");
+  .style("height", "35px");
 
 // Create slider spanning the range from 0 to 45 to encapsulate all 45 years of the dataset
 var slider = createD3RangeSlider(0, 45, "#slider-container", true);

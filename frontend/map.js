@@ -94,8 +94,10 @@ var drawmap = function(input){
       return tooltip.style("visibility", "visible");
     })
     .on("mousemove", function() {
-      return tooltip.style("top",
-      (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+      return tooltip.style("top",(470) + "px")
+                    .style("left", (10) + "px")
+                    .style("border", "solid 1px")
+                    .style("border-color", "rgba(234, 242, 255, 1");
     })
     .on("mouseout", function() {
       return tooltip.style("visibility", "hidden");

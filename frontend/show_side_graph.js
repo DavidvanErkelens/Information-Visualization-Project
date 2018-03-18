@@ -46,8 +46,8 @@ function show_side_graph(countries){
 
     // set the dimensions and margins of the graph
     var margin = {top: 20, right: 20, bottom: 50, left: 70},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 300 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
 
     // noramlize x scale
     var x = d3.scaleBand().rangeRound([0, width]).padding(0.1)
@@ -107,24 +107,28 @@ function show_side_graph(countries){
 
     /*pie chart for showing perpetrators percentages*/
 
-    var width = 250,
-    height = 250,
+    // set width heihgt and radius of chart
+    var width = 300,
+    height = 300,
     radius = Math.min(width, height) / 2;
 
+    // scale for the colors
     var color = d3.scaleOrdinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
+    // set the outer and inner radius of the arcs creating a hole in the middle
     var arc = d3.arc()
     .outerRadius(radius - 10)
     .innerRadius(radius - 70);
 
+    // create pie chart
     var pie = d3.pie()
     .sort(null)
     .value(function (d) {
       return d.nattack;
     });
 
-
+    // create new svg element and add pie chart
     var svg4 = d3.select(".svg-container2").append("svg")
     .attr("class", "svg4")
     .attr("width", width)
@@ -132,17 +136,20 @@ function show_side_graph(countries){
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+    // add arcs for each data element
     var g = svg4.selectAll(".arc")
     .data(pie(all_groups))
     .enter().append("g")
     .attr("class", "arc");
 
+    // draw for each data element
     g.append("path")
     .attr("d", arc)
     .style("fill", function (d) {
-      return color(d.name);
+      return color(d.data.name);
     });
 
+    // add text label to each element
     g.append("text")
     .attr("transform", function (d) {
       return "translate(" + arc.centroid(d) + ")";
@@ -150,7 +157,7 @@ function show_side_graph(countries){
     .attr("dy", ".35em")
     .style("text-anchor", "middle")
     .text(function (d) {
-      return String(d.name) + " (" + String(d.nattack) + ")";
+      return String(d.data.name) + " (" + String(d.data.nattack) + ")";
     });
 
     /*end pie chart showing perpetrators percentages*/

@@ -114,7 +114,7 @@ function show_side_graph(countries){
 
     // scale for the colors
     var color = d3.scaleOrdinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    .range(['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"]);
 
     // set the outer and inner radius of the arcs creating a hole in the middle
     var arc = d3.arc()

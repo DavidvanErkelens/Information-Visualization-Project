@@ -43,6 +43,9 @@ class WebSocketResponse
             // Skip invalid columns
             if ($filter == "-INV-") continue;
 
+            // We don't need a statement if the filter is empty
+            if (is_array($contents) && count($contents) == 0) continue;
+
             // Create new querystatement
             $statement = new QueryStatement();
 

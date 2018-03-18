@@ -11,9 +11,21 @@ var tooltip = d3.select("body")
 var svg = d3.select("body").append("svg")
 .attr("class", "svg1")
 
+svg.append("text")
+    .attr("x", "850")
+    .attr("y", "40")
+    .attr("font-size", "20px")
+    .text("Visualizing the terrorism landscape");
+
+
+
+
 // Projection for map overview
 var projection = d3.geoMercator()
 .translate([960, 500])
+
+
+selected = []
 
 
 // start drawing the map
@@ -75,8 +87,25 @@ var drawmap = function(input){
     .enter()
     .append("path")
     .attr("d", path)
+
     .attr("class", "boundary")
-    .on("click", showgraph("usa"))
+    .on("click", function(d) {
+      if(d3.select(this).style("fill") != 'rgba(252, 177, 80, 0.6)'){
+          d3.select(this).style("fill", "rgba(252, 177, 80, 0.6)");
+          selected.push(d.properties.name)
+
+        } else {
+          d3.select(this).style("fill", "rgb(255, 247, 236)");
+
+          var index = selected.indexOf(d.properties.name);
+          selected.splice(index, 1);
+
+        }
+
+        console.log(selected)
+
+
+})     
     .style("fill", function(d){return d.properties.color});
 
     //  add points for attack locations and tooltip hover for more information on
@@ -85,17 +114,20 @@ var drawmap = function(input){
     .data(attack_json)
     .enter()
     .append("circle")
-    .attr("r",4)
+    .attr("r",3)
     .attr("id", "attack-circle")
+    .attr("class", "attack-circle")
     .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
     .on("mouseover", function(d) {
 
-      tooltip.html(attacktypes[d.attacktype1]+"<br>"+targettypes[d.targtype1]+"<br>"+weaptypes[d.weaptype1]+"<br> Kills: "+d.nkil+"<br> perpkills: "+d.nkillter+"<br> nwound: "+d.nwound+"<br> propvalue: "+d.propvalue+"<br> perpwounds: "+d.nwoundte);
+      tooltip.html(attacktypes[d.attacktype1]+"<br>"+targettypes[d.targtype1]+"<br>"+weaptypes[d.weaptype1]+"<br> Kills: "+d.nkil+"<br> perpkills: "+d.nkillter+"<br> nwound: "+d.nwound+"<br> propvalue: "+d.propvalue+"<br> perpwounds: "+d.nwoundte+"<br> gname: "+d.gname);
       return tooltip.style("visibility", "visible");
     })
     .on("mousemove", function() {
-      return tooltip.style("top",
-      (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+      return tooltip.style("top",(470) + "px")
+                    .style("left", (10) + "px")
+                    .style("border", "solid 1px")
+                    .style("border-color", "rgba(234, 242, 255, 1");
     })
     .on("mouseout", function() {
       return tooltip.style("visibility", "hidden");
@@ -114,15 +146,16 @@ var svg2 = d3.select("body").append("svg")
 // // Append HTML to display slider information
 svg2.append("foreignObject")
 .attr("x", "0")
-.attr("y", "0")
+.attr("y", "30")
 .attr("width" , "100%")
 .attr("height", '50%')
 .append("xhtml:div")
   .style("border", "solid black 1px")
-  .style("background-color", "rgba(192, 192, 192, 0.4)")
+    .style("border-color", "rgba(234, 242, 255, 1)")
+  .style("background-color", "rgba(234, 242, 255, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
-  .style("height", "220px");
+  .style("height", "190px");
 
 
 // add the slider to to the SVG element
@@ -133,11 +166,12 @@ slider_element = svg2.append("foreignObject")
 .attr("height", '50%')
 .append("xhtml:div")
   .attr("id", "slider-container")
-  .style("border", "solid black 1px")
-  .style("background-color", "rgba(192, 192, 192, 0.4)")
+  .style("border", "solid 1px")
+  .style("border-color", "rgba(234, 242, 255, 1)")
+  .style("background-color", "rgba(234, 242, 255, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
-  .style("height", "50px");
+  .style("height", "35px");
 
 // Create slider spanning the range from 0 to 45 to encapsulate all 45 years of the dataset
 var slider = createD3RangeSlider(0, 45, "#slider-container", true);

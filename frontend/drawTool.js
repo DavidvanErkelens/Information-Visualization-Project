@@ -56,7 +56,6 @@ function showDropdown()
    		.attr("y", 10)
    		.append("xhtml:div")
         .style("background-color", "rgba(300, 33, 192, 1)")
-
         .html("<a onclick='loadFilters(0)'>"+filters[0]+"</a> <a onclick='loadFilters(1)'>"+filters[1]+"</a> <a onclick='loadFilters(2)'>"+filters[2]+"</a> <a onclick='loadFilters(3)'>"+filters[3]+"</a> <a onclick='loadFilters(4)'>"+filters[4])
 	} else
 	{
@@ -88,13 +87,14 @@ function selectFilter(id)
 function createBottomMenu(){
 	FO3 = svg.append("foreignObject")
    		.attr("x", 10)
-   		.attr("y", 325)
+   		.attr("y", 305)
         .attr("width", 200)
         .attr("height", 150)
    		.append("xhtml:div")
 
-        .style("border", "solid black 1px")
-        .style("background-color", "rgba(192, 192, 192, 0.4)")
+        .style("border", "solid 1px")
+        .style("border-color", "rgba(234, 242, 255, 1)")
+        .style("background-color", "rgba(234, 242, 255, 0.4)")
         .style("display", "block")
         .style("height", "150px")
 
@@ -126,6 +126,7 @@ function loadFilters(filter)
 	if(loadedFilters == true)
 	{
 		FO2.remove()
+		FO.remove()
 	}
 
 	//this value correspsonds with the numerical value for the filter
@@ -140,14 +141,15 @@ function loadFilters(filter)
    		.append("xhtml:div")
         .attr("width", 200)
         .attr("height", 300)
-        .style("border", "solid black 1px")
-        .style("background-color", "rgba(192, 192, 192, 0.4)")
+        .style("border", "solid 1px")
+        .style("border-color","rgb(234, 242, 255)")
+        .style("border-radius", "10px")
 
         .style("display", "block")
         .style("overflow", "hidden")
         .style("height", "35px")
        // .style("text-align", "center")
-        .html("<button onclick='showDropdown()' class='dropbtn' style='border: none; width: 198px; height: 35px; font-size: 20px; color:white'>"+filters[filter]+"</button>")
+        .html("<button onclick='showDropdown()' class='dropbtn' style='border: none; width: 198px; height: 35px; font-size: 20px; color:black'>"+filters[filter]+"</button>")
 
         loadedFilters = true;
 
@@ -166,13 +168,15 @@ function loadFilters(filter)
    		.append("xhtml:div")
         .attr("width", 200)
         .attr("height", 265)
-        .style("border", "solid black 1px")
-        .style("background-color", "rgba(192, 192, 192, 0.4)")
+        .style("border", "solid 1px")
+        .style("border-color","rgb(234, 242, 255)")
+        .style("background-color", "rgba(234, 242, 255, 0.4)")
+
 
         .style("display", "block")
-        .style("overflow", "hidden")
+        
         .style("overflow-y","scroll")
-        .style("height", "265px")
+        .style("height", "240px")
        // .style("text-align", "center")
         //.html("<button onclick='myFunction()' class='dropbtn' style='background-color: grey; border: none; width: 198px; height: 35px; font-size: 20px; color:white'>"+filters[filter]+"</button>")
 
@@ -189,7 +193,7 @@ function loadFilters(filter)
 		FO2.append("foreignObject")
 			.style("height", "20px")
 			.style("display", "block")
-	        .html("<input type=checkbox onclick=selectFilter(this.id) id="+i+" checked>"+stringdict[i])
+	        .html("<input type=checkbox class='checkmark' onclick=selectFilter(this.id) id="+i+" checked>"+stringdict[i])
 
 		}
 		else
@@ -197,7 +201,7 @@ function loadFilters(filter)
 				FO2.append("foreignObject")
 			.style("height", "20px")
 			.style("display", "block")
-	        .html("<input type=checkbox onclick=selectFilter(this.id) id="+i+">"+stringdict[i])
+	        .html("<input type=checkbox class='checkmark' onclick=selectFilter(this.id) id="+i+">"+stringdict[i])
 		}
 	}
 
@@ -207,6 +211,7 @@ function loadFilters(filter)
 	{
 		click = false;
 		dropdown.remove();
+
 	}
 
 }

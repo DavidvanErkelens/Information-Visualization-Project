@@ -7,6 +7,9 @@
 // Get the data
 function drawTime(containerSelector, data) {
 
+	var beginDate = 1970,
+		endDate = 2015;
+
 	var container = d3.select(containerSelector);
 	// set the dimensions and margins of the graph
 	var testing = containerSelector.width;
@@ -17,18 +20,11 @@ function drawTime(containerSelector, data) {
 	console.log(container.node().getBoundingClientRect().width)
 
 	// parse the date / time
-	// var parseTime = d3.timeParse("%d-%b-%y");
+	// var parseTime = d3.timeParse("%y");
 
 	// set the ranges
 	var x = d3.scaleLinear().range([0, width]);
 	var y = d3.scaleLinear().range([height, 0]);
-
-	// Define the axes
-	// var xAxis = d3.svg.axis().scale(x)
- //    .orient("bottom").ticks(5);
-
-	// var yAxis = d3.svg.axis().scale(y)
- //    .orient("left").ticks(5);
 
 	// define the line
 	var valueline = d3.line()
@@ -49,7 +45,8 @@ function drawTime(containerSelector, data) {
 	});
 
 	// Scale the range of the data
-	x.domain(d3.extent(data, function(d) { return d.year; }));
+	// x.domain(d3.extent(data, function(d) { return d.year; }));
+	x.domain([beginDate, endDate]);
 	y.domain([0, d3.max(data, function(d) { return d.close; })]);
 
 	// Add the valueline path.
@@ -70,31 +67,22 @@ function drawTime(containerSelector, data) {
 };
 
 var lineData = [{
-  year: "2001",
+  year: 2001,
   close: 5
 }, {
-  year: "2002",
+  year: 2002,
   close: 20
 }, {
-  year: "2003",
+  year: 2003,
   close: 10
 }, {
-  year: "2004",
+  year: 2004,
   close: 40
 }, {
-  year: "2005",
+  year: 2005,
   close: 5
 }, {
-  year: "2006",
+  year: 2006,
   close: 60
 }];
 
-var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true},
-				  1:{1:true, 2:true, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14:true, 15:true, 16:true, 17: true, 18:true, 19: true, 20: true, 21: true, 22: true},
-				  2:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true},
-				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true},
-				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
-					"time" : {"start" : 1970, "end" : 2015},
-					"number" : 5};
-
-console.log(dictionary)

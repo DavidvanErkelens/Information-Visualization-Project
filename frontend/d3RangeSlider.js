@@ -270,7 +270,18 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         updateUIFromRange();
     });
 
+// experimental
+var down = false;
+$(document).mousedown(function() {
+    down = true;
+}).mouseup(function() {
+    down = false;
+});
+// end excperiment
+
+
     function onChange(callback){
+
         changeListeners.push(callback);
         return this;
     }

@@ -11,6 +11,7 @@ var tooltip = d3.select("body")
 var svg = d3.select(".svg-container1").append("svg")
 .attr("class", "svg1")
 
+// adding title
 svg.append("text")
     .attr("x", "850")
     .attr("y", "40")
@@ -19,7 +20,7 @@ svg.append("text")
 
 // Projection for map overview
 var projection = d3.geoMercator()
-.translate([960, 500])
+.translate([700, 500])
 
 //  list for all currenlty selected countries
 selected = []
@@ -189,5 +190,7 @@ slider.onChange(function(newRange){
 
   // call update function to show new selected data
   updatedata()
+
+
 
 });

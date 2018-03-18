@@ -46,7 +46,7 @@ function show_side_graph(countries){
 
     // set the dimensions and margins of the graph
     var margin = {top: 20, right: 20, bottom: 50, left: 70},
-    width = 300 - margin.left - margin.right,
+    width = 700 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
     // noramlize x scale
@@ -69,7 +69,7 @@ function show_side_graph(countries){
     .attr("y", height)
     .attr("height", 0)
     .attr("width", x.bandwidth())
-    .style("fill", "rgb(234, 229, 229)")
+    .style("fill", "rgb(252, 141, 89)")
     .transition()
     .duration(700)
     .attr("height", function(d) { return height - y(d.nkill); })
@@ -147,7 +147,17 @@ function show_side_graph(countries){
     .attr("d", arc)
     .style("fill", function (d) {
       return color(d.data.name);
-    });
+    }) .transition()
+    .duration(function(d, i) {
+      return i * 800;
+    })
+		.attrTween('d', function(d) {
+   var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+   return function(t) {
+       d.endAngle = i(t);
+     return arc(d);
+   }
+});
 
     // add text label to each element
     g.append("text")
@@ -161,6 +171,4 @@ function show_side_graph(countries){
     });
 
     /*end pie chart showing perpetrators percentages*/
-
-
   }

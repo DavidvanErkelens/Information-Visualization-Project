@@ -31,7 +31,7 @@ var drawmap = function(input){
   attack_json = input
 
   // remove the old drawmap
-  d3.selectAll("path").remove();
+  d3.selectAll("boundary").remove();
   d3.selectAll("#attack-circle").remove();
 
   // create path based on projection
@@ -149,6 +149,7 @@ svg2.append("foreignObject")
 .attr("width" , "100%")
 .attr("height", '50%')
 .append("xhtml:div")
+  .attr("id", "timegraph")
   .style("border", "solid black 1px")
     .style("border-color", "rgba(234, 242, 255, 1)")
   .style("background-color", "rgba(234, 242, 255, 0.4)")
@@ -174,6 +175,9 @@ slider_element = svg2.append("foreignObject")
 
 // Create slider spanning the range from 0 to 45 to encapsulate all 45 years of the dataset
 var slider = createD3RangeSlider(0, 45, "#slider-container", true);
+
+// Create year timegraph
+var yearGraph = drawTime("#timegraph", lineData)
 
 // Slide range to start with showing 2 years per interval
 slider.range(0, 2);

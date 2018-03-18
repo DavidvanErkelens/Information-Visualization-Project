@@ -145,6 +145,8 @@ var slider = createD3RangeSlider(0, 45, "#slider-container", true);
 // Slide range to start with showing 2 years per interval
 slider.range(0, 2);
 
+
+
 // Slider listener
 slider.onChange(function(newRange){
 

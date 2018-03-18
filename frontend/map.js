@@ -8,7 +8,7 @@ var tooltip = d3.select("body")
 .attr("class", "tool-tip")
 
 // append svg to body
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".svg-container1").append("svg")
 .attr("class", "svg1")
 
 svg.append("text")
@@ -17,16 +17,12 @@ svg.append("text")
     .attr("font-size", "20px")
     .text("Visualizing the terrorism landscape");
 
-
-
-
 // Projection for map overview
 var projection = d3.geoMercator()
 .translate([960, 500])
 
-
+//  list for all currenlty selected countries
 selected = []
-
 
 // start drawing the map
 var drawmap = function(input){
@@ -102,10 +98,12 @@ var drawmap = function(input){
 
         }
 
-        console.log(selected)
+
+        // update the side graphs
+        show_side_graph(selected);
 
 
-})     
+})
     .style("fill", function(d){return d.properties.color});
 
     //  add points for attack locations and tooltip hover for more information on
@@ -140,7 +138,7 @@ var drawmap = function(input){
 
 /* Slider */
 // Create SVG element
-var svg2 = d3.select("body").append("svg")
+var svg2 = d3.select(".svg-container").append("svg")
 .attr("class", "svg2");
 
 // // Append HTML to display slider information

@@ -174,7 +174,7 @@ function loadFilters(filter)
 
 
         .style("display", "block")
-        
+
         .style("overflow-y","scroll")
         .style("height", "240px")
        // .style("text-align", "center")

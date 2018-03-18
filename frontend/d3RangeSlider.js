@@ -121,6 +121,11 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
     var handleW = slider.append("div").attr("class", "handle WW");
     var handleE = slider.append("div").attr("class", "handle EE");
 
+    // catch mouseup reload
+    slider.on("end", function(){
+      console.log("test");
+    });
+
     /** Update the `left` and `width` attributes of `slider` based on `sliderRange` */
     function updateUIFromRange () {
         var conW = sliderBox.node().clientWidth;
@@ -258,6 +263,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             .style("width", props.width + "px");
         updateRangeFromUI();
     });
+
 
     //Reposition slider on window resize
     window.addEventListener("resize", function () {

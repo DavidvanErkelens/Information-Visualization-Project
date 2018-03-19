@@ -80,13 +80,20 @@ function show_side_graph(countries){
     svg3.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x)
-    .tickFormat(function (d) {return d} ));
+      .tickFormat(function (d) {return d} ))
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", function(d) {
+          return "rotate(-65)"
+        });;
 
     // text label for the x axis
     svg3.append("text")
     .attr("transform",
     "translate(" + (width/2) + " ," +
-    (height + margin.top + 20) + ")")
+    (height + margin.top + 50) + ")")
     .style("text-anchor", "middle")
     .text("Month");
 
@@ -169,6 +176,4 @@ function show_side_graph(countries){
     .text(function (d) {
       return String(d.data.name) + " (" + String(d.data.nattack) + ")";
     });
-
-    /*end pie chart showing perpetrators percentages*/
   }

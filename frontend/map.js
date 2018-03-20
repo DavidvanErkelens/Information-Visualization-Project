@@ -92,7 +92,7 @@ var drawmap = function(input){
           selected.push(d.properties.name)
 
         } else {
-          d3.select(this).style("fill", "rgb(255, 247, 236)");
+          d3.select(this).style("fill", d.properties.color);
 
           var index = selected.indexOf(d.properties.name);
           selected.splice(index, 1);

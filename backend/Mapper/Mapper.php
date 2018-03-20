@@ -39,7 +39,7 @@ class Mapper
             case 0:         return 'nkil';
             case 1:         return 'nwound';
             case 2:         return 'nkillter';
-            case 3:         return 'nwoundter';
+            case 3:         return 'nwoundte';
             default:        return $index;
         }
     }

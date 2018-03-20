@@ -258,6 +258,24 @@ class WebSocketResponse
                 // Add statement to query
                 $query->addStatement($statement);
             }
+
+            // Ranges?
+            if ($filter == 'ranges')
+            {
+                // Loop over ranges
+                foreach ($contents as $index => $range)
+                {
+                    // Add beginning of range
+                    $startStatement = new QueryStatement();
+                    $startStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '>=', $range['start']));
+                    $query->addStatement($startStatement);
+
+                    // Add end of range
+                    $endStatement = new QueryStatement();
+                    $endStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '<', $range['end']));
+                    $query->addStatement($endStatement);
+                }
+            }
         }
 
         // Return the query
@@ -282,6 +300,78 @@ class WebSocketResponse
         // Create statement for countries and groups
         $countryStatement = new QueryStatement();
         $groupStatement = new QueryStatement();
+
+        // Map keys from IDs to column names
+        $parsedKeys = array_map(function($key) {
+            return Mapper::filterType($key);
+        }, array_keys($data));
+
+        // Set keys
+        $parsedData = array_combine($parsedKeys, array_values($data));
+
+        // Loop over filters to add to the query
+        foreach ($parsedData as $filter => $contents)
+        {
+            // Skip invalid columns
+            if ($filter == '-INV-') continue;
+
+            // We don't need a statement if the filter is empty
+            if (is_array($contents) && count($contents) == 0) continue;
+
+            // Create new querystatement
+            $statement = new QueryStatement();
+
+            // Different query formatting depending on column type
+            if (in_array($filter, array('attacktype', 'targettype', 'weapontype')))
+            {
+                // Save values that the column may have
+                $contains = array_keys(array_filter($contents, function($value, $key) {
+                    return $value;
+                }, ARRAY_FILTER_USE_BOTH));
+
+                // Get the columns that it could be in and add it to the statement
+                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition($column, $contains));   
+
+
+                // Add statement to query
+                $query->addStatement($statement);
+            }
+
+            // Group?
+            if ($filter == 'perpetrator')
+            {
+                // Create list of group names
+                $contains = array_map(function($value) {
+                    return strtolower(Mapper::groupToName($value));
+                }, array_keys(array_filter($contents, function($value, $key) {
+                    return $value;
+                }, ARRAY_FILTER_USE_BOTH)));
+
+                // Add to statement
+                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
+
+                // Add statement to query
+                $query->addStatement($statement);
+            }
+
+            // Ranges?
+            if ($filter == 'ranges')
+            {
+                // Loop over ranges
+                foreach ($contents as $index => $range)
+                {
+                    // Add beginning of range
+                    $startStatement = new QueryStatement();
+                    $startStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '>=', $range['start']));
+                    $query->addStatement($startStatement);
+
+                    // Add end of range
+                    $endStatement = new QueryStatement();
+                    $endStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '<', $range['end']));
+                    $query->addStatement($endStatement);
+                }
+            }
+        }
 
         // Loop over countries
         if (array_key_exists('countries', $data)) foreach ($data['countries'] as $country)
@@ -353,6 +443,78 @@ class WebSocketResponse
         $query->addColumn('iyear');
         $query->addColumn('country_txt');
         $query->addColumn('SUM(nkil) AS kills');
+
+        // Map keys from IDs to column names
+        $parsedKeys = array_map(function($key) {
+            return Mapper::filterType($key);
+        }, array_keys($data));
+
+        // Set keys
+        $parsedData = array_combine($parsedKeys, array_values($data));
+
+        // Loop over filters to add to the query
+        foreach ($parsedData as $filter => $contents)
+        {
+            // Skip invalid columns
+            if ($filter == '-INV-') continue;
+
+            // We don't need a statement if the filter is empty
+            if (is_array($contents) && count($contents) == 0) continue;
+
+            // Create new querystatement
+            $statement = new QueryStatement();
+
+            // Different query formatting depending on column type
+            if (in_array($filter, array('attacktype', 'targettype', 'weapontype')))
+            {
+                // Save values that the column may have
+                $contains = array_keys(array_filter($contents, function($value, $key) {
+                    return $value;
+                }, ARRAY_FILTER_USE_BOTH));
+
+                // Get the columns that it could be in and add it to the statement
+                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition($column, $contains));   
+
+
+                // Add statement to query
+                $query->addStatement($statement);
+            }
+
+            // Group?
+            if ($filter == 'perpetrator')
+            {
+                // Create list of group names
+                $contains = array_map(function($value) {
+                    return strtolower(Mapper::groupToName($value));
+                }, array_keys(array_filter($contents, function($value, $key) {
+                    return $value;
+                }, ARRAY_FILTER_USE_BOTH)));
+
+                // Add to statement
+                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
+
+                // Add statement to query
+                $query->addStatement($statement);
+            }
+
+            // Ranges?
+            if ($filter == 'ranges')
+            {
+                // Loop over ranges
+                foreach ($contents as $index => $range)
+                {
+                    // Add beginning of range
+                    $startStatement = new QueryStatement();
+                    $startStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '>=', $range['start']));
+                    $query->addStatement($startStatement);
+
+                    // Add end of range
+                    $endStatement = new QueryStatement();
+                    $endStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '<', $range['end']));
+                    $query->addStatement($endStatement);
+                }
+            }
+        }
 
         // Create statement for countries
         $countryStatement = new QueryStatement();

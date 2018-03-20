@@ -225,3 +225,10 @@ path.line
     fill: none;
     stroke: #000;
 }
+
+.legend {                                                   
+  font-size: 12px;                                          
+}                                                           
+rect {                                                      
+  stroke-width: 2;                                          
+}     

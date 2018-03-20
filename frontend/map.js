@@ -71,7 +71,7 @@ get_new_geojson = function (attack_json, resultcallback){
     // return the newly created geo json
     console.log(new_geojson);
 
-
+    //  return the result
     resultcallback(new_geojson);
 
   });

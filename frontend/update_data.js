@@ -14,7 +14,7 @@ conn.onmessage = function(e) {
       first = false
     }
 
-    if(!first){
+    else if(!first){
       update_map_color(output)
     }
 

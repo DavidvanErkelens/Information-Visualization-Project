@@ -1,9 +1,4 @@
 
-
-// append the svg obgect to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-
 // Get the data
 function drawTime(containerSelector, data) {
 
@@ -17,11 +12,8 @@ function drawTime(containerSelector, data) {
 	// set the dimensions and margins of the graph
 	var testing = containerSelector.width;
 	var margin = {top: 20, right: 20, bottom: 30, left: 50},
-	    width = container.node().getBoundingClientRect().width,
-	    height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
-
-	// parse the date / time
-	// var parseTime = d3.timeParse("%y");
+	    width = d3.select(".svg2").node().getBoundingClientRect().width - margin.right*4,
+	    height = container.node().getBoundingClientRect().height - margin.top;
 
 	// set the ranges
 	var x = d3.scaleLinear().range([0, width]);

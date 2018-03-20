@@ -41,7 +41,8 @@ get_new_geojson = function (attack_json, resultcallback){
     for(var i = 0; i< geojson.features.length;i++){
 
       // remove Antarctica
-      if (geojson.features[i].properties.name != "Antarctica"){
+      if (geojson.features[i].properties.name != "Antarctica")
+      {
 
         //  get the country features
         country_features = geojson.features[i]
@@ -155,9 +156,14 @@ function update_map_color(attack_json){
         if(d3.select(this).style("fill") != 'rgba(173, 131, 110, 0.6)'){
           d3.select(this).style("fill", "rgba(173, 131, 110, 0.6)");
           selected.push(d.properties.name)
+          d3.select(this).style("stroke-width", "1px");
+          d3.select(this).style("stroke", "black");
+
 
         } else {
-          d3.select(this).style("fill", d.properties.color);
+          //d3.select(this).style("fill", d.properties.color);
+          d3.select(this).style("stroke-width", "0.2px");
+          d3.select(this).style("stroke", "black");
 
           var index = selected.indexOf(d.properties.name);
           selected.splice(index, 1);

@@ -34,7 +34,7 @@ class WebSocketResponse
             default:            return json_encode(array());
         }
 
-        $query = self::mainQuery($data); 
+        // die($)
 
         // Create database connection
         $db = new Database();
@@ -247,6 +247,17 @@ class WebSocketResponse
     {
         // Create new Query
         $query = new QueryBuilder('gtdb');
+
+        // Add columns
+
+
+        $statement = new QueryStatement();
+
+        $statement->addCondition(new QueryCondition('country', '=', 'Mexico'));
+
+
+        // Set country
+        $query->addStatement($statement);
 
         // Return the query
         return $query;

@@ -5,9 +5,18 @@ var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
 conn.onmessage = function(e) {
   console.log('answer from socket')
 
-    output = JSON.parse(e.data);
-    drawmap(output);
-    var yearGraph = drawTime("#timegraph", lineData);
+    parsed = JSON.parse(e.data);
+
+    type = parsed.type;
+    output = parsed.data;
+
+    if (type == 'main'){
+    	drawmap(output);	
+    }
+    else if (type == "time"){
+    	drawTime("#timegraph", lineData);
+    }
+    
 };
 
 // send data to server
@@ -24,6 +33,7 @@ conn.onopen = function(e) {
 function updatedata(){
 
   conn.send(JSON.stringify(dictionary));
+  conn.send(JSON.stringify(timeDict));
   console.log('lekker pik')
 
 }

@@ -162,6 +162,24 @@ class WebSocketResponse
                 // Store limit
                 $limit = intval($contents);
             }
+
+            // Ranges?
+            if ($filter == 'ranges')
+            {
+                // Loop over ranges
+                foreach ($contents as $index => $range)
+                {
+                    // Add beginning of range
+                    $startStatement = new QueryStatement();
+                    $startStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '>=', $range['start']));
+                    $query->addStatement($startStatement);
+
+                    // Add end of range
+                    $endStatement = new QueryStatement();
+                    $endStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '<', $range['end']));
+                    $query->addStatement($endStatement);
+                }
+            }
         }
 
         // Set the limit 
@@ -278,8 +296,8 @@ class WebSocketResponse
         }
 
         // Add to query
-        if (array_key_exists('countries', $data) && count($data['countries'] > 0)) $query->addStatement($countryStatement);
-        if (array_key_exists('groups', $data) && count($data['groups'] > 0)) $query->addStatement($groupStatement);
+        if (array_key_exists('countries', $data) && count($data['countries']) > 0) $query->addStatement($countryStatement);
+        if (array_key_exists('groups', $data) && count($data['groups']) > 0) $query->addStatement($groupStatement);
 
         // Do we have a start date?
         if (array_key_exists('start', $data) && is_numeric($data['start']))
@@ -309,6 +327,12 @@ class WebSocketResponse
 
         // Set group by
         $query->addGroupBy('gname');
+
+        // Order by
+        $query->setOrderBy('nattack DESC');
+
+        // Limit
+        $query->setLimit(10);
 
         // Return query
         return $query;

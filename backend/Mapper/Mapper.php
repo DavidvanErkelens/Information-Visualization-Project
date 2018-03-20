@@ -28,6 +28,23 @@ class Mapper
     }
 
     /**
+     *  Convert range types to string
+     *  @param  int
+     *  @return string
+     */
+    public static function rangeIndexToColumn($index)
+    {
+        if (!is_numeric($index)) return $index;
+        switch($index) {
+            case 0:         return 'nkil';
+            case 1:         return 'nwound';
+            case 2:         return 'nkillter';
+            case 3:         return 'nwoundte';
+            default:        return $index;
+        }
+    }
+
+    /**
      *  Map a filter type to the array of columns it could be in
      *  @param   string
      *  @return  array

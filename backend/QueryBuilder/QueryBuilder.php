@@ -39,6 +39,12 @@ class QueryBuilder
      *  @var  string[]
      */
     private $groupby = array();
+
+    /**
+     *  Should we order by something?
+     *  @var  string
+     */
+    private $orderby = null;
     
     /**
      *  Constructor
@@ -101,6 +107,16 @@ class QueryBuilder
     }
 
     /**
+     *  Set order by
+     *  @param  string
+     */
+    public function setOrderBy($order)
+    {
+        // store
+        $this->orderby = $order;
+    }
+
+    /**
      *  Format the query
      *  @return string
      */
@@ -125,6 +141,9 @@ class QueryBuilder
 
         // Should we group by?
         if (count($this->groupby) > 0) $query .= " GROUP BY " . implode(', ', $this->groupby);
+
+        // Order?
+        if (!is_null($this->orderby)) $query .= " ORDER BY {$this->orderby}";
 
         // Should we limit and offset?
         if ($this->limit >= 0) $query .= " LIMIT {$this->limit}";

@@ -13,9 +13,6 @@ conn.onmessage = function(e) {
 
 
     if (type == 'main'){
-
-      console.log("test");
-
       if(first){
         drawmap(output);
         first = false
@@ -27,6 +24,13 @@ conn.onmessage = function(e) {
     }
     else if (type == "time"){
     	drawTime("#timegraph", output);
+    }
+    else if (type == "kill"){
+      // update graphs
+      show_line(output)
+    }
+    else if (type == "group"){
+      
     }
 
     output = JSON.parse(e.data);

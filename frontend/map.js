@@ -49,7 +49,8 @@ var drawmap = function(attack_json){
     for(var i = 0; i< geojson.features.length;i++){
 
       // remove Antarctica
-      if (geojson.features[i].properties.name != "Antarctica"){
+      if (geojson.features[i].properties.name != "Antarctica")
+      {
 
         //  get the country features
         country_features = geojson.features[i]
@@ -75,7 +76,6 @@ var drawmap = function(attack_json){
 
     }
 
-    console.log(geojson.features[79].properties.color);
     // draw the map
     countries = svg.selectAll("path")
     .data(new_geojson.features)
@@ -86,12 +86,14 @@ var drawmap = function(attack_json){
     .attr("class", "boundary")
     .on("click", function(d) {
       //if clicked
-      if(d3.select(this).style("fill") != 'rgba(173, 131, 110, 0.6)'){
-          d3.select(this).style("fill", "rgba(173, 131, 110, 0.6)");
+      if(d3.select(this).style("stroke-width") != '1px'){
+          //d3.select(this).style("fill", "rgba(173, 131, 110, 0.6)");
           selected.push(d.properties.name)
+          d3.select(this).style("stroke-width", "1px");
 
         } else {
-          d3.select(this).style("fill", d.properties.color);
+          //d3.select(this).style("fill", d.properties.color);
+          d3.select(this).style("stroke-width", "0.2px");
 
           var index = selected.indexOf(d.properties.name);
           selected.splice(index, 1);

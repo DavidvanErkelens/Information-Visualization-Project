@@ -56,7 +56,10 @@ class WebSocketResponse
         }
 
         // Return encoded result
-        return json_encode($results);
+        return json_encode(array(
+            'type'      =>  $data['type'],
+            'data'      =>  $results
+        ));
     }
 
     /**

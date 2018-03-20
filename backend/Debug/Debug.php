@@ -11,18 +11,12 @@
 class Debug
 {
     /**
-     *  Are we in debug mode?
-     *  @var bool
-     */
-    private $debug = false;
-
-    /**
      *  Do we want to print queries for debugging purposes?
      *  @return boolean
      */
     public static function printQueries()
     {
-        // expose member
-        return $debug;
+        // return value
+        return true;
     }
 }

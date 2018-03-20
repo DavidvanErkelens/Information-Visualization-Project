@@ -118,7 +118,7 @@ class WebSocketResponse
         $results = array();
 
         // Echo query for debugging purposes, if necessary
-        if (Debug::printQueries()) echo "Query: {$query} \n";
+        if (Debug::printQueries()) echo "Query: {$query->format()} \n";
 
         // Loop over results
         foreach ($db->query($query) as $result) 

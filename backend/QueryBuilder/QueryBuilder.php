@@ -36,9 +36,9 @@ class QueryBuilder
 
     /**
      *  Should we group by a column?
-     *  @var  string
+     *  @var  string[]
      */
-    private $groupby = null;
+    private $groupby = array();
     
     /**
      *  Constructor
@@ -94,10 +94,10 @@ class QueryBuilder
      *  Set group by
      *  @param  string
      */
-    public function setGroupBy($group)
+    public function addGroupBy($group)
     {
         // store
-        $this->groupby = $group;
+        $this->groupby[] = $group;
     }
 
     /**
@@ -124,7 +124,7 @@ class QueryBuilder
         $query .= implode(' AND ', $statements);
 
         // Should we group by?
-        if (!is_null($this->groupby)) $query .= " GROUP BY {$this->groupby}";
+        if (count($this->groupby) > 0) $query .= " GROUP BY " . implode(', ', $this->groupby);
 
         // Should we limit and offset?
         if ($this->limit >= 0) $query .= " LIMIT {$this->limit}";

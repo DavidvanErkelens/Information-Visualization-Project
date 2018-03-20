@@ -26,8 +26,6 @@ class WebSocketResponse
         // Do we have a type?
         if (!array_key_exists('type', $data)) return json_encode(array());
 
-        echo $data['type'];
-
         // Depending on the type of request, format the query
         // Return empty data on invalid request
         switch($data['type']) {
@@ -247,7 +245,64 @@ class WebSocketResponse
      */
     private static function groupQuery($data)
     {
+        // Create new Query
+        $query = new QueryBuilder('gtdb');
 
+        // Add columns
+        $query->addColumn('gname');
+        $query->addColumn('COUNT(*) AS nattack');
+
+        // Create statement for countries and groups
+        $countryStatement = new QueryStatement();
+        $groupStatement = new QueryStatement();
+
+        // Loop over countries
+        if (array_key_exists('countries', $data)) foreach ($data['countries'] as $country)
+        {
+            $countryStatement->addCondition(new QueryCondition('country_txt', '=', $country));
+        }
+
+        // Loop over groups
+        if (array_key_exists('groups', $data)) foreach ($data['groups'] as $group)
+        {
+            $groupStatement->addCondition(new QueryCondition('gname', '=', $group));
+        }
+
+        // Add to query
+        if (array_key_exists('countries', $data) && count($data['countries'] > 0)) $query->addStatement($countryStatement);
+        if (array_key_exists('groups', $data) && count($data['groups'] > 0)) $query->addStatement($groupStatement);
+
+        // Do we have a start date?
+        if (array_key_exists('start', $data) && is_numeric($data['start']))
+        {
+            // Create statement
+            $startStatement = new QueryStatement();
+            
+            // Set condition
+            $startStatement->addCondition(new QueryCondition('iyear', '>=', $data['start']));
+
+            // Add to query
+            $query->addStatement($startStatement);
+        }
+
+        // Do we have an end date?
+        if (array_key_exists('end', $data) && is_numeric($data['end']))
+        {
+            // Create statement
+            $endStatement = new QueryStatement();
+            
+            // Set condition
+            $endStatement->addCondition(new QueryCondition('iyear', '<', $data['end']));
+
+            // Add to query
+            $query->addStatement($endStatement);
+        }
+
+        // Set group by
+        $query->addGroupBy('gname');
+
+        // Return query
+        return $query;
     }
 
     /**

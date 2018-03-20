@@ -1,11 +1,12 @@
 // Connect to socket
 var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
 
+first = true
+
 // return data
 conn.onmessage = function(e) {
-  console.log('answer from socket')
-
-    parsed = JSON.parse(e.data);
+	console.log('answer from socket')
+	parsed = JSON.parse(e.data);
 
     type = parsed.type;
     output = parsed.data;
@@ -17,6 +18,18 @@ conn.onmessage = function(e) {
     	drawTime("#timegraph", lineData);
     }
     
+    output = JSON.parse(e.data);
+
+    if(first){
+      drawmap(output);
+      first = false
+    }
+
+    if(!first){
+      update_map_color(output)
+    }
+
+    var yearGraph = drawTime("#timegraph", lineData);
 };
 
 // send data to server

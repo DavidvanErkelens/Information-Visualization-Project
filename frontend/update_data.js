@@ -7,8 +7,12 @@ conn.onmessage = function(e) {
 
     output = JSON.parse(e.data);
     drawmap(output);
+<<<<<<< HEAD
     var yearGraph = drawTime("#timegraph", lineData);
   
+=======
+
+>>>>>>> 21fc6d0af680d5f2509934a5a90c36aee7822d04
 };
 
 // send data to server

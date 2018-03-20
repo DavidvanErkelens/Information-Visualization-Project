@@ -11,11 +11,12 @@ conn.onmessage = function(e) {
     type = parsed.type;
     output = parsed.data;
 
+
     if (type == 'main'){
     	drawmap(output);	
     }
     else if (type == "time"){
-    	drawTime("#timegraph", lineData);
+    	drawTime("#timegraph", output);
     }
     
     output = JSON.parse(e.data);
@@ -28,8 +29,6 @@ conn.onmessage = function(e) {
     else if(!first){
       update_map_color(output)
     }
-
-    var yearGraph = drawTime("#timegraph", lineData);
 };
 
 // send data to server
@@ -40,6 +39,7 @@ conn.onopen = function(e) {
     // delete dictionary["time"]
 
     conn.send(JSON.stringify(dictionary));
+    conn.send(JSON.stringify(timeDict));
 };
 
 //  get the new data from the server based on the defined filters

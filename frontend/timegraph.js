@@ -2,6 +2,8 @@
 // Get the data
 function drawTime(containerSelector, data) {
 
+	console.log(data);
+
 	// Remove previous info so we can reinstantiate the chart
 	d3.selectAll(".svgTime").remove();
 
@@ -22,8 +24,8 @@ function drawTime(containerSelector, data) {
 
 	// define the line
 	var valueline = d3.line()
-	    .x(function(d) { return x(d.year); })
-	    .y(function(d) { return y(d.close); });
+	    .x(function(d) { return x(d.iyear); })
+	    .y(function(d) { return y(d.kills); });
 
 	// Add the actual line graph svg container
 	var svg = container.append("svg").attr("class", "svgTime")
@@ -35,14 +37,14 @@ function drawTime(containerSelector, data) {
 
 	// format the data
 	data.forEach(function(d) {
-	  d.year = d.year;
-	  d.close = +d.close;
+	  d.iyear = d.iyear;
+	  d.kills = +d.kills;
 	});
 
 	// Scale the range of the data
 	// x.domain(d3.extent(data, function(d) { return d.year; }));
 	x.domain([beginDate, endDate]);
-	y.domain([0, d3.max(data, function(d) { return d.close; })]);
+	y.domain([0, d3.max(data, function(d) { return d.kills; })]);
 
 	// Add the valueline path.
 	svg.append("path")
@@ -52,9 +54,9 @@ function drawTime(containerSelector, data) {
 
 	// define the area
 	var area = d3.area()
-    .x(function(d) { return x(d.year); })
+    .x(function(d) { return x(d.iyear); })
     .y0(height)
-    .y1(function(d) { return y(d.close); });
+    .y1(function(d) { return y(d.kills); });
 
 	// add the area
     svg.append("path")

@@ -5,8 +5,19 @@ first = true
 
 // return data
 conn.onmessage = function(e) {
-  console.log('answer from socket')
+	console.log('answer from socket')
+	parsed = JSON.parse(e.data);
 
+    type = parsed.type;
+    output = parsed.data;
+
+    if (type == 'main'){
+    	drawmap(output);	
+    }
+    else if (type == "time"){
+    	drawTime("#timegraph", lineData);
+    }
+    
     output = JSON.parse(e.data);
 
     if(first){
@@ -35,6 +46,7 @@ conn.onopen = function(e) {
 function updatedata(){
 
   conn.send(JSON.stringify(dictionary));
+  conn.send(JSON.stringify(timeDict));
   console.log('lekker pik')
 
 }

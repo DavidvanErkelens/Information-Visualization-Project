@@ -7,7 +7,7 @@ conn.onmessage = function(e) {
 
     output = JSON.parse(e.data);
     drawmap(output);
-    console.log(output);
+  
 };
 
 // send data to server
@@ -24,5 +24,6 @@ conn.onopen = function(e) {
 function updatedata(){
 
   conn.send(JSON.stringify(dictionary));
+  console.log('lekker pik')
 
 }

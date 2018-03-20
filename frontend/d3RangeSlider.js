@@ -176,6 +176,8 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             if (resumePlaying) {
                 startPlaying();
               }
+            updatedata()
+            console.log('You changed right boundary')
         })
         .on("drag", function () {
             var dx = d3.event.dx;
@@ -200,6 +202,8 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             if (resumePlaying) {
                 startPlaying();
             }
+            updatedata()
+            console.log('You changed left boundary')
         })
         .on("drag", function () {
             var dx = d3.mouse(this)[0] - this.startX;
@@ -232,6 +236,8 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             if (resumePlaying) {
                 startPlaying();
             }
+            console.log('You dragged the slider.')
+            updatedata()
         })
         .on("drag", function () {
             var dx = d3.event.dx;
@@ -276,6 +282,8 @@ $(document).mousedown(function() {
     down = true;
 }).mouseup(function() {
     down = false;
+    console.log('You clicked on the slider container.')
+    updatedata()
 });
 // end excperiment
 
@@ -291,6 +299,8 @@ $(document).mousedown(function() {
         sliderRange.end = e;
 
         updateUIFromRange();
+
+        console.log('You changed the width of the slider.')
 
         //Fire change listeners
         changeListeners.forEach(function (callback) {

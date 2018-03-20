@@ -19,13 +19,11 @@ function show_side_graph(countries){
   conn.send(JSON.stringify(payload_line));
 
   // construct piechart payload
-  console.log(dictionary);
   payload_pie = jQuery.extend({}, dictionary)
   payload_pie.type = "group"
   payload_pie.start = dictionary.time.start
   payload_pie.end = dictionary.time.end
   payload_pie.countries = countries
-  console.log(dictionary);
 
   // send data to server for pie chart
   conn.send(JSON.stringify(payload_pie));
@@ -41,7 +39,7 @@ function show_line(data){
 
   // Set the dimensions of the canvas / graph
   var margin = {top: 30, right: 20, bottom: 70, left: 50},
-  width = 600 - margin.left - margin.right,
+  width = 500 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
 
 
@@ -56,7 +54,7 @@ function show_line(data){
 
   // Scale the range of the data
   x.domain(d3.extent(data, function(d) { return d.iyear; }));
-  y.domain([0, d3.max(data, function(d) { return d.kills; })]);
+  y.domain([0, d3.max(data, function(d) { return parseInt(d.kills); })]);
 
   // Nest the entries by country
   var dataNest = d3.nest()
@@ -70,7 +68,7 @@ function show_line(data){
   legendSpace = width/dataNest.length;
 
   // Loop through each country / key
-  dataNest.forEach(function(d,i) {
+  dataNest.forEach(function(d,i){
 
     svg3.append("path")
     .attr("class", "line")

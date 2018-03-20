@@ -1,8 +1,8 @@
 // Connect to socket
 var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
 
-first = true
 
+first = true
 // return data
 conn.onmessage = function(e) {
 	console.log('answer from socket')
@@ -13,7 +13,9 @@ conn.onmessage = function(e) {
 
 
     if (type == 'main'){
-<<<<<<< HEAD
+
+      console.log("test");
+
       if(first){
         drawmap(output);
         first = false
@@ -22,16 +24,6 @@ conn.onmessage = function(e) {
       else if(!first){
         update_map_color(output)
       }
-=======
-    	if(first){
-	      drawmap(output);
-	      first = false
-	    }
-
-	    else if(!first){
-	      update_map_color(output)
-	    }	
->>>>>>> 7b581d2a430cabdde414ee7de436caa162f227bc
     }
     else if (type == "time"){
     	drawTime("#timegraph", output);
@@ -39,18 +31,7 @@ conn.onmessage = function(e) {
 
     output = JSON.parse(e.data);
 
-<<<<<<< HEAD
 
-=======
-    // if(first){
-    //   drawmap(output);
-    //   first = false
-    // }
-
-    // else if(!first){
-    //   update_map_color(output)
-    // }
->>>>>>> 7b581d2a430cabdde414ee7de436caa162f227bc
 };
 
 // send data to server

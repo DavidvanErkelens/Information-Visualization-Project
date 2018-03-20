@@ -55,6 +55,8 @@ class WebSocketResponse
             $results[] = array_combine($keys, array_values($result));
         }
 
+        return json_encode($results);
+
         // Return encoded result
         return json_encode(array(
             'type'      =>  $data['type'],

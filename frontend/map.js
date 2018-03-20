@@ -28,6 +28,8 @@ selected = []
 // start drawing the map
 var drawmap = function(input){
 
+  console.log('DRAW THE MAPPP YEAH')
+
   attack_json = input
 
   // remove the old drawmap
@@ -76,7 +78,9 @@ var drawmap = function(input){
       }
     }
 
-    console.log(new_geojson);
+    console.log(new_geojson)
+
+    //console.log(new_geojson);
 
     // draw the map
     countries = svg.selectAll("path")
@@ -87,12 +91,13 @@ var drawmap = function(input){
 
     .attr("class", "boundary")
     .on("click", function(d) {
-      if(d3.select(this).style("fill") != 'rgba(252, 177, 80, 0.6)'){
-          d3.select(this).style("fill", "rgba(252, 177, 80, 0.6)");
+      //if clicked
+      if(d3.select(this).style("fill") != 'rgba(173, 131, 110, 0.6)'){
+          d3.select(this).style("fill", "rgba(173, 131, 110, 0.6)");
           selected.push(d.properties.name)
 
         } else {
-          d3.select(this).style("fill", "rgb(255, 247, 236)");
+          d3.select(this).style("fill", d.properties.color);
 
           var index = selected.indexOf(d.properties.name);
           selected.splice(index, 1);
@@ -191,8 +196,7 @@ slider.onChange(function(newRange){
   dictionary.time.start = newRange.begin + 1970
   dictionary.time.end = newRange.end + 1970
 
-  // // call update function to show new selected data
-  // updatedata()
+
 
 
 

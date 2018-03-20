@@ -28,6 +28,8 @@ selected = []
 // start drawing the map
 var drawmap = function(input){
 
+  console.log('DRAW THE MAPPP YEAH')
+
   attack_json = input
 
   // remove the old drawmap
@@ -75,6 +77,8 @@ var drawmap = function(input){
         new_geojson.features.push(geojson.features[i])
       }
     }
+
+    console.log(new_geojson)
 
     //console.log(new_geojson);
 

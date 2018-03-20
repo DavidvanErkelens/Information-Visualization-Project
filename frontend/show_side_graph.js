@@ -8,19 +8,28 @@ function show_side_graph(countries){
 
   if(countries.length > 0){
 
-  // get all data for line to send to server
-  payload_line = {"start" : dictionary.start , "end" : dictionary.end , "countries" : countries, type : "kills"};
+  // construct line payload
+  payload_line = jQuery.extend({}, dictionary)
+  payload_line.start = dictionary.time.start
+  payload_line.end = dictionary.time.end
+  payload_line.countries = countries
+  payload_line.type = "kills"
 
   // send data to server for line graph
   conn.send(JSON.stringify(payload_line));
 
-  // get all data for pie to send to server
-  payload_pie = {"type" : "group", "start": dictionary.start, "end" : dictionary.end, "countries" : countries};
+  // construct piechart payload
+  console.log(dictionary);
+  payload_pie = jQuery.extend({}, dictionary)
+  payload_pie.type = "group"
+  payload_pie.start = dictionary.time.start
+  payload_pie.end = dictionary.time.end
+  payload_pie.countries = countries
+  console.log(dictionary);
 
   // send data to server for pie chart
   conn.send(JSON.stringify(payload_pie));
 }
-
 }
 
 // function to show the line graphs

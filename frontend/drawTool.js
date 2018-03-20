@@ -21,7 +21,7 @@ ranges = {1: [0,5], 2: [10,15]}
 
 
 //here we match filters with correct category values
-stringvalues = [attacktypes, targettypes, weaptypes, perpretrator, stats]
+stringvalues = [attacktypes, targettypes, weaptypes, perpretrator]
 
 //here we name the filters ids
 filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator', 'Stats'];

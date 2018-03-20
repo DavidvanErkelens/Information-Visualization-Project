@@ -13,7 +13,14 @@ conn.onmessage = function(e) {
 
 
     if (type == 'main'){
-    	drawmap(output);	
+    	if(first){
+	      drawmap(output);
+	      first = false
+	    }
+
+	    else if(!first){
+	      update_map_color(output)
+	    }	
     }
     else if (type == "time"){
     	drawTime("#timegraph", output);
@@ -21,14 +28,14 @@ conn.onmessage = function(e) {
     
     output = JSON.parse(e.data);
 
-    if(first){
-      drawmap(output);
-      first = false
-    }
+    // if(first){
+    //   drawmap(output);
+    //   first = false
+    // }
 
-    else if(!first){
-      update_map_color(output)
-    }
+    // else if(!first){
+    //   update_map_color(output)
+    // }
 };
 
 // send data to server

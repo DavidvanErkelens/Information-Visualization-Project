@@ -1,7 +1,7 @@
 // Connect to socket
 var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
 
-first = true
+first = true;
 
 // return data
 conn.onmessage = function(e) {
@@ -29,7 +29,7 @@ conn.onmessage = function(e) {
 	    }
 
 	    else if(!first){
-	      update_map_color(output)
+	      update_map_color(output);
 	    }	
 >>>>>>> 7b581d2a430cabdde414ee7de436caa162f227bc
     }

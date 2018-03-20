@@ -29,7 +29,7 @@ selected = []
 var drawmap = function(attack_json){
   
   // remove the old drawmap and attack circles
-  d3.selectAll(".boundary").remove();
+  //d3.selectAll(".boundary").remove();
   d3.selectAll("#attack-circle").remove();
 
   // create path based on projection
@@ -104,7 +104,9 @@ var drawmap = function(attack_json){
         }
         // update the side graphs
         show_side_graph(selected);
-})
+
+
+      })
 
 
     //  add points for attack locations and tooltip hover for more information on
@@ -196,3 +198,4 @@ slider.onChange(function(newRange){
 
 
 });
+

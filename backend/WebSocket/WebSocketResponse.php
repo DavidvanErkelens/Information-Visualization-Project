@@ -24,17 +24,17 @@ class WebSocketResponse
         if (is_null($data)) return json_encode(array());
 
         // Do we have a type?
-        // if (!array_key_exists('type', $data)) return json_encode(array());
+        if (!array_key_exists('type', $data)) return json_encode(array());
 
-        // // Depending on the type of request, format the query
-        // // Return empty data on invalid request
-        // switch($data['type']) {
-        //     case 'main':        $query = self::mainQuery($data); break;
-        //     case 'time':        $query = self::timeQuery($data); break;
-        //     default:            return json_encode(array());
-        // }
+        // Depending on the type of request, format the query
+        // Return empty data on invalid request
+        switch($data['type']) {
+            case 'main':        $query = self::mainQuery($data); break;
+            case 'time':        $query = self::timeQuery($data); break;
+            default:            return json_encode(array());
+        }
 
-        $query = self::mainQuery($data); 
+        // die($)
 
         // Create database connection
         $db = new Database();
@@ -56,8 +56,6 @@ class WebSocketResponse
             // Add to results array
             $results[] = array_combine($keys, array_values($result));
         }
-
-        return json_encode($results);
 
         // Return encoded result
         return json_encode(array(
@@ -237,5 +235,42 @@ class WebSocketResponse
 
         // Return the query
         return $query;
+    }
+
+    /**
+     *  Helper function to create a query for the group attacks for a
+     *  set of countries and a time span
+     *  @param  array
+     *  @return QueryBuilder
+     */
+    private static function groupQuery($data)
+    {
+        // Create new Query
+        $query = new QueryBuilder('gtdb');
+
+        // Add columns
+
+
+        $statement = new QueryStatement();
+
+        $statement->addCondition(new QueryCondition('country', '=', 'Mexico'));
+
+
+        // Set country
+        $query->addStatement($statement);
+
+        // Return the query
+        return $query;
+    }
+
+    /**
+     *  Helper function to return the number of kills per year per country
+     *  for a list of countries and a time span
+     *  @param  array
+     *  @return QueryBuilder
+     */
+    private static function killQuery($data)
+    {
+
     }
 }

@@ -5,6 +5,7 @@ function drawTime(containerSelector, data) {
 	// Remove previous info so we can reinstantiate the chart
 	d3.selectAll(".svgTime").remove();
 
+	// Hardcoded begin and enddate for the graph
 	var beginDate = 1970,
 		endDate = 2015;
 
@@ -24,6 +25,7 @@ function drawTime(containerSelector, data) {
 	    .x(function(d) { return x(d.year); })
 	    .y(function(d) { return y(d.close); });
 
+	// Add the actual line graph svg container
 	var svg = container.append("svg").attr("class", "svgTime")
 	.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -76,45 +78,9 @@ function drawTime(containerSelector, data) {
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
-        .text("Number of casualties per year");
-
-	/* Legend bullshit, not working atm*/
-
-	// var legendRectSize = 18;                                
- //    var legendSpacing = 4;
- //    var color = d3.scaleOrdinal(d3.schemeCategory20b);
-
-	// var legend = svg.selectAll('.legend')                     
- //          .data([timeData.label])                                   
- //          .enter()                                               
- //          .append('g')                                            
- //          .attr('class', 'legend')                                
- //          .attr('transform', function(d, i) {                    
- //            var height = legendRectSize + legendSpacing;          
- //            var offset =  height * 2 / 2;     
- //            var horz = 2 * legendRectSize;                       
- //            var vert = i * height - offset;                    
- //            return 'translate(' + horz + ',' + vert + ')';        
- //          });                                                     
-
- //        legend.append('rect')                                     
- //          .attr('width', legendRectSize)                          
- //          .attr('height', legendRectSize)                         
- //          .style('fill', color)                                   
- //          .style('stroke', color);                                
-          
- //        legend.append('text')                                     
- //          .attr('x', legendRectSize + legendSpacing)              
- //          .attr('y', legendRectSize - legendSpacing)              
- //          .text(function(d) { return d; });                       
+        .text("Number of casualties per year");                 
 
 };
-
-
-// var timeData = [
-// 	{ label: 'Total attacks', count: 10 }, 
-//     { label: 'Attacks for filter', count: 20 }
-// ];
 
 var lineData = [{
   year: 2001,
@@ -136,3 +102,11 @@ var lineData = [{
   close: 60
 }];
 
+// Timegraph request dictionary with static start and end
+var timeDict = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true},
+				  1:{1:true, 2:true, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14:true, 15:true, 16:true, 17: true, 18:true, 19: true, 20: true, 21: true, 22: true},
+				  2:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true},
+				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true},
+				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
+					"time" : {"start" : 1970, "end" : 2015},
+					"type": "time"};

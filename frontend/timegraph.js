@@ -62,11 +62,55 @@ function drawTime(containerSelector, data) {
 	svg.append("g")
 	  .call(d3.axisLeft(y));
 
+	// add title for graph
+	svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text("Number of casualties per year");
+
 	// d3.selectAll(".svgTime").remove();
+
+
+	/* Legend bullshit, not working atm*/
+
+	// var legendRectSize = 18;                                
+ //    var legendSpacing = 4;
+ //    var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+	// var legend = svg.selectAll('.legend')                     
+ //          .data([timeData.label])                                   
+ //          .enter()                                               
+ //          .append('g')                                            
+ //          .attr('class', 'legend')                                
+ //          .attr('transform', function(d, i) {                    
+ //            var height = legendRectSize + legendSpacing;          
+ //            var offset =  height * 2 / 2;     
+ //            var horz = 2 * legendRectSize;                       
+ //            var vert = i * height - offset;                    
+ //            return 'translate(' + horz + ',' + vert + ')';        
+ //          });                                                     
+
+ //        legend.append('rect')                                     
+ //          .attr('width', legendRectSize)                          
+ //          .attr('height', legendRectSize)                         
+ //          .style('fill', color)                                   
+ //          .style('stroke', color);                                
+          
+ //        legend.append('text')                                     
+ //          .attr('x', legendRectSize + legendSpacing)              
+ //          .attr('y', legendRectSize - legendSpacing)              
+ //          .text(function(d) { return d; });                       
 
 };
 
 
+// var timeData = [
+// 	{ label: 'Total attacks', count: 10 }, 
+//     { label: 'Attacks for filter', count: 20 }
+// ];
 
 var lineData = [{
   year: 2001,

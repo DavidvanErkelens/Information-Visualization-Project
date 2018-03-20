@@ -1,7 +1,6 @@
-<?php       
-      
-require 'init.php';       
-   
+<?php
+
+require 'init.php';
 
 $json = file_get_contents(__DIR__.'/example.json');
 

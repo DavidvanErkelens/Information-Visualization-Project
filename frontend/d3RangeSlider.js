@@ -232,6 +232,8 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             if (resumePlaying) {
                 startPlaying();
             }
+            // call update function to show new selected data
+            updatedata()
         })
         .on("drag", function () {
             var dx = d3.event.dx;

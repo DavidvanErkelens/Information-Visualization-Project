@@ -190,10 +190,9 @@ slider.onChange(function(newRange){
   // save the start and and of the sliderRange
   dictionary.time.start = newRange.begin + 1970
   dictionary.time.end = newRange.end + 1970
-  console.log(dictionary);
 
-  // call update function to show new selected data
-  updatedata()
+  // // call update function to show new selected data
+  // updatedata()
 
 
 

@@ -24,5 +24,6 @@ conn.onopen = function(e) {
 function updatedata(){
 
   conn.send(JSON.stringify(dictionary));
+  console.log("Updated");
 
 }

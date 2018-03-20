@@ -185,7 +185,7 @@ class WebSocketResponse
         $query->addColumn('SUM(nkil) AS kills');
 
         // Group by year
-        $query->setGroupBy('iyear');
+        $query->addGroupBy('iyear');
 
         // Loop over filters to add to the query
         foreach ($parsedData as $filter => $contents)

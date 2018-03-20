@@ -26,15 +26,17 @@ class WebSocketResponse
         // Do we have a type?
         if (!array_key_exists('type', $data)) return json_encode(array());
 
+        echo $data['type'];
+
         // Depending on the type of request, format the query
         // Return empty data on invalid request
         switch($data['type']) {
             case 'main':        $query = self::mainQuery($data); break;
             case 'time':        $query = self::timeQuery($data); break;
+            case 'group':       $query = self::groupQuery($data); break;
+            case 'kills':       $query = self::killQuery($data); break;
             default:            return json_encode(array());
         }
-
-        // die($)
 
         // Create database connection
         $db = new Database();
@@ -245,22 +247,7 @@ class WebSocketResponse
      */
     private static function groupQuery($data)
     {
-        // Create new Query
-        $query = new QueryBuilder('gtdb');
 
-        // Add columns
-
-
-        $statement = new QueryStatement();
-
-        $statement->addCondition(new QueryCondition('country', '=', 'Mexico'));
-
-
-        // Set country
-        $query->addStatement($statement);
-
-        // Return the query
-        return $query;
     }
 
     /**
@@ -271,6 +258,57 @@ class WebSocketResponse
      */
     private static function killQuery($data)
     {
+        // Create new Query
+        $query = new QueryBuilder('gtdb');
 
+        // Add columns
+        $query->addColumn('iyear');
+        $query->addColumn('country_txt');
+        $query->addColumn('SUM(nkil) AS kills');
+
+        // Create statement for countries
+        $countryStatement = new QueryStatement();
+
+        // Loop over countries
+        if (array_key_exists('countries', $data)) foreach ($data['countries'] as $country)
+        {
+            $countryStatement->addCondition(new QueryCondition('country_txt', '=', $country));
+        }
+
+        // Add to query
+        $query->addStatement($countryStatement);
+
+        // Do we have a start date?
+        if (array_key_exists('start', $data) && is_numeric($data['start']))
+        {
+            // Create statement
+            $startStatement = new QueryStatement();
+            
+            // Set condition
+            $startStatement->addCondition(new QueryCondition('iyear', '>=', $data['start']));
+
+            // Add to query
+            $query->addStatement($startStatement);
+        }
+
+        // Do we have an end date?
+        if (array_key_exists('end', $data) && is_numeric($data['end']))
+        {
+            // Create statement
+            $endStatement = new QueryStatement();
+            
+            // Set condition
+            $endStatement->addCondition(new QueryCondition('iyear', '<', $data['end']));
+
+            // Add to query
+            $query->addStatement($endStatement);
+        }
+
+        // Set grouping        
+        $query->addGroupBy('iyear');
+        $query->addGroupBy('country_txt');
+
+        // Return the query
+        return $query;
     }
 }

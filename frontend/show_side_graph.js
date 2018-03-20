@@ -96,6 +96,7 @@ function show_line(data){
 
     }
 
+    // function to show piechart
     function show_piechart(all_groups){
 
       /*pie chart for showing perpetrators percentages*/
@@ -141,17 +142,21 @@ function show_line(data){
       .style("fill", function (d) {
         return color(d.data.gname);
       })
-      // .transition()
-      // .duration(function(d, i) {
-      //   return i * 800;
-      // })
-      // .attrTween('d', function(d) {
-      //   var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
-      //   return function(t) {
-      //     d.endAngle = i(t);
-      //     return arc(d);
-      //   }
-      // });
+      .on("mouseover", function(d){
+        console.log("test");
+        add_group_name(d.data.gname, d.data.nattack, svg4);
+      })
+      .transition()
+      .duration(function(d, i) {
+        return i * 800;
+      })
+      .attrTween('d', function(d) {
+        var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+        return function(t) {
+          d.endAngle = i(t);
+          return arc(d);
+        }
+      });
 
       // add text label to each element
       g.append("text")
@@ -159,9 +164,25 @@ function show_line(data){
         return "translate(" + arc.centroid(d) + ")";
       })
       .attr("dy", ".35em")
-      .style("text-anchor", "middle")
-      .text(function (d) {
-        return String(d.data.gname) + " (" + String(d.data.nattack) + ")";
-      });
+
+      // .style("text-anchor", "middle")
+      // .text(function (d) {
+        // return String(d.data.gname) + " (" + String(d.data.nattack) + ")";
+      // });
 
     }
+
+
+function add_group_name(name, nattack, svg4){
+
+  //  remove old name
+  d3.selectAll(".attack-group-name").remove()
+
+  // add group name to graph
+  svg4.append("text")
+  .attr("x", "0")
+  .attr("y", "0")
+  .attr("class", "attack-group-name")
+  .attr("font-size", "12px")
+  .text(String(name) + " (" + String(nattack)+")");
+}

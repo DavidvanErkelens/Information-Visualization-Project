@@ -310,6 +310,12 @@ class WebSocketResponse
         // Set group by
         $query->addGroupBy('gname');
 
+        // Order by
+        $query->setOrderBy('nattack DESC');
+
+        // Limit
+        $query->setLimit(15);
+
         // Return query
         return $query;
     }

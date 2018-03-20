@@ -176,7 +176,12 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             if (resumePlaying) {
                 startPlaying();
               }
+
+            //  update the data of main graph
             updatedata()
+
+            // update side graphs
+            show_side_graph(selected)
             console.log('You changed right boundary')
         })
         .on("drag", function () {
@@ -202,8 +207,13 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             if (resumePlaying) {
                 startPlaying();
             }
+
+            //  update data of main graph
             updatedata()
             console.log('You changed left boundary')
+
+            // update side graphs
+            show_side_graph(selected)
         })
         .on("drag", function () {
             var dx = d3.mouse(this)[0] - this.startX;
@@ -237,7 +247,12 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
                 startPlaying();
             }
             console.log('You dragged the slider.')
+
+            // update data of main graph
             updatedata()
+
+            // update side graphs
+            show_side_graph(selected)
         })
         .on("drag", function () {
             var dx = d3.event.dx;
@@ -268,7 +283,13 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         slider.style("left", props.left + "px")
             .style("width", props.width + "px");
         updateRangeFromUI();
+
+        // update main graph
         updatedata()
+
+        // update side graphs
+        show_side_graph(selected)
+
     });
 
 
@@ -367,7 +388,11 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         var rangeWidth = sliderRange.end - sliderRange.begin + 1;
         var delta = Math.min(Math.ceil(rangeWidth / 10), Math.ceil(limitWidth / 100));
 
+        // update data of main graph
         updatedata()
+
+        // update side graphs
+        show_side_graph(selected)
 
         // Check if playback has reached the end
         if (sliderRange.end + delta > rangeMax) {

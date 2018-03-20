@@ -53,6 +53,18 @@ function drawTime(containerSelector, data) {
 	  .attr("class", "line")
 	  .attr("d", valueline);
 
+	// define the area
+	var area = d3.area()
+    .x(function(d) { return x(d.year); })
+    .y0(height)
+    .y1(function(d) { return y(d.close); });
+
+	// add the area
+    svg.append("path")
+       .data([data])
+       .attr("class", "area")
+       .attr("d", area);
+
 	// Add the X Axis
 	svg.append("g")
 	  .attr("transform", "translate(0," + height + ")")

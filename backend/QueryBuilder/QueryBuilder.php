@@ -33,6 +33,12 @@ class QueryBuilder
      *  @var int
      */
     private $limit = -1, $offset = -1;
+
+    /**
+     *  Should we group by a column?
+     *  @var  string
+     */
+    private $groupby = null;
     
     /**
      *  Constructor
@@ -85,6 +91,16 @@ class QueryBuilder
     }
 
     /**
+     *  Set group by
+     *  @param  string
+     */
+    public function setGroupBy($group)
+    {
+        // store
+        $this->groupby = $group;
+    }
+
+    /**
      *  Format the query
      *  @return string
      */
@@ -106,6 +122,9 @@ class QueryBuilder
         // Add statements to query
         if (count($statements) > 0) $query .= " WHERE ";
         $query .= implode(' AND ', $statements);
+
+        // Should we group by?
+        if (!is_null($this->groupby)) $query .= " GROUP BY {$this->groupby}";
 
         // Should we limit and offset?
         if ($this->limit >= 0) $query .= " LIMIT {$this->limit}";

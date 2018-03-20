@@ -314,7 +314,7 @@ class WebSocketResponse
         $query->setOrderBy('nattack DESC');
 
         // Limit
-        $query->setLimit(15);
+        $query->setLimit(10);
 
         // Return query
         return $query;

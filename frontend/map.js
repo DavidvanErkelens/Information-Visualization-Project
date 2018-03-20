@@ -90,10 +90,13 @@ var drawmap = function(attack_json){
           //d3.select(this).style("fill", "rgba(173, 131, 110, 0.6)");
           selected.push(d.properties.name)
           d3.select(this).style("stroke-width", "1px");
+          d3.select(this).style("stroke", "black");
+
 
         } else {
           //d3.select(this).style("fill", d.properties.color);
           d3.select(this).style("stroke-width", "0.2px");
+          d3.select(this).style("stroke", "black");
 
           var index = selected.indexOf(d.properties.name);
           selected.splice(index, 1);

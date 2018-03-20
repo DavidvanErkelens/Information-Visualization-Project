@@ -13,10 +13,10 @@ var svg = d3.select(".svg-container1").append("svg")
 
 // adding title
 svg.append("text")
-    .attr("x", "850")
-    .attr("y", "40")
-    .attr("font-size", "20px")
-    .text("Visualizing the terrorism landscape");
+.attr("x", "850")
+.attr("y", "40")
+.attr("font-size", "20px")
+.text("Visualizing the terrorism landscape");
 
 // Projection for map overview
 var projection = d3.geoMercator()
@@ -25,16 +25,8 @@ var projection = d3.geoMercator()
 //  list for all currenlty selected countries
 selected = []
 
-// start drawing the map
-var drawmap = function(attack_json){
-  
-  // remove the old drawmap and attack circles
-  d3.selectAll(".boundary").remove();
-  d3.selectAll("#attack-circle").remove();
-
-  // create path based on projection
-  var path = d3.geoPath()
-  .projection(projection);
+/* function to calculate new geo json and colors */
+get_new_geojson = function (attack_json, resultcallback){
 
   // open geojson
   var url = "http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
@@ -54,7 +46,6 @@ var drawmap = function(attack_json){
         //  get the country features
         country_features = geojson.features[i]
 
-
         // select attacks for current country and add them to the geojson
         country_features.properties.attack = attack_json.filter(function( obj ) {
           return obj.country_txt == geojson.features[i].properties.name;
@@ -71,22 +62,97 @@ var drawmap = function(attack_json){
 
         // add country to new geojson
         new_geojson.features.push(geojson.features[i])
-      }
 
+
+      }
     }
 
-    console.log(geojson.features[79].properties.color);
-    // draw the map
-    countries = svg.selectAll("path")
-    .data(new_geojson.features)
-    .enter()
-    .append("path")
-    .attr("d", path)
-    .style("fill", function(d){return d.properties.color})
-    .attr("class", "boundary")
-    .on("click", function(d) {
-      //if clicked
-      if(d3.select(this).style("fill") != 'rgba(173, 131, 110, 0.6)'){
+    // return the newly created geo json
+    console.log(new_geojson);
+
+
+    resultcallback(new_geojson);
+
+  });
+}
+
+/* end calculate new geojson */
+
+/* Function to update map color and attack points*/
+function update_map_color(attack_json){
+
+  // get new geojson to update colors
+   get_new_geojson(attack_json, function(new_geojson) {
+
+    // update country color
+    d3.selectAll(".boundary")
+    .style("fill", function(d){
+
+      // get new color from new new_geojson
+      new_color = new_geojson.features.filter(function( obj ) {
+        return obj.id == d.id
+      });
+
+      return new_color[0].properties.color})
+
+      // remove old attack points
+      d3.selectAll("#attack-circle").remove()
+
+      //  add points for attack locations and tooltip hover for more information on
+      // actual attack
+      attacks = svg.selectAll("circles.points")
+      .data(attack_json)
+      .enter()
+      .append("circle")
+      .attr("r",3)
+      .attr("id", "attack-circle")
+      .attr("class", "attack-circle")
+      .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
+      .on("mouseover", function(d) {
+
+        tooltip.html(attacktypes[d.attacktype1]+"<br>"+targettypes[d.targtype1]+"<br>"+weaptypes[d.weaptype1]+"<br> Kills: "+d.nkil+"<br> perpkills: "+d.nkillter+"<br> nwound: "+d.nwound+"<br> propvalue: "+d.propvalue+"<br> perpwounds: "+d.nwoundte+"<br> gname: "+d.gname);
+        return tooltip.style("visibility", "visible");
+      })
+      .on("mousemove", function() {
+        return tooltip.style("top",(470) + "px")
+        .style("left", (10) + "px")
+        .style("border", "solid 1px")
+        .style("border-color", "rgba(234, 242, 255, 1");
+      })
+      .on("mouseout", function() {
+        return tooltip.style("visibility", "hidden");
+      });
+  });
+
+  }
+
+  /* End update map color */
+
+  // start drawing the map
+  var drawmap = function(attack_json){
+
+    // remove the old drawmap and attack circles
+    d3.selectAll(".boundary").remove();
+    d3.selectAll("#attack-circle").remove();
+
+    // create path based on projection
+    var path = d3.geoPath()
+    .projection(projection);
+
+    //
+    get_new_geojson(attack_json, function(new_geojson) {
+
+      // draw the map
+      countries = svg.selectAll("path")
+      .data(new_geojson.features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .style("fill", function(d){return d.properties.color})
+      .attr("class", "boundary")
+      .on("click", function(d) {
+        //if clicked
+        if(d3.select(this).style("fill") != 'rgba(173, 131, 110, 0.6)'){
           d3.select(this).style("fill", "rgba(173, 131, 110, 0.6)");
           selected.push(d.properties.name)
 
@@ -99,67 +165,66 @@ var drawmap = function(attack_json){
         }
         // update the side graphs
         show_side_graph(selected);
-})
+      })
 
 
-    //  add points for attack locations and tooltip hover for more information on
-    // actual attack
-    attacks = svg.selectAll("circles.points")
-    .data(attack_json)
-    .enter()
-    .append("circle")
-    .attr("r",3)
-    .attr("id", "attack-circle")
-    .attr("class", "attack-circle")
-    .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
-    .on("mouseover", function(d) {
+      //  add points for attack locations and tooltip hover for more information on
+      // actual attack
+      attacks = svg.selectAll("circles.points")
+      .data(attack_json)
+      .enter()
+      .append("circle")
+      .attr("r",3)
+      .attr("id", "attack-circle")
+      .attr("class", "attack-circle")
+      .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
+      .on("mouseover", function(d) {
 
-      tooltip.html(attacktypes[d.attacktype1]+"<br>"+targettypes[d.targtype1]+"<br>"+weaptypes[d.weaptype1]+"<br> Kills: "+d.nkil+"<br> perpkills: "+d.nkillter+"<br> nwound: "+d.nwound+"<br> propvalue: "+d.propvalue+"<br> perpwounds: "+d.nwoundte+"<br> gname: "+d.gname);
-      return tooltip.style("visibility", "visible");
-    })
-    .on("mousemove", function() {
-      return tooltip.style("top",(470) + "px")
-                    .style("left", (10) + "px")
-                    .style("border", "solid 1px")
-                    .style("border-color", "rgba(234, 242, 255, 1");
-    })
-    .on("mouseout", function() {
-      return tooltip.style("visibility", "hidden");
+        tooltip.html(attacktypes[d.attacktype1]+"<br>"+targettypes[d.targtype1]+"<br>"+weaptypes[d.weaptype1]+"<br> Kills: "+d.nkil+"<br> perpkills: "+d.nkillter+"<br> nwound: "+d.nwound+"<br> propvalue: "+d.propvalue+"<br> perpwounds: "+d.nwoundte+"<br> gname: "+d.gname);
+        return tooltip.style("visibility", "visible");
+      })
+      .on("mousemove", function() {
+        return tooltip.style("top",(470) + "px")
+        .style("left", (10) + "px")
+        .style("border", "solid 1px")
+        .style("border-color", "rgba(234, 242, 255, 1");
+      })
+      .on("mouseout", function() {
+        return tooltip.style("visibility", "hidden");
+      });
+
     });
+  }
 
 
-  })
-}
+  /* Slider */
+  // Create SVG element
+  var svg2 = d3.select(".svg-container").append("svg")
+  .attr("class", "svg2");
 
-
-/* Slider */
-// Create SVG element
-var svg2 = d3.select(".svg-container").append("svg")
-.attr("class", "svg2");
-
-// // Append HTML to display slider information
-svg2.append("foreignObject")
-.attr("x", "0")
-.attr("y", "30")
-.attr("width" , "100%")
-.attr("height", '50%')
-.append("xhtml:div")
+  // // Append HTML to display slider information
+  svg2.append("foreignObject")
+  .attr("x", "0")
+  .attr("y", "30")
+  .attr("width" , "100%")
+  .attr("height", '50%')
+  .append("xhtml:div")
   .attr("id", "timegraph")
   .style("border", "solid black 1px")
-    .style("border-color", "rgba(234, 242, 255, 1)")
+  .style("border-color", "rgba(234, 242, 255, 1)")
   .style("background-color", "rgba(234, 242, 255, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
   .style("height", "190px");
 
 
-// add the slider to to the SVG element
-slider_element = svg2.append("foreignObject")
-.attr("x", "0")
-.attr("y", "220")
-.attr("width" , "100%")
-.attr("height", '50%')
-.append("xhtml:div")
+  // add the slider to to the SVG element
+  slider_element = svg2.append("foreignObject")
+  .attr("x", "0")
+  .attr("y", "220")
+  .attr("width" , "100%")
+  .attr("height", '50%')
+  .append("xhtml:div")
   .attr("id", "slider-container")
   .style("border", "solid 1px")
   .style("border-color", "rgba(234, 242, 255, 1)")
@@ -168,26 +233,26 @@ slider_element = svg2.append("foreignObject")
   .style("overflow", "hidden")
   .style("height", "35px");
 
-// Create slider spanning the range from 0 to 45 to encapsulate all 45 years of the dataset
-var slider = createD3RangeSlider(0, 45, "#slider-container", true);
+  // Create slider spanning the range from 0 to 45 to encapsulate all 45 years of the dataset
+  var slider = createD3RangeSlider(0, 45, "#slider-container", true);
 
-// Create year timegraph
-// var yearGraph = drawTime("#timegraph", lineData)
+  // Create year timegraph
+  // var yearGraph = drawTime("#timegraph", lineData)
 
-// Slide range to start with showing 2 years per interval
-slider.range(0, 2);
-
-
-
-// Slider listener
-slider.onChange(function(newRange){
-
-  // save the start and and of the sliderRange
-  dictionary.time.start = newRange.begin + 1970
-  dictionary.time.end = newRange.end + 1970
+  // Slide range to start with showing 2 years per interval
+  slider.range(0, 2);
 
 
 
+  // Slider listener
+  slider.onChange(function(newRange){
+
+    // save the start and and of the sliderRange
+    dictionary.time.start = newRange.begin + 1970
+    dictionary.time.end = newRange.end + 1970
 
 
-});
+
+
+
+  });

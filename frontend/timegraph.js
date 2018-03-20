@@ -2,8 +2,6 @@
 // Get the data
 function drawTime(containerSelector, data) {
 
-	console.log(data);
-
 	// Remove previous info so we can reinstantiate the chart
 	d3.selectAll(".svgTime").remove();
 

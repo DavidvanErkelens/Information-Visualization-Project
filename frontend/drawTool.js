@@ -38,7 +38,7 @@ var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: 
 				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
 				 "ranges": {0: {"start":0, "end":10}, 1: {"start":0, "end":10}, 2: {"start":0, "end":10}, 3: {"start":0, "end":10}},
 					"time" : {"start" : 1970, "end" : 1972},
-					"number" : 5, "type": "main"};
+					"number" : 500, "type": "main"};
 
 console.log(JSON.stringify(dictionary))
 

@@ -20,7 +20,8 @@ perpretrator = {1: 'Unknown', 2: 'Taliban', 3: 'Shining Path', 4: 'ISIL', 5: 'FM
 stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'}
 
 //intvalues
-ranges = {1: [0,5], 2: [10,15], 3: [0,5], 4: [0,5]}
+
+
 
 
 //here we match filters with correct category values
@@ -35,8 +36,12 @@ var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: 
 				  2:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true},
 				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true},
 				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
+				 "ranges": {0: {"start":0, "end":10}, 1: {"start":0, "end":10}, 2: {"start":0, "end":10}, 3: {"start":0, "end":10}},
 					"time" : {"start" : 1970, "end" : 1972},
 					"number" : 500, "type": "main"};
+
+console.log(JSON.stringify(dictionary))
+
 
 
 
@@ -104,7 +109,7 @@ function createBottomMenu(){
 			.style("height", "20px")
 			.style("display", "block")
 	        //.html("<input type='range' min='1' max='100' value='50' class='slider2' id='myRange'>")
-	        .html("nKill: <input type=text' id=10 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[1][0]+"'> - <input type=text' id=11 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[1][1]+"'><br>nWound: <input type=text' id=20 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[2][0]+"'> - <input type=text' id=21 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[2][1]+"'><br>nKillter: <input type=text' id=10 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[3][0]+"'> - <input type=text' id=11 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[3][1]+"'><br>nWoundter: <input type=text' id=10 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[4][0]+"'> - <input type=text' id=11 onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+ranges[4][1]+"'>")
+	        .html("nKill: <input type=text' id=0start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][0].start+"'> - <input type=text' id=0end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][0].end+"'><br>nWound: <input type=text' id=1start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][1].start+"'> - <input type=text' id=1end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][1].end+"'><br>nKillter: <input type=text' id=2start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][2].start+"'> - <input type=text' id=2end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][2].end+"'><br>nWoundter: <input type=text' id=3start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][3].start+"'> - <input type=text' id=3end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][3].end+"'>")
 }
 
 createBottomMenu();
@@ -112,9 +117,14 @@ createBottomMenu();
 
 function updateRange(id, value)
 {
+	var index= id.substring(0, 1);
+	var which = id.substring(1);
 
-	ranges[id[0]][id[1]] = parseInt(value);
-	console.log(ranges);
+
+	dictionary["ranges"][index][which] = parseInt(value);
+
+	console.log(dictionary["ranges"])
+
 }
 
 

@@ -36,7 +36,7 @@ var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: 
 				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true},
 				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
 					"time" : {"start" : 1970, "end" : 1972},
-					"number" : 5};
+					"number" : 5, "type": "main"};
 
 
 

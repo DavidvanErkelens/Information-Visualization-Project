@@ -87,8 +87,9 @@ var drawmap = function(input){
 
     .attr("class", "boundary")
     .on("click", function(d) {
-      if(d3.select(this).style("fill") != 'rgba(252, 177, 80, 0.6)'){
-          d3.select(this).style("fill", "rgba(252, 177, 80, 0.6)");
+      //if clicked
+      if(d3.select(this).style("fill") != 'rgba(173, 131, 110, 0.6)'){
+          d3.select(this).style("fill", "rgba(173, 131, 110, 0.6)");
           selected.push(d.properties.name)
 
         } else {

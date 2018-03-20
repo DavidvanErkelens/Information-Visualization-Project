@@ -41,7 +41,7 @@ class WebSocketResponse
         foreach ($parsedData as $filter => $contents)
         {
             // Skip invalid columns
-            if ($filter == "-INV-") continue;
+            if ($filter == '-INV-') continue;
 
             // We don't need a statement if the filter is empty
             if (is_array($contents) && count($contents) == 0) continue;
@@ -98,7 +98,7 @@ class WebSocketResponse
             }
 
             // Is it a limit filter
-            if ($filter == "number")
+            if ($filter == 'number')
             {
                 // Is it numeric?
                 if (!is_numeric($contents)) continue;

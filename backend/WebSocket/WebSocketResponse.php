@@ -36,6 +36,15 @@ class WebSocketResponse
             default:            return json_encode(array());
         }
 
+        // Create statement for kills
+        $killStatement = new QueryStatement();
+
+        // Add condition
+        $killStatement->addCondition(new QueryCondition('nkil', '>', 0));
+
+        // Add to query
+        $query->addStatement($killStatement);
+
         // Create database connection
         $db = new Database();
 

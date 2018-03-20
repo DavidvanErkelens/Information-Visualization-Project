@@ -32,6 +32,8 @@ get_new_geojson = function (attack_json, resultcallback){
   var url = "http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
   countries = svg.append("g");
 
+  console.log(attack_json);
+
   d3.json(url, function(err, geojson) {
 
     // clean geojson
@@ -43,6 +45,7 @@ get_new_geojson = function (attack_json, resultcallback){
       // remove Antarctica
       if (geojson.features[i].properties.name != "Antarctica")
       {
+
 
         //  get the country features
         country_features = geojson.features[i]
@@ -63,13 +66,8 @@ get_new_geojson = function (attack_json, resultcallback){
 
         // add country to new geojson
         new_geojson.features.push(geojson.features[i])
-
-
       }
     }
-
-    // return the newly created geo json
-    console.log(new_geojson);
 
     //  return the result
     resultcallback(new_geojson);
@@ -170,7 +168,6 @@ function update_map_color(attack_json){
         show_side_graph(selected);
       })
 
-
       //  add points for attack locations and tooltip hover for more information on
       // actual attack
       attacks = svg.selectAll("circles.points")
@@ -198,7 +195,6 @@ function update_map_color(attack_json){
 
     });
   }
-
 
   /* Slider */
   // Create SVG element
@@ -245,17 +241,11 @@ function update_map_color(attack_json){
   // Slide range to start with showing 2 years per interval
   slider.range(0, 2);
 
-
-
   // Slider listener
   slider.onChange(function(newRange){
 
     // save the start and and of the sliderRange
     dictionary.time.start = newRange.begin + 1970
     dictionary.time.end = newRange.end + 1970
-
-
-
-
 
 });

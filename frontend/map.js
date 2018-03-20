@@ -26,14 +26,10 @@ var projection = d3.geoMercator()
 selected = []
 
 // start drawing the map
-var drawmap = function(input){
-
-  console.log('DRAW THE MAPPP YEAH')
-
-  attack_json = input
-
-  // remove the old drawmap
-  d3.selectAll("boundary").remove();
+var drawmap = function(attack_json){
+  
+  // remove the old drawmap and attack circles
+  d3.selectAll(".boundary").remove();
   d3.selectAll("#attack-circle").remove();
 
   // create path based on projection
@@ -76,19 +72,17 @@ var drawmap = function(input){
         // add country to new geojson
         new_geojson.features.push(geojson.features[i])
       }
+
     }
 
-    console.log(new_geojson)
-
-    //console.log(new_geojson);
-
+    console.log(geojson.features[79].properties.color);
     // draw the map
     countries = svg.selectAll("path")
     .data(new_geojson.features)
     .enter()
     .append("path")
     .attr("d", path)
-
+    .style("fill", function(d){return d.properties.color})
     .attr("class", "boundary")
     .on("click", function(d) {
       //if clicked
@@ -103,14 +97,10 @@ var drawmap = function(input){
           selected.splice(index, 1);
 
         }
-
-
         // update the side graphs
         show_side_graph(selected);
-
-
 })
-    .style("fill", function(d){return d.properties.color});
+
 
     //  add points for attack locations and tooltip hover for more information on
     // actual attack

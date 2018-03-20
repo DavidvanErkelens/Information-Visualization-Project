@@ -300,8 +300,6 @@ $(document).mousedown(function() {
 
         updateUIFromRange();
 
-        console.log('You changed the width of the slider.')
-
         //Fire change listeners
         changeListeners.forEach(function (callback) {
             callback({begin: sliderRange.begin, end: sliderRange.end});
@@ -377,6 +375,8 @@ $(document).mousedown(function() {
         var limitWidth = rangeMax - rangeMin + 1;
         var rangeWidth = sliderRange.end - sliderRange.begin + 1;
         var delta = Math.min(Math.ceil(rangeWidth / 10), Math.ceil(limitWidth / 100));
+
+        updatedata()
 
         // Check if playback has reached the end
         if (sliderRange.end + delta > rangeMax) {

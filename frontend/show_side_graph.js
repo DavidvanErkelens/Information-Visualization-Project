@@ -53,11 +53,11 @@ function show_line(data){
 
   // Define the line
   var nkillline = d3.line()
-  .x(function(d) { return x(d.iyear); })
-  .y(function(d) { return y(d.kills); });
+  .x(function(d) { return x(parseInt(d.iyear)); })
+  .y(function(d) { return y(parseInt(d.kills)); });
 
   // Scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d.iyear; }));
+  x.domain(d3.extent(data, function(d) { return parseInt(d.iyear); }));
   y.domain([0, d3.max(data, function(d) { return parseInt(d.kills); })]);
 
   // Nest the entries by country
@@ -73,7 +73,7 @@ function show_line(data){
 
   // Loop through each country / key
   dataNest.forEach(function(d,i){
-
+    console.log(d.values);
     svg3.append("path")
     .attr("class", "line")
     .style("stroke", function() {
@@ -113,9 +113,12 @@ function show_line(data){
       height = 300,
       radius = Math.min(width, height) / 2;
 
+      width = d3.select(".svg-container2").node().getBoundingClientRect().width - 100
+      height = (d3.select('.svg-container2').node().getBoundingClientRect().height - 100) /2
+
       // scale for the colors
       var color = d3.scaleOrdinal()
-      .range(['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"]);
+      .range(['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a','#ffff99','#b15928']);
 
       // set the outer and inner radius of the arcs creating a hole in the middle
       var arc = d3.arc()

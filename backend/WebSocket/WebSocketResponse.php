@@ -258,6 +258,24 @@ class WebSocketResponse
                 // Add statement to query
                 $query->addStatement($statement);
             }
+
+            // Ranges?
+            if ($filter == 'ranges')
+            {
+                // Loop over ranges
+                foreach ($contents as $index => $range)
+                {
+                    // Add beginning of range
+                    $startStatement = new QueryStatement();
+                    $startStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '>=', $range['start']));
+                    $query->addStatement($startStatement);
+
+                    // Add end of range
+                    $endStatement = new QueryStatement();
+                    $endStatement->addCondition(new QueryCondition(Mapper::rangeIndexToColumn($index), '<', $range['end']));
+                    $query->addStatement($endStatement);
+                }
+            }
         }
 
         // Return the query

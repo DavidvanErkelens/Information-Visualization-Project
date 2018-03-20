@@ -13,6 +13,16 @@ conn.onmessage = function(e) {
 
 
     if (type == 'main'){
+<<<<<<< HEAD
+      if(first){
+        drawmap(output);
+        first = false
+      }
+
+      else if(!first){
+        update_map_color(output)
+      }
+=======
     	if(first){
 	      drawmap(output);
 	      first = false
@@ -21,13 +31,17 @@ conn.onmessage = function(e) {
 	    else if(!first){
 	      update_map_color(output);
 	    }	
+>>>>>>> 7b581d2a430cabdde414ee7de436caa162f227bc
     }
     else if (type == "time"){
     	drawTime("#timegraph", output);
     }
-    
+
     output = JSON.parse(e.data);
 
+<<<<<<< HEAD
+
+=======
     // if(first){
     //   drawmap(output);
     //   first = false
@@ -36,6 +50,7 @@ conn.onmessage = function(e) {
     // else if(!first){
     //   update_map_color(output)
     // }
+>>>>>>> 7b581d2a430cabdde414ee7de436caa162f227bc
 };
 
 // send data to server
@@ -54,6 +69,5 @@ function updatedata(){
 
   conn.send(JSON.stringify(dictionary));
   conn.send(JSON.stringify(timeDict));
-  console.log('lekker pik')
 
 }

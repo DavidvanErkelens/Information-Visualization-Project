@@ -25,15 +25,15 @@ conn.onmessage = function(e) {
     else if (type == "time"){
     	drawTime("#timegraph", output);
     }
-    else if (type == "kill"){
+    else if (type == "kills"){
       // update graphs
       show_line(output)
     }
     else if (type == "group"){
-      
+      show_piechart(output)
     }
 
-    output = JSON.parse(e.data);
+    // output = JSON.parse(e.data);
 
 
 };

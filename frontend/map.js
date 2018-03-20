@@ -28,6 +28,8 @@ selected = []
 // start drawing the map
 var drawmap = function(input){
 
+  console.log('DRAW THE MAPPP YEAH')
+
   attack_json = input
 
   // remove the old drawmap
@@ -76,7 +78,9 @@ var drawmap = function(input){
       }
     }
 
-    console.log(new_geojson);
+    console.log(new_geojson)
+
+    //console.log(new_geojson);
 
     // draw the map
     countries = svg.selectAll("path")
@@ -191,10 +195,11 @@ slider.onChange(function(newRange){
   // save the start and and of the sliderRange
   dictionary.time.start = newRange.begin + 1970
   dictionary.time.end = newRange.end + 1970
-  console.log(dictionary);
+  //console.log(dictionary);
 
   // call update function to show new selected data
-  updatedata()
+  //updatedata()
+  //console.log('changessssss')
 
 
 

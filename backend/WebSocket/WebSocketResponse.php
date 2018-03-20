@@ -62,7 +62,7 @@ class WebSocketResponse
 
 
                 // Add statement to query
-                $query->addStatement($statement);             
+                $query->addStatement($statement);
             }
 
             // Group?
@@ -116,6 +116,9 @@ class WebSocketResponse
 
         // Create results array
         $results = array();
+
+        // Echo query for debugging purposes, if necessary
+        if (Debug::printQueries()) echo "Query: {$query} \n";
 
         // Loop over results
         foreach ($db->query($query) as $result) 

@@ -24,15 +24,17 @@ class WebSocketResponse
         if (is_null($data)) return json_encode(array());
 
         // Do we have a type?
-        if (!array_key_exists('type', $data)) return json_encode(array());
+        // if (!array_key_exists('type', $data)) return json_encode(array());
 
-        // Depending on the type of request, format the query
-        // Return empty data on invalid request
-        switch($data['type']) {
-            case 'main':        $query = self::mainQuery($data); break;
-            case 'time':        $query = self::timeQuery($data); break;
-            default:            return json_encode(array());
-        }
+        // // Depending on the type of request, format the query
+        // // Return empty data on invalid request
+        // switch($data['type']) {
+        //     case 'main':        $query = self::mainQuery($data); break;
+        //     case 'time':        $query = self::timeQuery($data); break;
+        //     default:            return json_encode(array());
+        // }
+
+        $query = self::mainQuery($data); 
 
         // Create database connection
         $db = new Database();

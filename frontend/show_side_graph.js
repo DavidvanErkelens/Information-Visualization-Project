@@ -6,6 +6,8 @@ function show_side_graph(countries){
   d3.select(".svg3").remove()
   d3.select(".svg4").remove()
 
+  console.log(countries);
+
   if(countries.length > 0){
 
   // construct line payload

@@ -220,3 +220,30 @@ function loadFilters(filter)
 	}
 
 }
+
+svg.append("foreignObject")
+		.attr("x", 10)
+		.attr("y", 470)
+			.attr("width", 200)
+			.attr("height", 150)
+		.append("xhtml:div")
+			.style("border", "solid 1px")
+			.style("border-color", "rgba(234, 242, 255, 1)")
+			.style("background-color", "rgba(234, 242, 255, 0.4)")
+			.style("display", "block")
+			.style("height", "150px")
+			.html("<button type='button' onclick='remove_all_countries()'>Deselect all countries</button>")
+
+// function to remove all selected countries
+function remove_all_countries(){
+
+  // remove all visual selection elements
+	d3.selectAll(".boundary").style("stroke-width", "0.2px");
+
+  // update selected
+	selected = []
+
+  // update data to show no countries
+	show_side_graph([])
+
+}

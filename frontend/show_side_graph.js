@@ -6,8 +6,7 @@ function show_side_graph(countries){
   d3.select(".svg3").remove()
   d3.select(".svg4").remove()
 
-
-
+  if(countries.length > 0){
 
   // get all data for line to send to server
   payload_line = {"start" : dictionary.start , "end" : dictionary.end , "countries" : countries, type : "kills"};
@@ -20,6 +19,7 @@ function show_side_graph(countries){
 
   // send data to server for pie chart
   conn.send(JSON.stringify(payload_pie));
+}
 
 }
 
@@ -29,7 +29,6 @@ function show_line(data){
   // select the svg container
   var svg3 = d3.select(".svg-container2").append("svg")
   .attr("class", "svg3")
-
 
   // Set the dimensions of the canvas / graph
   var margin = {top: 30, right: 20, bottom: 70, left: 50},
@@ -57,7 +56,7 @@ function show_line(data){
 
   // scale for the colors
   var color = d3.scaleOrdinal()
-  .range(["red"]);
+  .range(['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a','#ffff99','#b15928']);
 
   legendSpace = width/dataNest.length;
 
@@ -91,9 +90,6 @@ function show_line(data){
         .call(d3.axisLeft(y));
 
       });
-
-      /* End line graph */
-
     }
 
     // function to show piechart
@@ -157,19 +153,6 @@ function show_line(data){
           return arc(d);
         }
       });
-
-      // add text label to each element
-      g.append("text")
-      .attr("transform", function (d) {
-        return "translate(" + arc.centroid(d) + ")";
-      })
-      .attr("dy", ".35em")
-
-      // .style("text-anchor", "middle")
-      // .text(function (d) {
-        // return String(d.data.gname) + " (" + String(d.data.nattack) + ")";
-      // });
-
     }
 
 

@@ -268,6 +268,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         slider.style("left", props.left + "px")
             .style("width", props.width + "px");
         updateRangeFromUI();
+        updatedata()
     });
 
 
@@ -276,16 +277,6 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         updateUIFromRange();
     });
 
-// experimental
-var down = false;
-$(document).mousedown(function() {
-    down = true;
-}).mouseup(function() {
-    down = false;
-    console.log('You clicked on the slider container.')
-    updatedata()
-});
-// end excperiment
 
 
     function onChange(callback){

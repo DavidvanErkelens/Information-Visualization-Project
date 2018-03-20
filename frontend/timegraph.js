@@ -17,8 +17,6 @@ function drawTime(containerSelector, data) {
 	    width = container.node().getBoundingClientRect().width - margin.left - margin.right,
 	    height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
 
-	console.log(container.node().getBoundingClientRect().width)
-
 	// parse the date / time
 	// var parseTime = d3.timeParse("%y");
 
@@ -64,7 +62,11 @@ function drawTime(containerSelector, data) {
 	svg.append("g")
 	  .call(d3.axisLeft(y));
 
+	// d3.selectAll(".svgTime").remove();
+
 };
+
+
 
 var lineData = [{
   year: 2001,

@@ -219,3 +219,9 @@ a:hover{
     margin-left: 0;
     margin-bottom: -.6em;
 }
+
+path.line
+{
+    fill: none;
+    stroke: #000;
+}

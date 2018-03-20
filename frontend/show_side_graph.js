@@ -38,9 +38,11 @@ function show_line(data){
   .attr("class", "svg3")
 
   // Set the dimensions of the canvas / graph
-  var margin = {top: 30, right: 20, bottom: 70, left: 50},
+  var margin = {top: 30, right: 100, bottom: 150, left: 10},
   width = 500 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
+  width = d3.select(".svg3").node().getBoundingClientRect().width - margin.right
+  height = d3.select('.svg3').node().getBoundingClientRect().height - margin.bottom
 
 
   // Set the ranges

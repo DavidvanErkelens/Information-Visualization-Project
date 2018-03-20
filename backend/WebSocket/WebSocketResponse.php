@@ -278,8 +278,8 @@ class WebSocketResponse
         }
 
         // Add to query
-        if (array_key_exists('countries', $data) && count($data['countries'] > 0)) $query->addStatement($countryStatement);
-        if (array_key_exists('groups', $data) && count($data['groups'] > 0)) $query->addStatement($groupStatement);
+        if (array_key_exists('countries', $data) && count($data['countries']) > 0) $query->addStatement($countryStatement);
+        if (array_key_exists('groups', $data) && count($data['groups']) > 0) $query->addStatement($groupStatement);
 
         // Do we have a start date?
         if (array_key_exists('start', $data) && is_numeric($data['start']))

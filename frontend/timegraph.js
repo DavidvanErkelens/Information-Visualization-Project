@@ -7,6 +7,9 @@
 // Get the data
 function drawTime(containerSelector, data) {
 
+	// Remove previous info so we can reinstantiate the chart
+	d3.selectAll(".svgTime").remove();
+
 	var beginDate = 1970,
 		endDate = 2015;
 
@@ -82,9 +85,6 @@ function drawTime(containerSelector, data) {
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
         .text("Number of casualties per year");
-
-	// d3.selectAll(".svgTime").remove();
-
 
 	/* Legend bullshit, not working atm*/
 

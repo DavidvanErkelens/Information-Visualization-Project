@@ -182,7 +182,7 @@ slider_element = svg2.append("foreignObject")
 var slider = createD3RangeSlider(0, 45, "#slider-container", true);
 
 // Create year timegraph
-var yearGraph = drawTime("#timegraph", lineData)
+// var yearGraph = drawTime("#timegraph", lineData)
 
 // Slide range to start with showing 2 years per interval
 slider.range(0, 2);

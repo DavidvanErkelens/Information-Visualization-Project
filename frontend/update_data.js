@@ -7,6 +7,7 @@ conn.onmessage = function(e) {
 
     output = JSON.parse(e.data);
     drawmap(output);
+    var yearGraph = drawTime("#timegraph", lineData);
   
 };
 

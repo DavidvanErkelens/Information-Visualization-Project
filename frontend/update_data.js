@@ -13,22 +13,22 @@ conn.onmessage = function(e) {
 
 
     if (type == 'main'){
-    	drawmap(output);	
+      if(first){
+        drawmap(output);
+        first = false
+      }
+
+      else if(!first){
+        update_map_color(output)
+      }
     }
     else if (type == "time"){
     	drawTime("#timegraph", output);
     }
-    
+
     output = JSON.parse(e.data);
 
-    if(first){
-      drawmap(output);
-      first = false
-    }
 
-    else if(!first){
-      update_map_color(output)
-    }
 };
 
 // send data to server
@@ -47,6 +47,5 @@ function updatedata(){
 
   conn.send(JSON.stringify(dictionary));
   conn.send(JSON.stringify(timeDict));
-  console.log('lekker pik')
 
 }

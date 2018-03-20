@@ -34,10 +34,28 @@ get_new_geojson = function (attack_json, resultcallback){
 
   console.log(attack_json);
 
+  max_attack = 0;
+
   d3.json(url, function(err, geojson) {
 
     // clean geojson
     var new_geojson = {type: "FeatureCollection", features : []}
+
+    //  loop through geojson per country and get maximum number of attacks
+    for(var i = 0; i< geojson.features.length;i++){
+
+      // select attacks for current country and add them to the geojson
+      attack = attack_json.filter(function( obj ) {
+        return obj.country_txt == geojson.features[i].properties.name;
+      });
+
+      // if number of attack is max save number of attack
+      if(attack.length > max_attack){
+        max_attack = attack.length;
+      }
+
+    }
+
 
     //  loop through geojson per country
     for(var i = 0; i< geojson.features.length;i++){
@@ -45,7 +63,6 @@ get_new_geojson = function (attack_json, resultcallback){
       // remove Antarctica
       if (geojson.features[i].properties.name != "Antarctica")
       {
-
 
         //  get the country features
         country_features = geojson.features[i]
@@ -56,7 +73,7 @@ get_new_geojson = function (attack_json, resultcallback){
         });
 
         // get relative number of attacks for country
-        rel_num_attack = Math.floor((country_features.properties.attack.length / attack_json.length) * 10)
+        rel_num_attack = Math.floor((country_features.properties.attack.length / max_attack) * 10)
 
         // colours for map
         colors = ['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"];

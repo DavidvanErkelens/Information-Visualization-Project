@@ -191,6 +191,9 @@ function show_line(data){
         d3.select(this).style("opacity", "1");
         d3.selectAll(".attack-group-name").remove()
       })
+      .on("click", function(d){
+      })
+
       .transition()
       .duration(function(d, i) {
         return i * 800;
@@ -202,6 +205,7 @@ function show_line(data){
           return arc(d);
         }
       });
+
     }
 
 

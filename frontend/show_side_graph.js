@@ -2,6 +2,8 @@
 // Function to update the data in the side graphs
 function show_side_graph(countries){
 
+  
+
   // remove the old graphs
   d3.select(".svg3").remove()
   d3.select(".svg4").remove()

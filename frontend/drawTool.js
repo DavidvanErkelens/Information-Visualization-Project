@@ -114,11 +114,17 @@ function updateRange(id, value)
 {
 	var index= id.substring(0, 1);
 	var which = id.substring(1);
-
-
 	dictionary["ranges"][index][which] = parseInt(value);
 
-	console.log(dictionary["ranges"])
+
+	updatedata()
+
+
+	if (selected.length > 0)
+	{
+		show_side_graph(selected);
+	}
+
 
 }
 

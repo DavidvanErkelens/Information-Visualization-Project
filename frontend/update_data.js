@@ -36,8 +36,6 @@ conn.onmessage = function(e) {
       show_piechart(output)
     }
 
-    // output = JSON.parse(e.data);
-
 
 };
 
@@ -45,19 +43,14 @@ conn.onmessage = function(e) {
 conn.onopen = function(e) {
     console.log("Connection established!");
 
-    // TODO remove this
-    // delete dictionary["time"]
-
     conn.send(JSON.stringify(dictionary));
     conn.send(JSON.stringify(timeDict));
 };
 
 //  get the new data from the server based on the defined filters
 function updatedata(){
-		console.log('updatedata',dictionary.type)
+	console.log('updatedata',dictionary.type)
 
-
-  
   conn.send(JSON.stringify(dictionary));
   conn.send(JSON.stringify(timeDict));
 

@@ -21,9 +21,6 @@ stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'
 
 //intvalues
 
-
-
-
 //here we match filters with correct category values
 stringvalues = [attacktypes, targettypes, weaptypes, perpretrator]
 

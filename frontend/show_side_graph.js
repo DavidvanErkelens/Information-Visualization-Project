@@ -2,14 +2,6 @@
 // Function to update the data in the side graphs
 function show_side_graph(countries){
 
-  
-
-  // remove the old graphs
-  d3.select(".svg3").remove()
-  d3.select(".svg4").remove()
-
-  console.log(countries);
-
   if(countries.length > 0){
 
   // construct line payload
@@ -18,7 +10,6 @@ function show_side_graph(countries){
   payload_line.end = dictionary.time.end
   payload_line.countries = countries
   payload_line.type = "kills"
-  
 
   // send data to server for line graph
   conn.send(JSON.stringify(payload_line));
@@ -37,6 +28,9 @@ function show_side_graph(countries){
 
 // function to show the line graphs
 function show_line(data){
+
+  // remove old svg
+  d3.select(".svg3").remove()
 
   // select the svg container
   var svg3 = d3.select(".svg-container2").append("svg")
@@ -109,7 +103,8 @@ function show_line(data){
     // function to show piechart
     function show_piechart(all_groups){
 
-      /*pie chart for showing perpetrators percentages*/
+      // remove the old graphs
+      d3.select(".svg4").remove()
 
       // set width heihgt and radius of chart
       var width = 300,

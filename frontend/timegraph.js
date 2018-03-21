@@ -12,7 +12,7 @@ function drawTime(containerSelector, data) {
 	var container = d3.select(containerSelector);
 	// set the dimensions and margins of the graph
 	var testing = containerSelector.width;
-	var margin = {top: 50, right: 20, bottom: 150, left: 50},
+	var margin = {top: 50, right: 20, bottom: 350, left: 50},
 	    width = d3.select(".svg2").node().getBoundingClientRect().width - margin.right*4,
 	    height = container.node().getBoundingClientRect().height - margin.top;
 
@@ -30,7 +30,7 @@ function drawTime(containerSelector, data) {
 	.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-        .attr("transform", 
+        .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
 
 	// format the data
@@ -73,12 +73,12 @@ function drawTime(containerSelector, data) {
 
 	// add title for graph
 	svg.append("text")
-        .attr("x", (width / 2))             
+        .attr("x", (width / 2))
         .attr("y", 0 - (margin.top / 2))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("text-decoration", "underline")  
-        .text("Number of casualties per year");                 
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("Number of casualties per year");
 
 };
 

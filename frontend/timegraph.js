@@ -78,7 +78,6 @@ function drawTime(containerSelector, data) {
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
-        .style("text-decoration", "underline")
         .text("Number of casualties per year");
 
 };

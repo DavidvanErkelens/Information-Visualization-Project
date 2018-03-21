@@ -183,9 +183,13 @@ function show_line(data){
       .style("fill", function (d) {
         return color(d.data.gname);
       })
-      .on("mouseover", function(d){
-        console.log("test");
+      .on("mouseenter", function(d){
+        d3.select(this).style("opacity", "0.5");
         add_group_name(d.data.gname, d.data.nattack, svg4);
+      })
+      .on("mouseleave", function(d){
+        d3.select(this).style("opacity", "1");
+        d3.selectAll(".attack-group-name").remove()
       })
       .transition()
       .duration(function(d, i) {
@@ -204,7 +208,6 @@ function show_line(data){
 function add_group_name(name, nattack, svg4){
 
   //  remove old name
-  d3.selectAll(".attack-group-name").remove()
 
   // add group name to graph
   svg4.append("text")

@@ -74,16 +74,47 @@ function show_line(data){
   .range(['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a','#ffff99','#b15928']);
 
   legendSpace = width/dataNest.length;
+  console.log(dataNest);
 
-  // Loop through each country / key
+
+  // Loop through each country / key add points
   dataNest.forEach(function(d,i){
-    console.log(d.values);
+
     svg3.append("path")
     .attr("class", "line")
     .attr('stroke-width', "5")
     .style("stroke", function() {
       return d.color = color(d.key); })
-      .attr("d", nkillline(d.values));
+      .attr("d", nkillline(d.values))
+
+      svg3.selectAll("point")
+      .data(d.values)
+      .enter()
+      .append("circle")
+      .attr("r", 5)
+      .style("stroke-width", "10")
+      .attr("cx", function(d) { return x(parseInt(d.iyear)); })
+      .attr("cy", function(d) { return y(parseInt(d.kills)); })
+      .on("mouseover", function(d) {
+        d3.select(this).style("cursor", "pointer");
+      })
+      .on("click", function(d){
+
+          // update start and end around current point
+          dictionary.time.start = (parseInt(d.iyear) - 2) -1970
+          dictionary.time.end = (parseInt(d.iyear) + 2) - 1970
+
+          // update slider location
+          setRange(dictionary.time.start, dictionary.time.end);
+
+          // show the updated data for main map and side graphs
+          updatedata()
+          show_side_graph(selected)
+
+      })
+
+
+
       // Add the Legend
       svg3.append("text")
       .attr("x", (legendSpace/2)+i*legendSpace)
@@ -112,7 +143,7 @@ function show_line(data){
       .attr("x",0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Number of attacks");
+      .text("Number of kills");
 
       // add x axis label
       svg3.append("text")

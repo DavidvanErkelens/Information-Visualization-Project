@@ -82,32 +82,12 @@ function drawTime(containerSelector, data) {
 
 };
 
-var lineData = [{
-  year: 2001,
-  close: 5
-}, {
-  year: 2002,
-  close: 20
-}, {
-  year: 2003,
-  close: 10
-}, {
-  year: 2004,
-  close: 40
-}, {
-  year: 2005,
-  close: 5
-}, {
-  year: 2006,
-  close: 60
-}];
-
 // Timegraph request dictionary with static start and end
-var timeDict = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true},
-				  1:{1:true, 2:true, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14:true, 15:true, 16:true, 17: true, 18:true, 19: true, 20: true, 21: true, 22: true},
-				  2:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true},
-				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true, 15: true},
-				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
+var timeDict = {0:{1:false, 2:false, 3:true, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false},
+				  1:{1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14:false, 15:false, 16:false, 17: false, 18:false, 19: false, 20: false, 21: false, 22: false},
+				  2:{1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false},
+				  3:{1:false, 2:true, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14: false, 15: false},
+				  4:{1:false, 2:false, 3:false, 4:false, 5:false},
 					"time" : {"start" : 1970, "end" : 2015},
 					"ranges": {0: {"start":1, "end":1501}, 1: {"start":0, "end":7367}, 2: {"start":0, "end":501}, 3: {"start":0, "end":201}},
 					"type": "time"};

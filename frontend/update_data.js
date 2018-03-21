@@ -8,6 +8,9 @@ conn.onmessage = function(e) {
 	console.log('answer from socket')
 	parsed = JSON.parse(e.data);
 
+		// show new year timeframe
+		show_years()
+
     type = parsed.type;
     output = parsed.data;
 

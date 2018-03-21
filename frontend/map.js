@@ -12,11 +12,20 @@ var svg = d3.select(".svg-container1").append("svg")
 .attr("class", "svg1")
 
 // adding title
-svg.append("text")
+svg_title = svg.append("text")
 .attr("x", "850")
 .attr("y", "40")
 .attr("font-size", "20px")
-.text("Visualizing the terrorism landscape");
+.attr("class", "header-title")
+.text("Visualizing the terrorism landscape")
+
+function show_years(){
+
+
+  // show new timespan
+  svg.selectAll(".header-title")
+  .text("Visualizing the terrorism landscape ("+ dictionary.time.start + " " + dictionary.time.end +")")
+}
 
 // Projection for map overview
 var projection = d3.geoMercator()

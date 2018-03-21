@@ -29,7 +29,7 @@ function show_years(){
 
 // Projection for map overview
 var projection = d3.geoMercator()
-.translate([700, 500])
+.translate([900, 500])
 
 //  list for all currenlty selected countries
 selected = []

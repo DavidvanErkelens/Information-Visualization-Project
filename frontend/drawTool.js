@@ -77,8 +77,6 @@ function selectFilter(id)
 		timeDict[currentfilter][id] = true;
 		dictionary[currentfilter][id] = true;
 	}
-	console.log("hi");
-	console.log(timeDict);
 	updatedata();
 	show_side_graph(selected);
 
@@ -115,6 +113,7 @@ function updateRange(id, value)
 	var index= id.substring(0, 1);
 	var which = id.substring(1);
 	dictionary["ranges"][index][which] = parseInt(value);
+	timeDict['ranges'][index][which] = parseInt(value);
 
 
 	updatedata()

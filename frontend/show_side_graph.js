@@ -23,6 +23,13 @@ function show_side_graph(countries){
 
   // send data to server for pie chart
   conn.send(JSON.stringify(payload_pie));
+}else{
+  // remove old svg
+  d3.select(".svg3").remove()
+
+  // remove the old graphs
+  d3.select(".svg4").remove()
+
 }
 }
 

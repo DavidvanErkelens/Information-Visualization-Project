@@ -16,6 +16,7 @@ function show_side_graph(countries){
   payload_line.end = dictionary.time.end
   payload_line.countries = countries
   payload_line.type = "kills"
+  
 
   // send data to server for line graph
   conn.send(JSON.stringify(payload_line));

@@ -55,6 +55,7 @@ conn.onopen = function(e) {
 //  get the new data from the server based on the defined filters
 function updatedata(){
 
+  
   conn.send(JSON.stringify(dictionary));
   conn.send(JSON.stringify(timeDict));
 

@@ -10,16 +10,12 @@ function drawTime(containerSelector, data) {
 		endDate = 2015;
 
 	var container = d3.select(containerSelector);
+
 	// set the dimensions and margins of the graph
 	var testing = containerSelector.width;
-	var margin = {top: 50, right: 20, bottom: 50, left: 50},
-	    // width = d3.select(".svg2").node().getBoundingClientRect().width - margin.right*4,
-	    // height = container.node().getBoundingClientRect().height - margin.top*3;
+	var margin = {top: 30, right: 20, bottom: 20, left: 50},
 	    width = parseInt(container.style('width'),10) - margin.left - margin.right,
 	    height = parseInt(container.style('height'),10) - margin.top - margin.bottom;
-
-	console.log("HI");
-	console.log(width, height);
 
 	// set the ranges
 	var x = d3.scaleLinear().range([0, width]);
@@ -70,7 +66,7 @@ function drawTime(containerSelector, data) {
 	// Add the X Axis
 	svg.append("g")
 	  .attr("transform", "translate(0," + height + ")")
-	  .call(d3.axisBottom(x));
+		.call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
 	// Add the Y Axis
 	svg.append("g")

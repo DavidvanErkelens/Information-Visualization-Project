@@ -227,7 +227,7 @@ function update_map_color(attack_json){
   var svg2 = d3.select(".svg-container").append("svg")
   .attr("class", "svg2");
 
-  // // Append HTML to display slider information
+  // Append HTML to display slider information
   svg2.append("foreignObject")
   .attr("x", "0")
   .attr("y", "30")
@@ -235,28 +235,23 @@ function update_map_color(attack_json){
   .attr("height", '50%')
   .append("xhtml:div")
   .attr("id", "timegraph")
-  .style("border", "solid black 1px")
-  .style("border-color", "rgba(234, 242, 255, 1)")
   .style("background-color", "rgba(234, 242, 255, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
-  .style("height", "190px");
+  .style("height", "210px");
 
 
   // add the slider to to the SVG element
   slider_element = svg2.append("foreignObject")
   .attr("x", "0")
-  .attr("y", "220")
+  .attr("y", "240")
   .attr("width" , "100%")
   .attr("height", '50%')
   .append("xhtml:div")
   .attr("id", "slider-container")
-  .style("border", "solid 1px")
-  .style("border-color", "rgba(234, 242, 255, 1)")
-  .style("background-color", "rgba(234, 242, 255, 0.4)")
   .style("display", "block")
   .style("overflow", "hidden")
-  .style("height", "35px");
+  .style("height", "45px");
 
   // Create slider spanning the range from 0 to 45 to encapsulate all 45 years of the dataset
   var slider = createD3RangeSlider(0, 45, "#slider-container", true);

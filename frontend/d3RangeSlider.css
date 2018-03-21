@@ -1,5 +1,6 @@
 .slider-container {
-    background-color: #f2f2f9;
+    background-color: rgba(234, 242, 255, 0.4) !important;
+    border: 0px !important;
 }
 
 .slider {
@@ -17,7 +18,7 @@
     position: absolute;
     height: 9px;
     width: 9px;
-    border: 1px solid #AAB;
+    /* border: 1px solid #AAB; */
     background: #9AC;
 
     /* Support for bootstrap */
@@ -48,9 +49,7 @@
 }
 
 .play-container .play, .play-container .stop {
-    fill: #BCE;
+    fill: rgb(166, 206, 227);
     stroke: #AAB;
     stroke-width: 1;
 }
-
-

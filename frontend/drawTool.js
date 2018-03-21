@@ -233,12 +233,12 @@ svg.append("foreignObject")
 			// .attr("width", 200)
 			// .attr("height", 150)
 		.append("xhtml:div")
-			.style("border", "solid 1px")
+			// .style("border", "solid 1px")
 			// .style("border-color", "rgba(234, 242, 255, 1)")
 			// .style("background-color", "rgba(234, 242, 255, 0.4)")
 			 .style("display", "block")
-			 .style("width", '200px')
-			.html("<button type='button' onclick='remove_all_countries()'>Deselect all countries</button>")
+			 .style("width", '300px')
+			.html("<button type='button' style='width: 200px;' class='btn btn-primary' onclick='remove_all_countries()'>Deselect all countries</button>")
 
 // function to remove all selected countries
 function remove_all_countries(){
@@ -250,6 +250,6 @@ function remove_all_countries(){
 	selected = []
 
   // update data to show no countries
-	show_side_graph([])
+	show_side_graph(selected)
 
 }

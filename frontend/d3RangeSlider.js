@@ -1,22 +1,8 @@
 /* Source: https://rasmusfonseca.github.io/d3RangeSlider/
 Ported from version 3 to version 4 of d3js*/
-
-/*jslint browser: true */
-/*jslint this */
-
+  
 
 /**
- * Create a d3 range slider that selects ranges between `rangeMin` and `rangeMax`, and add it to the
- * `containerSelector`. The contents of the container is laid out as follows
- * <code>
- * <div class="drag">
- *     <div class="handle WW"></div>
- *     <div class="handle EE"></div>
- * </div>
- * </code>
- * The appearance can be changed with CSS, but the `position` must be `relative`, and the width of `.slider` should be
- * left unaltered.
- *
  * @param rangeMin Minimum value of the range
  * @param rangeMax Maximum value of the range
  * @param containerSelector A CSS selection indicating exactly one element in the document
@@ -73,7 +59,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         var circleSymbol = playSVG.append("circle")
             .attr("cx", containerHeight / 2)
             .attr("cy", containerHeight / 2)
-            .attr("r", containerHeight / 2)
+            .attr("r", (containerHeight -10) / 2)
             .classed("button", true);
 
         var h = containerHeight;
@@ -93,7 +79,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         playSVG.append("circle")
             .attr("cx", containerHeight / 2)
             .attr("cy", containerHeight / 2)
-            .attr("r", containerHeight / 2)
+            .attr("r", (containerHeight - 10) / 2)
             .style("fill-opacity", "0.0")
             .style("cursor", "pointer")
             .on("click", togglePlayButton)
@@ -102,7 +88,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
                     .transition()
                     .attr("r", 1.2 * containerHeight / 2)
                     .transition()
-                    .attr("r", containerHeight / 2);
+                    .attr("r", (containerHeight - 10) / 2);
             });
 
 

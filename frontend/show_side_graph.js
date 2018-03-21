@@ -92,7 +92,7 @@ function show_line(data){
         svg3.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
         // Add the Y Axis
         svg3.append("g")

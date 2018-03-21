@@ -31,7 +31,7 @@ filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator'];
 var dictionary = {0:{1:false, 2:false, 3:true, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false},
 				  1:{1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14:false, 15:false, 16:false, 17: false, 18:false, 19: false, 20: false, 21: false, 22: false},
 				  2:{1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false},
-				  3:{1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14: false, 15: false},
+				  3:{1:false, 2:true, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14: false, 15: false},
 				  4:{1:false, 2:false, 3:false, 4:false, 5:false},
 				 "ranges": {0: {"start":1, "end":1501}, 1: {"start":0, "end":7367}, 2: {"start":0, "end":501}, 3: {"start":0, "end":201}},
 					"time" : {"start" : 1970, "end" : 1972},

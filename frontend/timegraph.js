@@ -12,11 +12,11 @@ function drawTime(containerSelector, data) {
 	var container = d3.select(containerSelector);
 	// set the dimensions and margins of the graph
 	var testing = containerSelector.width;
-	var margin = {top: 50, right: 20, bottom: 350, left: 50},
+	var margin = {top: 50, right: 20, bottom: 50, left: 50},
 	    // width = d3.select(".svg2").node().getBoundingClientRect().width - margin.right*4,
 	    // height = container.node().getBoundingClientRect().height - margin.top*3;
 	    width = parseInt(container.style('width'),10) - margin.left - margin.right,
-	    height = parseInt(container.style('height'),10) - margin.top;
+	    height = parseInt(container.style('height'),10) - margin.top - margin.bottom;
 
 	console.log("HI");
 	console.log(width, height);

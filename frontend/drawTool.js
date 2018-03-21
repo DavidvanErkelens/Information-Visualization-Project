@@ -28,14 +28,14 @@ stringvalues = [attacktypes, targettypes, weaptypes, perpretrator]
 filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator'];
 
 //this will hold all the states of the filters!
-var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true},
-				  1:{1:true, 2:true, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14:true, 15:true, 16:true, 17: true, 18:true, 19: true, 20: true, 21: true, 22: true},
-				  2:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true},
-				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true, 15: true},
-				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
+var dictionary = {0:{1:false, 2:false, 3:true, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false},
+				  1:{1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14:false, 15:false, 16:false, 17: false, 18:false, 19: false, 20: false, 21: false, 22: false},
+				  2:{1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false},
+				  3:{1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14: false, 15: false},
+				  4:{1:false, 2:false, 3:false, 4:false, 5:false},
 				 "ranges": {0: {"start":1, "end":1501}, 1: {"start":0, "end":7367}, 2: {"start":0, "end":501}, 3: {"start":0, "end":201}},
 					"time" : {"start" : 1970, "end" : 1972},
-					"number" : 500, "type": "main"};
+					"number" : 100000, "type": "main"};
 
 //initialize filtlers
 loadedFilters = false

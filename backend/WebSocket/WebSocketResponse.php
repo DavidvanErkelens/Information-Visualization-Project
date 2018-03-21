@@ -132,6 +132,9 @@ class WebSocketResponse
                     return $value;
                 }, ARRAY_FILTER_USE_BOTH)));
 
+                // Do we have groups?
+                if (count($contains) == 0) continue;
+
                 // Add to statement
                 foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
 
@@ -251,6 +254,9 @@ class WebSocketResponse
                 }, array_keys(array_filter($contents, function($value, $key) {
                     return $value;
                 }, ARRAY_FILTER_USE_BOTH)));
+
+                // Do we have groups?
+                if (count($contains) == 0) continue;
 
                 // Add to statement
                 foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
@@ -489,6 +495,9 @@ class WebSocketResponse
                 }, array_keys(array_filter($contents, function($value, $key) {
                     return $value;
                 }, ARRAY_FILTER_USE_BOTH)));
+
+                // Do we have groups?
+                if (count($contains) == 0) continue;
 
                 // Add to statement
                 foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));

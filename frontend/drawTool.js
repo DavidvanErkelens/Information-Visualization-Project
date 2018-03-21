@@ -35,7 +35,7 @@ var dictionary = {0:{1:false, 2:false, 3:true, 4:false, 5:false, 6:false, 7:fals
 				  4:{1:true, 2:false, 3:false, 4:false, 5:false},
 				 "ranges": {0: {"start":1, "end":1501}, 1: {"start":0, "end":7367}, 2: {"start":0, "end":501}, 3: {"start":0, "end":201}},
 					"time" : {"start" : 1970, "end" : 1972},
-					"number" : 100000, "type": "main"};
+					"number" : 500, "type": "main"};
 
 //initialize filtlers
 loadedFilters = false
@@ -243,6 +243,56 @@ svg.append("foreignObject")
 			 .style("display", "block")
 			 .style("width", '300px')
 			.html("<button type='button' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='sendFilterData()'>Renew map for filters</button>")
+
+/*AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH*/
+function circleCheck(){
+	var isCheck = document.getElementById('checkId').checked;
+	// var attackCircles = d3.selectAll('attack-circle');
+	var attackCircles = document.getElementById('attack-circle');
+	if(isCheck == true){
+		console.log('checkbox true');
+		for (let el of document.querySelectorAll('.attack-circle')) el.style.visibility = 'visible';
+		// attackCircles.style.visibility = 'visible';
+		checkbox.label = false;
+	}
+	else if (checkbox.label == false){
+		checkbox.label = true;
+		for (let el of document.querySelectorAll('.attack-circle')) el.style.visibility = 'hidden';
+		// attackCircles.style.visibility = 'hidden';
+		console.log("checkbox false")
+	}
+}
+
+// Button to turn off attack circles on map
+var checkbox = document.createElement("INPUT");
+checkbox.type = "checkbox";
+checkbox.name = "cCheck";
+checkbox.value = false;
+checkbox.id = 'checkId';
+checkbox.label = "hi there";
+checkbox.onclick = circleCheck;
+
+// Div element to store checkbox
+svg.append("foreignObject")
+		.attr("x", 20)
+		.attr("y", 465)
+		.append("xhtml:div")
+		.attr('id', 'circleButton')
+		.attr('width', '300px');
+
+// Label for checkbox
+var label = document.createElement('label')
+label.htmlFor = "id";
+label.width = '300px';
+label.appendChild(document.createTextNode('Show individual attacks'));
+
+// Adding the checkbox and label to the right position
+var checkDiv = document.getElementById('circleButton');
+checkDiv.appendChild(checkbox);
+checkDiv.children[0].insertAdjacentElement("afterEnd", label);
+
+
+/*aaaaaaaaaaaaaaaaaah*/
 
 // Deselect button for all countries
 svg.append("foreignObject")

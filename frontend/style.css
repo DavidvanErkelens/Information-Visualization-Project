@@ -3,10 +3,6 @@ body{
   margin:0;position:fixed;top:0;right:0;bottom:0;left:0;
 }
 
-input[type="checkbox"] {
-   display: none;
-}
-
 input {
   box-sizing: border-box;
   height: 20px;
@@ -148,4 +144,9 @@ path.line
 
 .area {
   fill: #A6CEE3;
+}
+
+input[type=checkbox]
+{
+  -webkit-appearance:checkbox;
 }

@@ -84,7 +84,6 @@ function show_line(data){
     .style("stroke", function() {
       return d.color = color(d.key); })
       .attr("d", nkillline(d.values));
-
       // Add the Legend
       svg3.append("text")
       .attr("x", (legendSpace/2)+i*legendSpace)

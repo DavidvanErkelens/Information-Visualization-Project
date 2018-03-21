@@ -489,7 +489,7 @@ class WebSocketResponse
         if (!is_numeric($contents)) return $query;
 
         // Store limit
-        $limit = intval($contents);
+        $query->setLimit(intval($contents));
 
         // Return query
         return $query;

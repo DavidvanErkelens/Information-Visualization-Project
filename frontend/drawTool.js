@@ -14,7 +14,7 @@ var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
 attacktypes = {1: 'Assassination', 2: 'Armed Assault', 3: 'Bombing/Explosion', 4: 'Hijacking', 5: 'Barricade Incident', 6: 'Kidnapping', 7: 'Facility/Infrastructure', 8: 'Unarmed Assault', 9: 'Unknown'}
 targettypes = {1: 'Business', 2: 'Government', 3: 'Police', 4: 'Military', 5: 'Abortion related', 6: 'Airports/Aircraft', 7: 'Government (Diplomatic)', 8: 'Education', 9: 'Food/water supplies', 10: 'Journalist/Media', 11: 'Maritime', 12: 'NGO', 13: 'Other', 14: 'Private property', 15: 'Religious', 16: 'Telecommunication', 17: 'Terrorists', 18: 'Tourist', 19: 'Transportation', 20: 'Unknown', 21: 'Utilities', 22: 'Violent political parties'}
 weaptypes = {1: 'Biological', 2: 'Chemical', 3: 'Radiological', 4: 'Nuclear', 5: 'Firearms', 6: 'Explosives', 7: 'Fake weapons', 8: 'Incendiary', 9: 'Melee', 10: 'Vehicle', 11: 'Sabotage', 12: 'Other', 13: 'Unkown'}
-perpretrator = {1: 'Unknown', 2: 'Taliban', 3: 'Shining Path', 4: 'ISIL', 5: 'FMLN', 6: 'Al-Shabaab', 7: 'IRA', 8: 'FARC', 9:'NPA', 10: 'PKK', 11: 'Boko Haram', 12: 'ETA', 13: 'CPI-Maoist', 14: 'LTTE'}
+perpretrator = {1: 'Unknown', 2: 'Taliban', 3: 'Shining Path', 4: 'ISIL', 5: 'FMLN', 6: 'Al-Shabaab', 7: 'IRA', 8: 'FARC', 9:'NPA', 10: 'PKK', 11: 'Boko Haram', 12: 'ETA', 13: 'CPI-Maoist', 14: 'LTTE', 15: 'Other'}
 
 //not one column but 5 columns that are true or false
 stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'}
@@ -28,15 +28,15 @@ stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'
 stringvalues = [attacktypes, targettypes, weaptypes, perpretrator]
 
 //here we name the filters ids
-filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator', 'Stats'];
+filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator'];
 
 //this will hold all the states of the filters!
 var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true},
 				  1:{1:true, 2:true, 3:true, 4:true, 5:false, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14:true, 15:true, 16:true, 17: true, 18:true, 19: true, 20: true, 21: true, 22: true},
 				  2:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true},
-				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true},
+				  3:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true, 10:true, 11:true, 12:true, 13:true, 14: true, 15: true},
 				  4:{1:true, 2:true, 3:true, 4:true, 5:true},
-				 "ranges": {0: {"start":1, "end":10}, 1: {"start":0, "end":10}, 2: {"start":0, "end":10}, 3: {"start":0, "end":10}},
+				 "ranges": {0: {"start":1, "end":1000}, 1: {"start":0, "end":1000}, 2: {"start":0, "end":1000}, 3: {"start":0, "end":1000}},
 					"time" : {"start" : 1970, "end" : 1972},
 					"number" : 500, "type": "main"};
 
@@ -55,8 +55,7 @@ function showDropdown()
    		.attr("x", 220)
    		.attr("y", 10)
    		.append("xhtml:div")
-        .style("background-color", "rgba(300, 33, 192, 1)")
-        .html("<a onclick='loadFilters(0)'>"+filters[0]+"</a> <a onclick='loadFilters(1)'>"+filters[1]+"</a> <a onclick='loadFilters(2)'>"+filters[2]+"</a> <a onclick='loadFilters(3)'>"+filters[3]+"</a> <a onclick='loadFilters(4)'>"+filters[4])
+        .html("<a onclick='loadFilters(0)'>"+filters[0]+"</a> <a onclick='loadFilters(1)'>"+filters[1]+"</a> <a onclick='loadFilters(2)'>"+filters[2]+"</a> <a onclick='loadFilters(3)'>"+filters[3])
 	} else
 	{
 		click = false;
@@ -81,7 +80,8 @@ function selectFilter(id)
 	}
 
 	updatedata();
-	console.log(dictionary[currentfilter]);
+	show_side_graph(selected);
+
 }
 
 function createBottomMenu(){

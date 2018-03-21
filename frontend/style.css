@@ -46,9 +46,16 @@ a {
   text-align: center;
   width: 100px;
   display: block;
-  background-color: lightgrey;
+  background-color: rgba(234, 242, 255, 0.4);
 }
-button:focus{
+
+a:hover
+{
+  background-color:rgba(234, 242, 255, 0.8);
+}
+
+button:focus
+{
 outline: none;
 }
 
@@ -59,9 +66,7 @@ outline: none;
 
 
 
-a:hover{
-  background-color:yellow;
-}
+
 
 .dropbtn{
   background-color:rgba(234, 242, 255, 0.4);

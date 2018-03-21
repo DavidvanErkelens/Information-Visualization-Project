@@ -14,7 +14,7 @@ function drawTime(containerSelector, data) {
 	var testing = containerSelector.width;
 	var margin = {top: 50, right: 20, bottom: 350, left: 50},
 	    width = d3.select(".svg2").node().getBoundingClientRect().width - margin.right*4,
-	    height = container.node().getBoundingClientRect().height - margin.top;
+	    height = container.node().getBoundingClientRect().height - margin.top*3;
 
 	// set the ranges
 	var x = d3.scaleLinear().range([0, width]);

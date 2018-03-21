@@ -66,6 +66,24 @@ class WebSocketResponse
             $results[] = array_combine($keys, array_values($result));
         }
 
+        // Post processing, because sql does not comply
+        if ($data['type'] == 'time')
+        {
+            // Store missing years
+            $missing = range(1970, 2016);
+
+            // Loop over data result
+            foreach ($results as $result) $missing = array_diff($missing, array($result['iyear']));
+
+            // Add missing years to array
+            foreach ($missing as $year) $results[] = array('iyear' => $year, 'kills' => 0);
+
+            // Sort array
+            usort($results, function($one, $two) {
+                return $one['iyear'] > $two['iyear'];
+            });
+        }
+
         // Return encoded result
         return json_encode(array(
             'type'      =>  $data['type'],

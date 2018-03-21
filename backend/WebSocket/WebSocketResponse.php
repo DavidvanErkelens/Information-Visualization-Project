@@ -338,21 +338,21 @@ class WebSocketResponse
             }
 
             // Group?
-            if ($filter == 'perpetrator')
-            {
-                // Create list of group names
-                $contains = array_map(function($value) {
-                    return strtolower(Mapper::groupToName($value));
-                }, array_keys(array_filter($contents, function($value, $key) {
-                    return $value;
-                }, ARRAY_FILTER_USE_BOTH)));
+            // if ($filter == 'perpetrator')
+            // {
+            //     // Create list of group names
+            //     $contains = array_map(function($value) {
+            //         return strtolower(Mapper::groupToName($value));
+            //     }, array_keys(array_filter($contents, function($value, $key) {
+            //         return $value;
+            //     }, ARRAY_FILTER_USE_BOTH)));
 
-                // Add to statement
-                foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
+            //     // Add to statement
+            //     foreach (Mapper::filterToColumns($filter) as $column) $statement->addCondition(new QueryInCondition("lower($column)", $contains));
 
-                // Add statement to query
-                $query->addStatement($statement);
-            }
+            //     // Add statement to query
+            //     $query->addStatement($statement);
+            // }
 
             // Ranges?
             if ($filter == 'ranges')

@@ -111,9 +111,6 @@ function show_line(data){
           updatedata()
           show_side_graph(selected)
 
-
-
-
       })
 
 

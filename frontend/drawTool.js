@@ -154,7 +154,7 @@ function loadFilters(filter)
         .attr("width", 250)
         .attr("height", 300)
    		.append("xhtml:div")
-        .attr("width", 200)
+        .attr("width", 250)
         .attr("height", 300)
         .style("border", "solid 1px")
         .style("border-color","rgb(234, 242, 255)")
@@ -163,8 +163,7 @@ function loadFilters(filter)
         .style("display", "block")
         .style("overflow", "hidden")
         .style("height", "35px")
-       // .style("text-align", "center")
-        .html("<button onclick='showDropdown()' class='dropbtn' style='border: none; width: 198px; height: 35px; font-size: 20px; color:black'>"+filters[filter]+"</button>")
+        .html("<button onclick='showDropdown()' class='dropbtn' style='border: none; width: 250px; height: 35px; font-size: 20px; color:black'>"+filters[filter]+"</button>")
 
         loadedFilters = true;
 
@@ -192,8 +191,6 @@ function loadFilters(filter)
 
         .style("overflow-y","scroll")
         .style("height", "240px")
-       // .style("text-align", "center")
-        //.html("<button onclick='myFunction()' class='dropbtn' style='background-color: grey; border: none; width: 198px; height: 35px; font-size: 20px; color:white'>"+filters[filter]+"</button>")
 
 
 	//loop over the filters and create checkboxes

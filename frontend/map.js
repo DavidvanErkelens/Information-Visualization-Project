@@ -24,7 +24,7 @@ function show_years(){
 
   // show new timespan
   svg.selectAll(".header-title")
-  .text("Visualizing the terrorism landscape ("+ dictionary.time.start + " " + dictionary.time.end +")")
+  .text("Visualizing the terrorism landscape ("+ dictionary.time.start + " - " + dictionary.time.end +")")
 }
 
 // Projection for map overview

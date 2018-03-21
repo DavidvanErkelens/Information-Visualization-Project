@@ -68,14 +68,17 @@ function selectFilter(id)
 {
 	if(dictionary[currentfilter][id] == true)
 	{
+		timeDict[currentfilter][id] = false;
 		dictionary[currentfilter][id] = false;
 		//dictionary[currentfilter] =
 	}
 	else
 	{
+		timeDict[currentfilter][id] = true;
 		dictionary[currentfilter][id] = true;
 	}
-
+	console.log("hi");
+	console.log(timeDict);
 	updatedata();
 	show_side_graph(selected);
 

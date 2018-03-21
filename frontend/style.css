@@ -29,8 +29,14 @@ input[type="checkbox"].checkmark {
    background-color: blue;
 }
 
-.btn:focus{
-  outline: none;
+.btn.btn-primary:focus{
+  outline:none!important;
+
+}
+
+.btn.btn-primary{
+  background-color:#A6CEE3!important;
+  border: none;
 }
 
 

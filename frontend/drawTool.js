@@ -244,21 +244,18 @@ svg.append("foreignObject")
 			 .style("width", '300px')
 			.html("<button type='button' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='sendFilterData()'>Renew map for filters</button>")
 
-/*AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH*/
+/*Everything for the checkbox to hide the attack circles*/
 function circleCheck(){
 	var isCheck = document.getElementById('checkId').checked;
-	// var attackCircles = d3.selectAll('attack-circle');
 	var attackCircles = document.getElementById('attack-circle');
 	if(isCheck == true){
 		console.log('checkbox true');
 		for (let el of document.querySelectorAll('.attack-circle')) el.style.visibility = 'visible';
-		// attackCircles.style.visibility = 'visible';
 		checkbox.label = false;
 	}
 	else if (checkbox.label == false){
 		checkbox.label = true;
 		for (let el of document.querySelectorAll('.attack-circle')) el.style.visibility = 'hidden';
-		// attackCircles.style.visibility = 'hidden';
 		console.log("checkbox false")
 	}
 }
@@ -282,8 +279,8 @@ svg.append("foreignObject")
 
 // Label for checkbox
 var label = document.createElement('label')
-label.htmlFor = "id";
-label.width = '300px';
+label.htmlFor = "id"
+label.style.width = '200px'
 label.appendChild(document.createTextNode('Show individual attacks'));
 
 // Adding the checkbox and label to the right position
@@ -292,7 +289,7 @@ checkDiv.appendChild(checkbox);
 checkDiv.children[0].insertAdjacentElement("afterEnd", label);
 
 
-/*aaaaaaaaaaaaaaaaaah*/
+/*End of checkbox code*/
 
 // Deselect button for all countries
 svg.append("foreignObject")

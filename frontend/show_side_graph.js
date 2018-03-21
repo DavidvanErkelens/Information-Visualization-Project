@@ -73,6 +73,7 @@ function show_line(data){
     console.log(d.values);
     svg3.append("path")
     .attr("class", "line")
+    .attr('stroke-width', "5")
     .style("stroke", function() {
       return d.color = color(d.key); })
       .attr("d", nkillline(d.values));
@@ -82,6 +83,7 @@ function show_line(data){
       .attr("x", (legendSpace/2)+i*legendSpace)
       .attr("y", height + (margin.bottom/2)+ 5)
       .attr("class", "legend")
+      .attr("font-weight", "bold")
       .style("fill", function() {
         return d.color = color(d.key); })
         .text(d.key);
@@ -175,9 +177,11 @@ function add_group_name(name, nattack, svg4){
 
   // add group name to graph
   svg4.append("text")
-  .attr("x", "0")
-  .attr("y", "0")
+  .attr("y", "160")
+  .attr("x", "-250")
   .attr("class", "attack-group-name")
   .attr("font-size", "12px")
-  .text(String(name) + " (" + String(nattack)+")");
+  .attr("font-weight", "bold")
+  .text(String(name) + " (" + String(nattack)+")")
+  .style("text-align", "center")
 }

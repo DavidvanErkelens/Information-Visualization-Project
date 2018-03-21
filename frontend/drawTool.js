@@ -49,8 +49,8 @@ function showDropdown()
 		click = true;
 
 	dropdown = svg.append("foreignObject")
-   		.attr("x", 220)
-   		.attr("y", 10)
+   		.attr("x", 270)
+   		.attr("y", 50)
    		.append("xhtml:div")
         .html("<a onclick='loadFilters(0)'>"+filters[0]+"</a> <a onclick='loadFilters(1)'>"+filters[1]+"</a> <a onclick='loadFilters(2)'>"+filters[2]+"</a> <a onclick='loadFilters(3)'>"+filters[3])
 	} else

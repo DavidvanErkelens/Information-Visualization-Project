@@ -102,7 +102,15 @@ function createBottomMenu(){
 			.style("height", "20px")
 			.style("display", "block")
 	        //.html("<input type='range' min='1' max='100' value='50' class='slider2' id='myRange'>")
-	        .html("nKill: <input type=text' id=0start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='4' size='1' value='"+dictionary["ranges"][0].start+"'> - <input type=text' id=0end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='4' size='1' value='"+dictionary["ranges"][0].end+"'><br>nWound: <input type=text' id=1start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][1].start+"'> - <input type=text' id=1end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][1].end+"'><br>nKillter: <input type=text' id=2start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][2].start+"'> - <input type=text' id=2end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][2].end+"'><br>nWoundter: <input type=text' id=3start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][3].start+"'> - <input type=text' id=3end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"+dictionary["ranges"][3].end+"'>")
+	        .html("Casualties: <input type=text' id=0start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='4' size='1' value='"
+	        	+dictionary["ranges"][0].start+"'> - <input type=text' id=0end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='4' size='1' value='"
+	        	+dictionary["ranges"][0].end+"'><br>Wounded: <input type=text' id=1start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"
+	        	+dictionary["ranges"][1].start+"'> - <input type=text' id=1end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"
+	        	+dictionary["ranges"][1].end+"'><br>Terrorist Casualties: <input type=text' id=2start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"
+	        	+dictionary["ranges"][2].start+"'> - <input type=text' id=2end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"
+	        	+dictionary["ranges"][2].end+"'><br>Terrosits Wounded: <input type=text' id=3start onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"
+	        	+dictionary["ranges"][3].start+"'> - <input type=text' id=3end onkeyup='updateRange(this.id, this.value)' name='lastname' maxlength='3' size='1' value='"
+	        	+dictionary["ranges"][3].end+"'>")
 }
 
 createBottomMenu();

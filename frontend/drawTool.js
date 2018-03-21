@@ -28,7 +28,7 @@ stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'
 stringvalues = [attacktypes, targettypes, weaptypes, perpretrator]
 
 //here we name the filters ids
-filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator', 'Stats'];
+filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator'];
 
 //this will hold all the states of the filters!
 var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true},
@@ -55,8 +55,7 @@ function showDropdown()
    		.attr("x", 220)
    		.attr("y", 10)
    		.append("xhtml:div")
-        .style("background-color", "rgba(300, 33, 192, 1)")
-        .html("<a onclick='loadFilters(0)'>"+filters[0]+"</a> <a onclick='loadFilters(1)'>"+filters[1]+"</a> <a onclick='loadFilters(2)'>"+filters[2]+"</a> <a onclick='loadFilters(3)'>"+filters[3]+"</a> <a onclick='loadFilters(4)'>"+filters[4])
+        .html("<a onclick='loadFilters(0)'>"+filters[0]+"</a> <a onclick='loadFilters(1)'>"+filters[1]+"</a> <a onclick='loadFilters(2)'>"+filters[2]+"</a> <a onclick='loadFilters(3)'>"+filters[3])
 	} else
 	{
 		click = false;
@@ -81,7 +80,8 @@ function selectFilter(id)
 	}
 
 	updatedata();
-	console.log(dictionary[currentfilter]);
+	show_side_graph(selected);
+
 }
 
 function createBottomMenu(){

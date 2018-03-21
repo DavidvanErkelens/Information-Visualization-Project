@@ -70,15 +70,12 @@ function selectFilter(id)
 	{
 		timeDict[currentfilter][id] = false;
 		dictionary[currentfilter][id] = false;
-		//dictionary[currentfilter] =
 	}
 	else
 	{
 		timeDict[currentfilter][id] = true;
 		dictionary[currentfilter][id] = true;
 	}
-	updatedata();
-	show_side_graph(selected);
 
 }
 
@@ -234,9 +231,31 @@ function loadFilters(filter)
 
 }
 
+// Function to send all filters to the backend
+function sendFilterData(){
+	updatedata();
+	show_side_graph(selected);
+}
+
+// Add filter button to send to backend
 svg.append("foreignObject")
 		.attr("x", 10)
 		.attr("y", 425)
+			// .attr("width", 200)
+			// .attr("height", 150)
+		.append("xhtml:div")
+			.attr('class', 'filterButton')
+			// .style("border", "solid 1px")
+			// .style("border-color", "rgba(234, 242, 255, 1)")
+			// .style("background-color", "rgba(234, 242, 255, 0.4)")
+			 .style("display", "block")
+			 .style("width", '300px')
+			.html("<button type='button' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='sendFilterData()'>Renew map for filters</button>")
+
+// Deselect button for all countries
+svg.append("foreignObject")
+		.attr("x", 280)
+		.attr("y", 10)
 			// .attr("width", 200)
 			// .attr("height", 150)
 		.append("xhtml:div")

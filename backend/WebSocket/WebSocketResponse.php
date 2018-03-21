@@ -210,6 +210,9 @@ class WebSocketResponse
             // Different query formatting depending on column type
             if (in_array($filter, array('attacktype', 'targettype', 'weapontype'))) $query = self::addTypeFilter($query, $filter, $contents);
 
+            // Group?
+            if ($filter == 'perpetrator') $query = self::addGroupFilter($query, $contents);
+
             // Ranges?
             if ($filter == 'ranges') $query = self::addRangeFilter($query, $contents);
         }

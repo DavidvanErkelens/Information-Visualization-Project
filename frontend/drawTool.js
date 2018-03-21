@@ -77,8 +77,6 @@ function selectFilter(id)
 		timeDict[currentfilter][id] = true;
 		dictionary[currentfilter][id] = true;
 	}
-	console.log("hi");
-	console.log(timeDict);
 	updatedata();
 	show_side_graph(selected);
 

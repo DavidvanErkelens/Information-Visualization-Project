@@ -27,6 +27,7 @@ conn.onmessage = function(e) {
     }
     else if (type == "time"){
     	drawTime("#timegraph", output);
+    	console.log(output)
     }
     else if (type == "kills"){
       // update graphs

@@ -1,6 +1,6 @@
 /* Source: https://rasmusfonseca.github.io/d3RangeSlider/
 Ported from version 3 to version 4 of d3js*/
-  
+
 
 /**
  * @param rangeMin Minimum value of the range
@@ -8,6 +8,10 @@ Ported from version 3 to version 4 of d3js*/
  * @param containerSelector A CSS selection indicating exactly one element in the document
  * @returns {{range: function(number, number), onChange: function(function)}}
  */
+
+// make set range global
+var setRange
+
 function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton) {
     "use strict";
 
@@ -292,7 +296,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         return this;
     }
 
-    function setRange (b, e) {
+    setRange = function (b, e) {
         sliderRange.begin = b;
         sliderRange.end = e;
 
@@ -303,6 +307,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             callback({begin: sliderRange.begin, end: sliderRange.end});
         });
     }
+
 
 
     /**

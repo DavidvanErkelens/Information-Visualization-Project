@@ -238,7 +238,7 @@ svg.append("foreignObject")
 			// .style("background-color", "rgba(234, 242, 255, 0.4)")
 			 .style("display", "block")
 			 .style("width", '300px')
-			.html("<button type='button' style='width: 200px;' class='btn btn-primary' onclick='remove_all_countries()'>Deselect all countries</button>")
+			.html("<button type='button' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='remove_all_countries()'>Deselect all countries</button>")
 
 // function to remove all selected countries
 function remove_all_countries(){

@@ -106,6 +106,23 @@ function show_line(data){
         .attr("class", "axis")
         .call(d3.axisLeft(y));
 
+      // text label for the y axis
+      svg3.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - 50 )
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Number of attacks");
+
+      // add x axis label
+      svg3.append("text")
+      .attr("transform",
+            "translate(" + (width/2) + " ," +
+                           (height + margin.top + 10) + ")")
+      .style("text-anchor", "middle")
+      .text("Year");
+
       });
     }
 
@@ -152,6 +169,14 @@ function show_line(data){
       .data(pie(all_groups))
       .enter().append("g")
       .attr("class", "arc");
+
+      // add graph name
+      svg4.append("text")
+      .attr("x", 0)
+        .attr("y", 0 - (10 / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text("Attack groups");
 
       // draw for each data element
       g.append("path")

@@ -7,7 +7,7 @@ function drawTime(containerSelector, data) {
 
 	// Hardcoded begin and enddate for the graph
 	var beginDate = 1970,
-		endDate = 2015;
+		endDate = 2016;
 
 	var container = d3.select(containerSelector);
 

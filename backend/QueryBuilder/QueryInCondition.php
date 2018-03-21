@@ -1,6 +1,6 @@
 <?php
 /**
- *  QueryCondition.php
+ *  QueryInCondition.php
  *
  *  Class that describes a single condition for running a query
  */

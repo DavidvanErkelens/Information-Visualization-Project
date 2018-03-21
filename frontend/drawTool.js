@@ -96,7 +96,7 @@ function createBottomMenu(){
         .style("border-color", "rgba(234, 242, 255, 1)")
         .style("background-color", "rgba(234, 242, 255, 0.4)")
         .style("display", "block")
-        .style("height", "150px")
+        .style("height", "100px")
 
 
 
@@ -114,11 +114,17 @@ function updateRange(id, value)
 {
 	var index= id.substring(0, 1);
 	var which = id.substring(1);
-
-
 	dictionary["ranges"][index][which] = parseInt(value);
 
-	console.log(dictionary["ranges"])
+
+	updatedata()
+
+
+	if (selected.length > 0)
+	{
+		show_side_graph(selected);
+	}
+
 
 }
 
@@ -169,10 +175,10 @@ function loadFilters(filter)
    		.attr("x", 10)
    		.attr("y", 50)
         .attr("width", 200)
-        .attr("height", 265)
+        .attr("height", 225)
    		.append("xhtml:div")
         .attr("width", 200)
-        .attr("height", 265)
+        .attr("height", 225)
         .style("border", "solid 1px")
         .style("border-color","rgb(234, 242, 255)")
         .style("background-color", "rgba(234, 242, 255, 0.4)")
@@ -223,15 +229,15 @@ function loadFilters(filter)
 
 svg.append("foreignObject")
 		.attr("x", 10)
-		.attr("y", 470)
-			.attr("width", 200)
-			.attr("height", 150)
+		.attr("y", 425)
+			// .attr("width", 200)
+			// .attr("height", 150)
 		.append("xhtml:div")
 			.style("border", "solid 1px")
-			.style("border-color", "rgba(234, 242, 255, 1)")
-			.style("background-color", "rgba(234, 242, 255, 0.4)")
-			.style("display", "block")
-			.style("height", "150px")
+			// .style("border-color", "rgba(234, 242, 255, 1)")
+			// .style("background-color", "rgba(234, 242, 255, 0.4)")
+			 .style("display", "block")
+			 .style("width", '200px')
 			.html("<button type='button' onclick='remove_all_countries()'>Deselect all countries</button>")
 
 // function to remove all selected countries

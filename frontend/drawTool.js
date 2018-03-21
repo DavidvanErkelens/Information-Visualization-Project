@@ -115,6 +115,7 @@ function updateRange(id, value)
 	var index= id.substring(0, 1);
 	var which = id.substring(1);
 	dictionary["ranges"][index][which] = parseInt(value);
+	timeDict['ranges'][index][which] = parseInt(value);
 
 
 	updatedata()

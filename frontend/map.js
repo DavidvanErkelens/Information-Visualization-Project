@@ -4,7 +4,7 @@ var tooltip = d3.select("body")
 .style("position", "absolute")
 .style("z-index", "10")
 .style("visibility", "hidden")
-.text("a simple tooltip")
+.style("width", '200')
 .attr("class", "tool-tip")
 
 // append svg to body
@@ -143,7 +143,7 @@ function update_map_color(attack_json){
         return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function() {
-        return tooltip.style("top",(440) + "px")
+        return tooltip.style("top",(420) + "px")
         .style("left", (10) + "px")
         .style("border", "solid 1px")
         .style("border-color", "rgba(234, 242, 255, 1");
@@ -220,7 +220,7 @@ function update_map_color(attack_json){
         return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function() {
-        return tooltip.style("top",(470) + "px")
+        return tooltip.style("top",(420) + "px")
         .style("left", (10) + "px")
         .style("border", "solid 1px")
         .style("border-color", "rgba(234, 242, 255, 1");

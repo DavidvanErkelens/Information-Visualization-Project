@@ -125,8 +125,8 @@ outline: none;
 
 /* Styling for tooltip */
 .tool-tip{
-  width: 200px;
-  height: 230px;
+  width: 250px;
+  height: 220px;
   background-color: rgba(234, 242, 255, 0.4);
 }
 

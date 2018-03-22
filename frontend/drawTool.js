@@ -278,15 +278,40 @@ function toggle_filters()
 {
 	index = filters.indexOf(d3.select(".dropbtn").text())
 
-	console.log(dictionary[index])
+	alltrue = true;
 
+	//check if all are checked
+	for (var key in dictionary[index])
+	{
+	if (dictionary[index][key] == false)
+	{
+		alltrue = false;
+	}
+	}
+
+
+	if (alltrue) 
+	{
+
+	for (var key in dictionary[index])
+	{
+	dictionary[index][key] = false
+	timeDict[index][key] = false
+		d3.selectAll('.checkmark').property("checked", false)
+	}
+
+
+	} else 
+	{
 	for (var key in dictionary[index])
 	{
 	dictionary[index][key] = true
 	timeDict[index][key] = true
-	}
-
 	d3.selectAll('.checkmark').property("checked", true)
+	}
+}
+
+
 
 
 
@@ -306,8 +331,6 @@ function toggle_points(){
 		toggled = true;
 		updatedata(dictionary)
 	}
-
-	console.log('daag')
 
 	d3.select("#toggler").text("Show data points: "+toggled)
 

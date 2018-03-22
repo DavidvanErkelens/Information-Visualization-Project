@@ -398,7 +398,7 @@ svg.append("text")
 	.attr("y", "590")
 	.attr("width", 300)
 	.attr("height", 20)
-	.text("Relative amount of attacks")
+	.text("Relative amount of kills")
 
 svg.append("text")
 	.attr("x", "275")

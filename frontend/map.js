@@ -72,9 +72,18 @@ get_new_geojson = function (attack_json, resultcallback){
         return obj.country_txt == geojson.features[i].properties.name;
       });
 
+      // total kils for this country
+      total_kill = 0
+
+      // loop though all attacks
+      for(m = 0; m < attack.length; m++){
+        total_kill += attack[m].nkil;
+
+      }
+
       // if number of attack is max save number of attack
-      if(attack.length > max_attack){
-        max_attack = attack.length;
+      if(total_kill > max_attack){
+        max_attack = total_kill;
       }
 
     }
@@ -100,8 +109,18 @@ get_new_geojson = function (attack_json, resultcallback){
           return obj.country_txt == geojson.features[i].properties.name;
         });
 
+        // total kils for this country
+        total_kill = 0
+
+        // loop though all attacks
+        for(m = 0; m < country_features.properties.attack.length; m++){
+         total_kill += country_features.properties.attack[m].nkil;
+
+        }
+
+
         // get relative number of attacks for country
-        rel_num_attack = Math.ceil((country_features.properties.attack.length / max_attack) * 10)
+        rel_num_attack = Math.ceil((total_kill / max_attack) * 10)
 
         // colours for map
         colors = ['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"];

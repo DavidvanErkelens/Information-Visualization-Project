@@ -265,6 +265,33 @@ svg.append("foreignObject")
 			 .style("width", '300px')
 			.html("<button type='button' id = 'toggler' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='toggle_points()'>Show data points: "+toggled+"</button>")
 
+// Deselect button for all countries
+svg.append("foreignObject")
+		.attr("x", 280)
+		.attr("y", 130)
+		.append("xhtml:div")
+			 .style("display", "block")
+			 .style("width", '300px')
+			.html("<button type='button' id = 'toggler' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='toggle_filters()'>Toggle all filters</button>")
+
+function toggle_filters()
+{
+	index = filters.indexOf(d3.select(".dropbtn").text())
+
+	console.log(dictionary[index])
+
+	for (var key in dictionary[index])
+	{
+	dictionary[index][key] = true
+	timeDict[index][key] = true
+	}
+
+	d3.selectAll('.checkmark').property("checked", true)
+
+
+
+
+}
 
 
 function toggle_points(){
@@ -272,6 +299,8 @@ function toggle_points(){
 	{
 		toggled = false;
 		updatedata(dictionary)
+
+
 	} else 
 	{
 		toggled = true;

@@ -148,6 +148,7 @@ function loadFilters(filter)
 	//this value correspsonds with the numerical value for the filter
 	console.log(filter);
 
+
 	//this creates the top button where you can click to select filter categories
 	FO = svg.append("foreignObject")
    		.attr("x", 10)
@@ -169,6 +170,8 @@ function loadFilters(filter)
         loadedFilters = true;
 
         currentfilter = filter;
+
+    d3.select("#toggler2").text("Toggle all: "+filters[filter])
 
 
 	var arrayLength = Object.keys(dictionary[filter]).length
@@ -272,11 +275,13 @@ svg.append("foreignObject")
 		.append("xhtml:div")
 			 .style("display", "block")
 			 .style("width", '300px')
-			.html("<button type='button' id = 'toggler' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='toggle_filters()'>Toggle all filters</button>")
+			.html("<button type='button' id = 'toggler2' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='toggle_filters()'>Toggle all: "+filters[0]+"</button>")
 
 function toggle_filters()
 {
 	index = filters.indexOf(d3.select(".dropbtn").text())
+
+
 
 	alltrue = true;
 

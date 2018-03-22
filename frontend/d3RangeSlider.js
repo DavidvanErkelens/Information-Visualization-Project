@@ -22,7 +22,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
 
     var playing = false;
     var resumePlaying = false; // Used by drag-events to resume playing on release
-    var playingRate = 1000;
+    var playingRate = 5000;
     var sliderRange = {begin: rangeMin, end: rangeMin};
     var changeListeners = [];
     var container = d3.select(containerSelector);

@@ -19,6 +19,20 @@ svg_title = svg.append("text")
 .attr("class", "header-title")
 .text("Visualizing the terrorism landscape")
 
+var svgw = svg.node().getBoundingClientRect().width;
+var svgh = svg.node().getBoundingClientRect().height;
+
+// loading text
+svg_load_text = svg.append("text")
+  .attr("x", svgw-120)
+  .attr("y", svgh-5)
+  .attr("font-size", "15px")
+  .attr("class", "loading-text")
+  .style("visibility", "hidden")
+  .style("fill", "grey")
+  .style("font-style", "italic")
+  .text("fetching data...")
+
 function show_years(){
 
 

@@ -16,6 +16,9 @@ conn.onmessage = function(e) {
 
 
     if (type == 'main'){
+
+      svg_load_text.style("visibility", "hidden");
+
       if(first){
         drawmap(output);
         first = false
@@ -44,6 +47,8 @@ conn.onmessage = function(e) {
 conn.onopen = function(e) {
     console.log("Connection established!");
 
+    svg_load_text.style("visibility", "visible");
+
     conn.send(JSON.stringify(dictionary));
     conn.send(JSON.stringify(timeDict));
 };
@@ -51,6 +56,8 @@ conn.onopen = function(e) {
 //  get the new data from the server based on the defined filters
 function updatedata(){
 	console.log('updatedata',dictionary.type)
+
+  svg_load_text.style("visibility", "visible");
 
   conn.send(JSON.stringify(dictionary));
   conn.send(JSON.stringify(timeDict));

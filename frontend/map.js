@@ -73,6 +73,11 @@ get_new_geojson = function (attack_json, resultcallback){
       if (geojson.features[i].properties.name != "Antarctica")
       {
 
+        if(geojson.features[i].properties.name == "England")
+        {
+          geojson.features[i].properties.name = "United Kingdom"
+        }
+
         //  get the country features
         country_features = geojson.features[i]
 
@@ -82,7 +87,7 @@ get_new_geojson = function (attack_json, resultcallback){
         });
 
         // get relative number of attacks for country
-        rel_num_attack = Math.floor((country_features.properties.attack.length / max_attack) * 10)
+        rel_num_attack = Math.ceil((country_features.properties.attack.length / max_attack) * 10)
 
         // colours for map
         colors = ['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000','#7f0000',"#ce0000"];

@@ -36,7 +36,7 @@ var dictionary = {0:{1:false, 2:false, 3:true, 4:false, 5:false, 6:false, 7:fals
 				  4:{1:true, 2:false, 3:false, 4:false, 5:false},
 				 "ranges": {0: {"start":1, "end":1501}, 1: {"start":0, "end":7367}, 2: {"start":0, "end":501}, 3: {"start":0, "end":201}},
 					"time" : {"start" : 1970, "end" : 1972},
-					"number" : 500, "type": "main"};
+					"number" : 50000, "type": "main"};
 
 //initialize filtlers
 loadedFilters = false
@@ -351,3 +351,56 @@ function remove_all_countries(){
 	show_side_graph(selected)
 
 }
+
+
+
+//Append a defs (for definition) element to your SVG
+var defs = svg.append("defs");
+
+//Append a linearGradient element to the defs and give it a unique id
+var linearGradient = defs.append("linearGradient")
+    .attr("id", "linear-gradient");
+//Horizontal gradient
+linearGradient
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%");
+//Set the color for the start (0%)
+linearGradient.append("stop") 
+    .attr("offset", "0%")   
+    .attr("stop-color", "#fff7ec"); //light blue
+
+//Set the color for the end (100%)
+linearGradient.append("stop") 
+    .attr("offset", "100%")   
+    .attr("stop-color", "#ce0000"); //dark blue
+
+//Draw the rectangle and fill with gradient
+svg.append("rect")
+	.attr("x", "275")
+	.attr("y", "600")
+	.attr("width", 300)
+	.attr("height", 20)
+	.style("fill", "url(#linear-gradient)")
+
+svg.append("text")
+	.attr("x", "275")
+	.attr("y", "590")
+	.attr("width", 300)
+	.attr("height", 20)
+	.text("Legend: relative amount of attacks")
+
+svg.append("text")
+	.attr("x", "275")
+	.attr("y", "640")
+	.attr("width", 300)
+	.attr("height", 20)
+	.text("Low %")
+
+svg.append("text")
+	.attr("x", "520")
+	.attr("y", "640")
+	.attr("width", 300)
+	.attr("height", 20)
+	.text("High %")

@@ -26,17 +26,18 @@ stats = {1: 'Multiple', 2:'Success', 3: 'Suicide', 4: 'Claimed', 5: 'Individual'
 stringvalues = [attacktypes, targettypes, weaptypes, perpretrator]
 
 //here we name the filters ids
-filters = ['Attack type','Target type', 'Weapon type', 'Pepretrator'];
+filters = ['Attack type','Target type', 'Weapon type', 'Perpetrator'];
 
 //this will hold all the states of the filters!
-var dictionary = {0:{1:false, 2:false, 3:true, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false},
-				  1:{1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14:false, 15:false, 16:false, 17: false, 18:false, 19: false, 20: false, 21: false, 22: false},
-				  2:{1:false, 2:false, 3:false, 4:false, 5:false, 6:true, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false},
+var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: true, 9:true},
+				  1:{1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14:true, 15:false, 16:false, 17: false, 18:false, 19: false, 20: false, 21: false, 22: false},
+				  2:{1:false, 2:false, 3:false, 4:false, 5:false, 6:true, 7:false, 8: false, 9:false, 10:true, 11:false, 12:false, 13:false},
 				  3:{1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8: false, 9:false, 10:false, 11:false, 12:false, 13:false, 14: false, 15: true},
 				  4:{1:true, 2:false, 3:false, 4:false, 5:false},
 				 "ranges": {0: {"start":1, "end":1501}, 1: {"start":0, "end":7367}, 2: {"start":0, "end":501}, 3: {"start":0, "end":201}},
-					"time" : {"start" : 1970, "end" : 1972},
+					"time" : {"start" : 1970, "end" : 1992},
 					"number" : 50000, "type": "main"};
+
 
 //initialize filtlers
 loadedFilters = false
@@ -328,7 +329,10 @@ function toggle_points(){
 	if(toggled)
 	{
 		toggled = false;
-		updatedata(dictionary)
+		// remove old attack points
+      	d3.selectAll("#attack-circle").remove()
+
+		// updatedata(dictionary)
 
 
 	} else 

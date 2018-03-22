@@ -13,7 +13,7 @@ var svg = d3.select(".svg-container1").append("svg")
 
 // adding title
 svg_title = svg.append("text")
-.attr("x", "850")
+.attr("x", "685")
 .attr("y", "40")
 .attr("font-size", "20px")
 .attr("class", "header-title")
@@ -291,7 +291,7 @@ function update_map_color(attack_json){
   // var yearGraph = drawTime("#timegraph", lineData)
 
   // Slide range to start with showing 2 years per interval
-  slider.range(0, 2);
+  slider.range(0, 22);
 
   // Slider listener
   slider.onChange(function(newRange){

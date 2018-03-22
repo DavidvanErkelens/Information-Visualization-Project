@@ -244,6 +244,14 @@ class WebSocketResponse
             // Skip invalid columns
             if ($filter == '-INV-') continue;
 
+             // For certain filters, we need at least one true value
+            if (in_array($filter, array('attacktype', 'targettype', 'weapontype', 'perpetrator')))
+            {
+                if (count(array_filter($contents, function($value) {
+                    return $value;
+                })) == 0) return false;
+            }
+
             // We don't need a statement if the filter is empty
             if (is_array($contents) && count($contents) == 0) continue;
 
@@ -341,6 +349,14 @@ class WebSocketResponse
         {
             // Skip invalid columns
             if ($filter == '-INV-') continue;
+
+             // For certain filters, we need at least one true value
+            if (in_array($filter, array('attacktype', 'targettype', 'weapontype', 'perpetrator')))
+            {
+                if (count(array_filter($contents, function($value) {
+                    return $value;
+                })) == 0) return false;
+            }
 
             // We don't need a statement if the filter is empty
             if (is_array($contents) && count($contents) == 0) continue;

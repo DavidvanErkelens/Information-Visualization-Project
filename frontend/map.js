@@ -235,7 +235,7 @@ function update_map_color(attack_json){
       .attr("transform", function(d) {return "translate(" + projection([d.longitude,d.latitude]) + ")";})
       .on("mouseover", function(d) {
 
-        tooltip.html(attacktypes[d.attacktype1]+"<br>"+targettypes[d.targtype1]+"<br>"+weaptypes[d.weaptype1]+"<br> Kills: "+d.nkil+"<br> perpkills: "+d.nkillter+"<br> nwound: "+d.nwound+"<br> propvalue: "+d.propvalue+"<br> perpwounds: "+d.nwoundte+"<br> gname: "+d.gname);
+        tooltip.html("Attacktype: "+attacktypes[d.attacktype1]+"<br>"+"Targettype: "+targettypes[d.targtype1]+"<br>"+"Weaptype: "+weaptypes[d.weaptype1]+"<br> Kills: "+d.nkil+"<br> Terkills: "+d.nkillter+"<br> Wounded: "+d.nwound+"<br> Terwounds: "+d.nwoundte+"<br> Propvalue ($): "+d.propvalue+"<br> Pepetrator: "+d.gname);
         return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function() {

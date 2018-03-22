@@ -236,8 +236,8 @@ function sendFilterData(){
 
 // Add filter button to send to backend
 svg.append("foreignObject")
-		.attr("x", 10)
-		.attr("y", 425)
+		.attr("x", 280)
+		.attr("y", 50)
 		.append("xhtml:div")
 			.attr('class', 'filterButton')
 			 .style("display", "block")
@@ -266,13 +266,13 @@ checkbox.type = "checkbox";
 checkbox.name = "cCheck";
 checkbox.value = false;
 checkbox.id = 'checkId';
-checkbox.label = "hi there";
+
 checkbox.onclick = circleCheck;
 
 // Div element to store checkbox
 svg.append("foreignObject")
-		.attr("x", 20)
-		.attr("y", 465)
+		.attr("x", 280)
+		.attr("y", 90)
 		.append("xhtml:div")
 		.attr('id', 'circleButton')
 		.attr('width', '300px');

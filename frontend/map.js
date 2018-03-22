@@ -200,6 +200,14 @@ function update_map_color(attack_json){
       .attr("d", path)
       .style("fill", function(d){return d.properties.color})
       .attr("class", "boundary")
+      .on("mouseover", function(d) {
+         d3.select(this).style("opacity", "0.5")
+      })
+      .on("mouseout", function(d) {
+         d3.select(this).style("opacity", "1")
+      })
+
+
       .on("click", function(d) {
         //if clicked
         if(d3.select(this).style("stroke-width") != "1px"){

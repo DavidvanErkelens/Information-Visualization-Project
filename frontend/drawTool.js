@@ -36,7 +36,7 @@ var dictionary = {0:{1:true, 2:true, 3:true, 4:true, 5:true, 6:true, 7:true, 8: 
 				  4:{1:true, 2:false, 3:false, 4:false, 5:false},
 				 "ranges": {0: {"start":1, "end":1501}, 1: {"start":0, "end":7367}, 2: {"start":0, "end":501}, 3: {"start":0, "end":201}},
 					"time" : {"start" : 1970, "end" : 1992},
-					"number" : 50000, "type": "main"};
+					"number" : 250000, "type": "main"};
 
 
 //initialize filtlers
@@ -398,18 +398,18 @@ svg.append("text")
 	.attr("y", "590")
 	.attr("width", 300)
 	.attr("height", 20)
-	.text("Legend: relative amount of attacks")
+	.text("Relative amount of attacks")
 
 svg.append("text")
 	.attr("x", "275")
 	.attr("y", "640")
 	.attr("width", 300)
 	.attr("height", 20)
-	.text("Low %")
+	.text("Low")
 
 svg.append("text")
-	.attr("x", "520")
+	.attr("x", "535")
 	.attr("y", "640")
 	.attr("width", 300)
 	.attr("height", 20)
-	.text("High %")
+	.text("High")

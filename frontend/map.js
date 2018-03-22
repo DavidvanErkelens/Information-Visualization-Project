@@ -125,6 +125,10 @@ function update_map_color(attack_json){
 
       //  add points for attack locations and tooltip hover for more information on
       // actual attack
+
+      if(toggled){
+
+
       attacks = svg.selectAll("circles.points")
       .data(attack_json)
       .enter()
@@ -139,7 +143,7 @@ function update_map_color(attack_json){
         return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function() {
-        return tooltip.style("top",(470) + "px")
+        return tooltip.style("top",(440) + "px")
         .style("left", (10) + "px")
         .style("border", "solid 1px")
         .style("border-color", "rgba(234, 242, 255, 1");
@@ -147,6 +151,8 @@ function update_map_color(attack_json){
       .on("mouseout", function() {
         return tooltip.style("visibility", "hidden");
       });
+
+    }
   });
 
   }
@@ -193,6 +199,10 @@ function update_map_color(attack_json){
         // update the side graphs
         show_side_graph(selected);
       })
+      
+      console.log('toggled=', toggled)
+
+      if(toggled){
 
       //  add points for attack locations and tooltip hover for more information on
       // actual attack
@@ -218,6 +228,8 @@ function update_map_color(attack_json){
       .on("mouseout", function() {
         return tooltip.style("visibility", "hidden");
       });
+}
+  
 
     });
   }

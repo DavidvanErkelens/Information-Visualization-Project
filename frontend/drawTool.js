@@ -1,6 +1,7 @@
 // append svg to body
 var svg = d3.select("svg")
 var click = false;
+var toggled = true;
 
 var conn = new WebSocket('ws://davidvanerkelens.nl:8080');
 
@@ -272,16 +273,17 @@ checkbox.onclick = circleCheck;
 // Div element to store checkbox
 svg.append("foreignObject")
 		.attr("x", 280)
-		.attr("y", 90)
+		.attr("y", 140)
 		.append("xhtml:div")
 		.attr('id', 'circleButton')
-		.attr('width', '300px');
+		.attr('width', '300px')
 
 // Label for checkbox
 var label = document.createElement('label')
 label.htmlFor = "id"
 label.style.width = '200px'
 label.appendChild(document.createTextNode('Show individual attacks'));
+
 
 // Adding the checkbox and label to the right position
 var checkDiv = document.getElementById('circleButton');
@@ -299,6 +301,37 @@ svg.append("foreignObject")
 			 .style("display", "block")
 			 .style("width", '300px')
 			.html("<button type='button' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='remove_all_countries()'>Deselect all countries</button>")
+
+
+// Deselect button for all countries
+svg.append("foreignObject")
+		.attr("x", 280)
+		.attr("y", 90)
+		.append("xhtml:div")
+			 .style("display", "block")
+			 .style("width", '300px')
+			.html("<button type='button' id = 'toggler' style='width: 200px; font-weight: bold;' class='btn btn-primary' onclick='toggle_points()'>Show data points: "+toggled+"</button>")
+
+
+
+function toggle_points(){
+	if(toggled)
+	{
+		toggled = false;
+		updatedata(dictionary)
+	} else 
+	{
+		toggled = true;
+		updatedata(dictionary)
+	}
+
+	console.log('daag')
+
+	d3.select("#toggler").text("Show data points: "+toggled)
+
+
+
+}
 
 // function to remove all selected countries
 function remove_all_countries(){

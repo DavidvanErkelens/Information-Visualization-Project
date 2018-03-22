@@ -10,19 +10,23 @@ Ported from version 3 to version 4 of d3js*/
  */
 
 // make set range global
-var setRange
+var setRange;
+
+var stillLoading = false;
 
 function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton) {
     "use strict";
 
     var minWidth = 10;
 
+
+    var playing = false;
+    var resumePlaying = false; // Used by drag-events to resume playing on release
+    var playingRate = 5000;
     var sliderRange = {begin: rangeMin, end: rangeMin};
     var changeListeners = [];
     var container = d3.select(containerSelector);
-    var playing = false;
-    var resumePlaying = false; // Used by drag-events to resume playing on release
-    var playingRate = 1000;
+    // var playing = false;
     var containerHeight = container.node().offsetHeight;
 
     // Set up play button if requested
@@ -375,6 +379,8 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
             return;
         }
 
+        if (stillLoading) return setTimeout(frameTick, playingRate);
+
         var limitWidth = rangeMax - rangeMin + 1;
         var rangeWidth = sliderRange.end - sliderRange.begin + 1;
         var delta = Math.min(Math.ceil(rangeWidth / 10), Math.ceil(limitWidth / 100));
@@ -394,6 +400,7 @@ function createD3RangeSlider (rangeMin, rangeMax, containerSelector, playButton)
         setRange(sliderRange.begin + delta, sliderRange.end + delta);
 
         setTimeout(frameTick, playingRate);
+        
     }
 
     function startPlaying(rate) {

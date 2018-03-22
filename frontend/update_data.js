@@ -18,6 +18,7 @@ conn.onmessage = function(e) {
     if (type == 'main'){
 
       svg_load_text.style("visibility", "hidden");
+      stillLoading = false;
 
       if(first){
         drawmap(output);
@@ -49,6 +50,8 @@ conn.onopen = function(e) {
 
     svg_load_text.style("visibility", "visible");
 
+    stillLoading = true;
+
     conn.send(JSON.stringify(dictionary));
     conn.send(JSON.stringify(timeDict));
 };
@@ -58,6 +61,8 @@ function updatedata(){
 	console.log('updatedata',dictionary.type)
 
   svg_load_text.style("visibility", "visible");
+
+  stillLoading = true;
 
   conn.send(JSON.stringify(dictionary));
   conn.send(JSON.stringify(timeDict));

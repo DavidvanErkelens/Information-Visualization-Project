@@ -227,7 +227,7 @@ function show_line(data){
 
       .transition()
       .duration(function(d, i) {
-        return i * 800;
+        return i * 100;
       })
       .attrTween('d', function(d) {
         var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
